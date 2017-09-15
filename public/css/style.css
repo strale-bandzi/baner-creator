@@ -1,0 +1,38 @@
+form .btn-danger.active,
+form .btn-danger.active:focus {
+    color: red;
+    border: 1px solid red;
+    background: #fff;
+    text-transform: uppercase;
+    outline: none;
+
+}
+
+form .btn-primary.active,
+form .btn-primary.active:focus{
+    color: blue;
+    border: 1px solid blue;
+    background: #fff;
+    text-transform: uppercase;
+    outline: none;
+}
+
+
+form .btn-success.active,
+form .btn-success.active:focus{
+    color: green;
+    border: 1px solid green;
+    background: #fff;
+    text-transform: uppercase;
+    outline: none;
+}
+
+form .btn-warning.active,
+form .btn-warning.active:focus{
+    color: orange;
+    border: 1px solid orange;
+    background: #fff;
+    text-transform: uppercase;
+    outline: none;
+}
+
