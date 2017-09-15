@@ -83,13 +83,11 @@ class CsvController extends Controller
                 if ($banertype == 'Leaderboard') {
 
                     $watermark = Image::canvas(190, 3)->fill($newline);
-//
-//                    return Image::make($imageUrl)
-//                        ->fit(728, 90, function($c){
-//                            $c->upsize();
-//                            })
-                        return $this->addImage($imageUrl)
 
+                    return Image::make($imageUrl)
+                        ->fit(728, 90, function($c){
+                            $c->upsize();
+                            })
                         ->insert($watermark, 'left', 45, 0)
                         ->text($banertext, 364, 45, function ($font) use ($txtColor, $txtSize)   {
                             $font->file(public_path('fonts/Capture_it_2.ttf'));
@@ -142,9 +140,8 @@ class CsvController extends Controller
             });
     }
 //
-//    public function addTxt($banertext, $txtColor)
+//    public function addTxt($banertext, $txtColor, $imageUrl)
 //    {
-//        dd('ovde');
 //        return $this->text($banertext, 176, 89, function ($font) use ($txtColor) {
 //            $font->file(public_path('fonts/Capture_it_2.ttf'));
 //            $font->color($txtColor);
