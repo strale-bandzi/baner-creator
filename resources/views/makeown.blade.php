@@ -32,8 +32,12 @@
 
                                     {{ Session::get('success') }}
 
-                                </div>
+                                    <a href="images/csv/{{Session::get('imageName')}}" data-lightbox="roadtrip">Click to see images</a>
 
+                                   {{--# @include('inc.fancy')--}}
+
+
+                                </div>
 
                             @elseif($message = Session::get('error'))
                                 <div class="alert alert-danger" role="alert">
@@ -43,6 +47,7 @@
 
 
                         </div>
+
                     </div>
 
                 </div>

@@ -12,7 +12,10 @@ class CsvController extends Controller
 {
     public function index()
     {
+        $destinationPath = public_path('/images/csv');
+        $images = Image::get($destinationPath);
 
+        dd($images);
         return view('makeown');
     }
 
@@ -42,7 +45,8 @@ class CsvController extends Controller
                     ];
 
 
-                    if (empty($insert['banertype']) || !is_string($insert['banertype'])) {
+                    if (empty($insert['banertype'])) { continue;}
+                    if(!is_string($insert['banertype'])) {
                         return back()->with('error', 'Houston, we got a problem');
                     }
 
