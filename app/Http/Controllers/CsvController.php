@@ -12,11 +12,10 @@ class CsvController extends Controller
 {
     public function index()
     {
-        $destinationPath = public_path('/images/csv');
-        $images = Image::get($destinationPath);
 
-        dd($images);
-        return view('makeown');
+        $images = array();
+
+        return view('makeown', compact('images'));
     }
 
     public function importCsv()
@@ -28,7 +27,10 @@ class CsvController extends Controller
             $data = Excel::load($path, function ($reader) {
             })->get();
 
+
             if (!empty($data) && $data->count()) {
+
+                $images = [];
                 $imgNo = 0;
 
                 foreach ($data as $key => $value) {
@@ -45,10 +47,12 @@ class CsvController extends Controller
                     ];
 
 
+
                     if (empty($insert['banertype'])) { continue;}
                     if(!is_string($insert['banertype'])) {
                         return back()->with('error', 'Houston, we got a problem');
                     }
+
 
                     ## Banner method - create banner ##
 
@@ -61,7 +65,9 @@ class CsvController extends Controller
                     );
 
 
-                    $input['imagename'] = $img . $imgNo . time();
+                    $input['imagename'] = $img . $imgNo . time() . ".png";
+
+                    $images[] = $img . $imgNo . time() . ".png";
 
                     $destinationPath = public_path('/images/csv');
 
@@ -71,7 +77,8 @@ class CsvController extends Controller
 
                 }
 
-                return back()->with('imageName', $input['imagename'])->with('success', 'Autobots roll-out! ');
+                return view('makeown', compact('images'))
+                            ->with('success', 'Autobots roll-out! ');
 
             } else {
                 return back()->with('error', 'file empty');
@@ -153,6 +160,7 @@ class CsvController extends Controller
 //            $font->size(39);
 //        });
 //    }
+
 
 
 }

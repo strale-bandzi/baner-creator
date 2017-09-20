@@ -35,6 +35,10 @@
     <script src="js/Jcrop.js"></script>
     <link rel="stylesheet" href="css/Jcrop.css" type="text/css">
 
+    <!-- Lightbox -->
+    <script type="text/javascript" src="js/lightbox.js"></script>
+    <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen"/>
+
     <script type="text/javascript">
         $(document).ready(function () {
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <br><br>
     <div class="container">
         <div class="jumbotron">
@@ -27,19 +28,22 @@
 
                         <div class="col-xs-5">
 
-                            @if ($message = Session::get('success'))
+                            @if (count($images)>0)
+
                                 <div class="alert alert-success" role="alert">
+                                    Autobots, roll out!
 
-                                    {{ Session::get('success') }}
+                                    @foreach($images as $image)
 
-                                    <a href="images/csv/{{Session::get('imageName')}}" data-lightbox="roadtrip">Click to see images</a>
+                                        <li class="gallItem"><a href="images/csv/{{$image}}"
+                                                                data-lightbox="baner-csv-recipe">Click here to see your
+                                                banners</a></li>
 
-                                   {{--# @include('inc.fancy')--}}
-
+                                    @endforeach
 
                                 </div>
 
-                            @elseif($message = Session::get('error'))
+                            @elseif(Session::get('error'))
                                 <div class="alert alert-danger" role="alert">
                                     {{Session::get('error')}}
                                 </div>
@@ -62,6 +66,45 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        $(document).ready(function () {
+
+            lightbox.option({
+                'resizeDuration': 200,
+                'maxWidth': 728,
+                'wrapAround': true
+            });
+
+        });
+    </script>
+    <style>
+        /* LIGHT BOX STYLE */
+        .gallItem {
+            text-decoration: none;
+        }
+
+        li {
+            visibility: hidden;
+            display: none;
+        }
+
+        li:first-child {
+            visibility: visible;
+            display: inline;
+        }
+
+        li a {
+            color: #28455A;
+        }
+
+        li a:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+    </style>
 @endsection
 
 
