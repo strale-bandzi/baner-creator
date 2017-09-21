@@ -94,6 +94,7 @@ class CsvController extends Controller
                 if ($banertype == 'Leaderboard') {
 
                     $watermark = Image::canvas(190, 3)->fill($newline);
+                   # $clck = $this->addButton();
 
                     return Image::make($imageUrl)
                         ->fit(728, 90, function($c){
@@ -160,6 +161,40 @@ class CsvController extends Controller
 //            $font->size(39);
 //        });
 //    }
+
+
+    public function addButton()
+    {
+        /*  THIS WILL GENERATE RED BUTTON WITH WHITE TEXT CENTERED, 35% OPACITY*/
+
+//        return Image::canvas(105, 35, '#ff0000')
+//                ->text('Click me', 55, 25, function ($font){
+//                    $font->file(public_path('fonts/Capture_it_2.ttf'));
+//                    $font->size(15);
+//                    $font->color('#fff');
+//                    $font->align('center');
+//                })->opacity(35);
+//
+//
+        /*  THIS WILL GENERATE white BUTTON WITH black TEXT CENTERED, 60% OPACITY */
+
+        return Image::canvas(120, 40)
+                    ->ellipse(120, 120, 60, 20, function ($draw){
+                        $draw->background('#fff');
+                        $draw->border(6, '#fff');
+        })
+            ->opacity(60)
+            ->text('Click me', 60, 30, function ($font){
+                    $font->file(public_path('fonts/Capture_it_2.ttf'));
+                    $font->size(20);
+                    $font->color('#000');
+                    $font->align('center');
+                });
+
+
+
+    }
+
 
 
 

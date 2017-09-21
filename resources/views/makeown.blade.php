@@ -17,11 +17,12 @@
                         <div class="col-xs-7">
                             {!! Form::open(['method'=>'POST', 'action'=>'CsvController@importCsv', 'files'=>true ]) !!}
 
-                            {!! Form::label('insCsv', "Upload csv data here") !!}
+                            {!! Form::label('insCsv', "Upload csv data") !!}
                             {!! Form::file('insCsv', ['class'=>'filestyle', 'data-buttonName'=>'btn-primary', 'id'=>'imgId']) !!}
 
                             <br>
-                            <p>If you are not sure, <a href="#">click</a> here to see full process.</p>
+                            {{--Here we need .csv template to download --}}
+                            <p><a href="#">Download</a> csv template. Fill. Upload.</p>
                             <br>
                         </div>
                         <br>
