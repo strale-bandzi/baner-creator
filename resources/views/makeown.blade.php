@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <br><br>
     <div class="container">
         <div class="jumbotron">
@@ -23,6 +22,7 @@
                             <br>
                             {{--Here we need .csv template to download --}}
                             <p><a href="#">Download</a> csv template. Fill. Upload.</p>
+
                             <br>
                         </div>
                         <br>
@@ -43,6 +43,8 @@
                                     @endforeach
 
                                 </div>
+
+                                Order <a href="#">here</a>, we know you like it!
 
                             @elseif(Session::get('error'))
                                 <div class="alert alert-danger" role="alert">
