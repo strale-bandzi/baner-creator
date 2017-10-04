@@ -21,6 +21,9 @@
             {!! Form::label('file_image', 'Or you can upload your own photo') !!}
             {!! Form::file('file_image', ['class'=>'filestyle', 'data-buttonName'=>'btn-primary', 'id'=>'imgId']) !!}
 
+            {!! Form::label('wholeImage', 'Check to use whole image') !!}
+            {!! Form::checkbox('wholeImage', 'wholeImage', false) !!}
+            <br>
             {!! Form::hidden('image', '', ['id'=>'1file1']) !!}
 
 
@@ -35,83 +38,90 @@
 
             <br>
 
-            <div>
+            <img src="" id="imageDisplay"/>
 
-                <img src="" id="imageDisplay"/>
-                <script type='text/javascript'>
 
-                    function readURL(input) {
-                        if (input.files && input.files[0]) {
-                            var reader = new FileReader();
+            <script type='text/javascript'>
 
-                            reader.onload = function (e) {
-                                $('#imageDisplay').attr('src', e.target.result);
-                            }
 
-                            reader.readAsDataURL(input.files[0]);
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#imageDisplay').attr('src', e.target.result);
                         }
-                    }
 
-                    $("#imgId").change(function () {
-                        readURL(this);
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                var show = $("#imgId").change(function () {
+                    readURL(this);
+                });
+
+                if (show) {
+                    $("#imageDisplay").hide();
+                }
+
+
+                $('document').ready(function () {
+
+                    /*Check for aspect ratio*/
+
+                    var aspect;
+
+                    $("[href='#tab2']").click(function () {
+                        var arButton = $('input[name=bannertemplate]:checked').val();
+                        if (arButton == 'Leaderboard') {
+                            aspect = 9 / 1;
+
+                        } else if (arButton == 'Rectangle') {
+                            aspect = 6 / 5;
+
+                        } else {
+                            aspect = 1 / 5;
+                        }
+
+                        /* display image and crop */
+
+                        $('#imageDisplay').Jcrop({
+                            trackDocument: true,
+                            bgColor: 'black',
+                            bgOpacity: .4,
+                            setSelect: [100, 100, 50, 50],
+                            boxWidth: 900,
+                            boxHeight: 450,
+                            aspectRatio: aspect,
+                            onChange: showCoords,
+                            onSelect: showCoords
+                        });
                     });
 
 
-                    $('document').ready(function () {
+                    /* hidden input image file */
 
-                        /*Check for aspect ratio*/
-
-                        var aspect;
-
-                        $("[href='#tab2']").click(function () {
-                            var arButton = $('input[name=bannertemplate]:checked').val();
-                            if (arButton == 'Leaderboard') {
-                                aspect = 234 / 29;
-
-                            } else {
-                                aspect = 73 / 61;
-
-                            }
-
-                            /* display image and crop */
-
-                            $('#imageDisplay').Jcrop({
-                                trackDocument: true,
-                                bgColor: 'black',
-                                bgOpacity: .4,
-                                setSelect: [100, 100, 50, 50],
-                                boxWidth: 750,
-                                boxHeight: 500,
-                                aspectRatio: aspect,
-                                onChange: showCoords,
-                                onSelect: showCoords
-                            });
-                        });
-
-
-                        /* hidden input image file */
-
-                        $('#imgId').click(function () {
-                            $('#1file1').val('radi');
-                            return true;
-                        });
-
+                    $('#imgId').click(function () {
+                        $('#1file1').val('radi');
+                        return true;
                     });
 
-                    /* collect coordinates */
+                });
 
-                    function showCoords(c) {
-                        jQuery('#x1').val(c.x);
-                        jQuery('#y1').val(c.y);
-                        jQuery('#w').val(c.w);
-                        jQuery('#h').val(c.h);
+                /* collect coordinates */
 
-                    }
+                function showCoords(c) {
+                    jQuery('#x1').val(c.x);
+                    jQuery('#y1').val(c.y);
+                    jQuery('#w').val(c.w);
+                    jQuery('#h').val(c.h);
+
+                }
 
 
-                </script>
+            </script>
 
-            </div>
+
             <br>
         </div>
     </div>

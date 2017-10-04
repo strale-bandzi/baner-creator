@@ -56,7 +56,7 @@
 
                                 <div class="tab-pane" id="tab2">
                                     <br>
-                                    <h3><strong>Step 2</strong> Select background</h3>
+                                    <h3><strong>Step 2</strong> Select background color from the list</h3>
                                     <hr>
                                     @include('inc.colorpicker')
 

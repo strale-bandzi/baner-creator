@@ -43,7 +43,10 @@ class CsvController extends Controller
                         'followtext' => $value->followtext,
                         'txtsize' => $value->txtsize,
                         'folltxtsize' => $value->folltxtsize,
-                        'newline' => $value->newline
+                        'newline' => $value->newline,
+                        'textalign' => $value->textalign,
+                        'btnposition' => $value->btnposition,
+                        'buttontext'    => $value->buttontext
                     ];
 
 
@@ -51,9 +54,8 @@ class CsvController extends Controller
                         continue;
                     }
                     if (!is_string($insert['banertype'])) {
-                        return back()->with('error', 'Houston, we got a problem');
+                        return back()->with('error', 'Banertype must be a string');
                     }
-
 
                     ## Banner method - create banner ##
 
@@ -61,10 +63,12 @@ class CsvController extends Controller
                         $insert['banertype'], $insert['image'],
                         $insert['maintext'], $insert['textcolor'], $insert['followtext'],
                         $insert['txtsize'], $insert['folltxtsize'],
-                        $insert['newline']
-
+                        $insert['newline'], $insert['textalign'], $insert['btnposition'],
+                        $insert['buttontext']
                     );
 
+
+                   ### this one works: $img = $this->addTxt( $insert['maintext'], $insert['textcolor'], $insert['txtsize'] ); ###
 
                     $input['imagename'] = $img . $imgNo . time() . ".png";
 
@@ -89,65 +93,108 @@ class CsvController extends Controller
         return back()->with('error', 'Please insert file');
 
     }
-
-    public function makeBaner($banertype, $imageUrl, $banertext, $txtColor, $banertextFollow, $txtSize, $follTxtSize, $newline)
+//
+    public function makeBaner($banertype, $imageUrl, $banertext, $txtColor, $banertextFollow, $txtSize, $follTxtSize, $newline, $txtAlign, $btnPosition, $btnText)
     {
-        if ($banertype == 'Leaderboard') {
+        if (strtolower($banertype) == 'leaderboard') {
 
-            $clck = $this->addButton();
+            # if leaderboard define size #
+            $xSize = 728; $ySize = 90;
+
+            # if main txt align == something, do this #
+
+            switch (strtolower($txtAlign)) {
+                case 'center':
+                    $txtAlignX = 364;
+                    $txtAlignY = 45;
+                    break;
+                case 'left':
+                    $txtAlignX = 140;
+                    $txtAlignY = 45;
+                    break;
+                case 'right':
+                    $txtAlignX = 588;
+                    $txtAlignY = 45;
+                    break;
+            }
+
+            $clck = $this->addButton($btnText, $txtColor);
+
             $ln = $this->line($newline);
-            $btt = $this->addTxt($banertext, $txtColor, $txtSize);
+
+            $mainText = $this->addTxt($xSize, $ySize, $banertext, $txtColor, $txtSize, $txtAlignX, $txtAlignY);
 
             return Image::make($imageUrl)
-                ->fit(728, 90, function ($c) {
+                ->fit($xSize, $ySize, function ($c) {
                     $c->upsize();
                 })
-                #->insert($btt, 'left', 45, 0)
-                ->insert($btt)
-//                ->text($banertext, 364, 45, function ($font) use ($txtColor, $txtSize) {
-//                    $font->file(public_path('fonts/Capture_it_2.ttf'));
-//                    $font->color($txtColor);
-//                    $font->align('center');
-//                    $font->valign('middle');
-//                    $font->size($txtSize);
-//                })
-                ->text($banertextFollow, 676, 45, function ($font) use ($txtColor, $follTxtSize) {
-                    $font->file(public_path('fonts/Caviar_Dreams_Bold.ttf'));
-                    $font->color($txtColor);
-                    $font->align('right');
-                    $font->valign('middle');
-                    $font->size($follTxtSize);
-                });
+                ->insert($clck, $btnPosition, 45, 0)
+                ->insert($mainText);
 
-        } else if ($banertype == 'Rectangle') {
+
+//                ->text($banertextFollow, 676, 45, function ($font) use ($txtColor, $follTxtSize) {
+//                    $font->file(public_path('fonts/Caviar_Dreams_Bold.ttf'));
+//                    $font->color($txtColor);
+//                    $font->align('right');
+//                    $font->valign('middle');
+//                    $font->size($follTxtSize);
+//                });
+
+        }
+
+        else if (strtolower($banertype) == 'rectangle') {
+
+            $clck = $this->addButton($btnText, $txtColor);
+
+            $xSize = 300; $ySize = 250;
+
+            switch (strtolower($txtAlign)) {
+                    case 'up':
+                        $txtAlignX = 150;
+                        $txtAlignY = 50;
+                      break;
+                    case 'center':
+                        $txtAlignX = 150;
+                        $txtAlignY = 125;
+                        break;
+                    case 'down':
+                        $txtAlignX = 150;
+                        $txtAlignY = 200;
+                        break;
+                default:
+                    $txtAlignX = 150;
+                    $txtAlignY = 200;
+//                    ## pogledati sutra ovaj deo kada korisnik ne unese nikakve podatke ##
+            }
+
+
+            $mainText = $this->addTxt($xSize, $ySize, $banertext, $txtColor, $txtSize, $txtAlignX, $txtAlignY);
+
             return Image::make($imageUrl)
-                ->fit(300, 250, function ($sc) {
+                    ->fit($xSize, $ySize, function ($sc) {
                     $sc->upsize();
                 })
-                ->text($banertext, 176, 89, function ($font) use ($txtColor, $txtSize) {
-                    $font->file(public_path('fonts/Capture_it_2.ttf'));
-                    $font->color($txtColor);
-                    $font->align('center');
-                    $font->size($txtSize);
-                })
-                ->text($banertextFollow, 150, 120, function ($font) use ($txtColor, $follTxtSize) {
-                    $font->file(public_path('fonts/Caviar_Dreams_Bold.ttf'));
-                    $font->color($txtColor);
-                    $font->align('center');
-                    $font->size($follTxtSize);
-                });
+                ->insert($clck, $btnPosition, 75, 25)
+                ->insert($mainText);
+
+//                ->text($banertextFollow, 150, 120, function ($font) use ($txtColor, $follTxtSize) {
+//                    $font->file(public_path('fonts/Caviar_Dreams_Bold.ttf'));
+//                    $font->color($txtColor);
+//                    $font->align('center');
+//                    $font->size($follTxtSize);
+//                });
         } else {
-            return back()->with('error', 'UNKNOWN BANNER TYPE, PLEASE FILL CSV CORRECTLY');
+            return back()->with('error', 'Unknown banner type, please fill csv correctly.');
         }
 
 
     }
 
-//      ################################## see this later on ########################
+    ################################## see this later on ########################
 
     public function line($newline)
     {
-        ## linija neuptorebljiva (LINE) GD driver ne prihvata width, napravicemo canvas image i na osnovu toga liniju :) ##
+        ## GD driver doesn't support line()->width, here we made canvas width: 3px in user-customized color ##
 
         return Image::canvas(190, 3, $newline);
 
@@ -155,7 +202,7 @@ class CsvController extends Controller
 
     public function addImage($imageUrl)
     {
-        ## this function adds image 100% uradjeno ##
+        ## function adds image  ##
 
         return Image::make($imageUrl)
             ->fit(728, 90, function ($c) {
@@ -164,37 +211,65 @@ class CsvController extends Controller
     }
 
 
-    public function addTxt($banertext, $txtColor, $txtSize)
+    public function addTxt($x, $y, $banertext, $txtColor, $txtSize, $txtX, $txtY)
     {
-            return Image::canvas(728,90)->text($banertext, 364, 45, function ($font) use ($txtColor, $txtSize) {
-                $font->file(public_path('fonts/Capture_it_2.ttf'));
-                $font->color($txtColor);
-                $font->align('center');
-                $font->valign('middle');
-                $font->size($txtSize);
-            });
+
+        ## function adds txt ##
+
+        return Image::canvas($x,$y)->text($banertext, $txtX, $txtY, function ($font) use ($txtColor, $txtSize) {
+            $font->file(public_path('fonts/Capture_it_2.ttf'));
+            $font->color($txtColor);
+            $font->align('center');
+            $font->valign('middle');
+            $font->size($txtSize);
+        });
+
     }
 
 
-    public function addButton()
+    public function addButton($text, $color)
     {
 
-        /*  THIS WILL GENERATE white BUTTON WITH black TEXT CENTERED, 60% OPACITY */
+        ## generate white button with black txt centered, opacity: 60% ##
+        if (!empty($text)) {
 
-        return Image::canvas(120, 40)
-            ->ellipse(120, 120, 60, 20, function ($draw) {
-                $draw->background('#fff');
-                $draw->border(6, '#fff');
-            })
-            ->opacity(60)
-            ->text('Click me', 60, 30, function ($font) {
-                $font->file(public_path('fonts/Capture_it_2.ttf'));
-                $font->size(20);
-                $font->color('#000');
-                $font->align('center');
-            });
+               return Image::canvas(120, 40)
+                   ->ellipse(120, 120, 60, 20, function ($draw) use ($color) {
+                       $draw->background($color);
+                       $draw->border(6, $color);
+                   })
+                   ->opacity(60)
+                   ->text($text, 60, 32, function ($font) {
+                       $font->file(public_path('fonts/Capture_it_2.ttf'));
+                       $font->size(24);
+                       $font->color('#000');
+                       $font->align('center');
+                   });
+
+        }
+
+        else {
+            return Image::canvas(120, 40);
+        }
+    }
+
+    ## Follow text NOT finished##
+
+    public function addFollowTxt($x, $y, $text, $txtColor, $txtSize, $txtX, $txtY)
+    {
+
+        ## function adds txt ##
+
+        return Image::canvas($x,$y)->text($text, $txtX, $txtY, function ($font) use ($txtColor, $txtSize) {
+            $font->file(public_path('fonts/Capture_it_2.ttf'));
+            $font->color($txtColor);
+            $font->align('center');
+            $font->valign('middle');
+            $font->size($txtSize);
+        });
 
     }
+
 
 
 }

@@ -4,6 +4,16 @@
 
     {!! Form::text('banertext' , '', ['class'=>'form-control'])!!}
     <br>
+    {!! Form::label('txtAlign', 'Select text align: ') !!}
+
+    {!! Form::select('txtAlign', [
+   'center'=>'center',
+   'left'=>'left',
+   'right'=>'right',
+   ], [ "class"=>"btn-info"]) !!}
+
+
+    <br>
 
     {!! Form::label('textColor', 'Select main text color') !!}
 
@@ -36,3 +46,9 @@
     $('select[name="textColor"]').simplecolorpicker({theme: 'glyphicons'});
 
 </script>
+<style>
+
+    select {
+        background-color: #2A3F54;
+    }
+</style>

@@ -12,7 +12,7 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="shortcut icon" href="/delije.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="/zmaj.png" type="image/x-icon">
 
     <!--COLOR PICKERR -->
 

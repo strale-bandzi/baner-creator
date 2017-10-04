@@ -5,6 +5,17 @@
 
     <br>
 
+    {!! Form::label('btnposition', 'Enter button position:') !!}
+    {{--{!! Form::text('btnposition', '', ['class'=>'form-control'])!!}--}}
+
+    {!! Form::select('btnposition', [
+            'center'=>'center',
+            'right'=>'right',
+            'left'=>'left'
+    ]) !!}
+
+    <br>
+
 
     {!! Form::label('btnTextColor', 'Select button text color') !!}
 
