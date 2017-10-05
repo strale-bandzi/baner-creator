@@ -28,27 +28,36 @@ class ImageController extends Controller
         switch (strtolower($pos)) {
             case 'center':
                 $tX = 364;
-                $tY = 30;
+                $tY = 45;
                 break;
 
             case 'left':
-                $tX = 151;
-                $tY = 30;
+                $tX = 174;
+                $tY = 45;
                 break;
 
             case 'right':
                 $tX = 546;
-                $tY = 30;
+                $tY = 45;
                 break;
         }
 
         return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
+            $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
+            $font->color($txtColor);
+            $font->align('center');
+            $font->valign('middle');
+            $font->size(40);
+        });
+      #  Myriad_Pro_Semibold_italic.ttf
+
+        /*OLD  return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
             $font->file(public_path('fonts/160MKA.ttf'));
             $font->color($txtColor);
             $font->align('center');
             $font->valign('middle');
             $font->size(32);
-        })->blur(2);
+        })->blur(1);*/
 
     }
 
@@ -63,8 +72,8 @@ class ImageController extends Controller
                 break;
 
             case 'left':
-                $tX = 151;
-                $tY = 57;
+                $tX = 250;
+                $tY = 75;
                 break;
 
             case 'right':
@@ -74,12 +83,13 @@ class ImageController extends Controller
         }
 
         return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
-            $font->file(public_path('fonts/160MKA.ttf'));
-            $font->color('#fff');
+            $font->file(public_path('fonts/MyriadProItalic.ttf'));
+            $font->color('#363636');
             $font->align('center');
             $font->valign('middle');
-            $font->size(25);
-        })->blur(1);
+            $font->size(14);
+        });
+        #->blur(1);
 
     }
 
@@ -88,23 +98,32 @@ class ImageController extends Controller
 
         ## generate white button with black txt centered, opacity: 60% ##
 
-        if (empty($text)) {
-              return Image::canvas(182, 40);
-          } else {
+//        if (empty($text)) {
+//              return Image::canvas(182, 40);
+//          } else {
+//
+//            return Image::canvas(182, 40)
+//                ->ellipse(182, 182, 91, 20, function ($draw) {
+//                    $draw->background('#fff');
+//                    $draw->border(4, '#fff');
+//                })
+//                ->opacity(60)
+//                ->text($text, 91, 28, function ($font) use ($color) {
+//                    $font->file(public_path('fonts/Caviar_Dreams_Bold.ttf'));
+//                    $font->size(16);
+//                    $font->color($color);
+//                    $font->align('center');
+//                });
+//        }
 
-            return Image::canvas(182, 40)
-                ->ellipse(182, 182, 91, 20, function ($draw) {
-                    $draw->background('#fff');
-                    $draw->border(4, '#fff');
-                })
-                ->opacity(60)
-                ->text($text, 91, 28, function ($font) use ($color) {
-                    $font->file(public_path('fonts/Caviar_Dreams_Bold.ttf'));
-                    $font->size(16);
-                    $font->color($color);
-                    $font->align('center');
-                });
-        }
+        return Image::canvas(122, 90, '#fff')
+            ->opacity(50)
+            ->text($text, 61, 51, function ($font) use ($color) {
+                $font->file(public_path('fonts/MyriadProSemibold.ttf'));
+                $font->size(14);
+                $font->color($color);
+                $font->align('center');
+            });
 
     }
 
@@ -179,9 +198,12 @@ class ImageController extends Controller
                         $c->upsize();
                     })
                 ->insert($main, 'center')
-                ->insert($bt, $btnposition, 30, 0)
+                ->insert($bt, $btnposition, 0, 0)
                 ->insert($folow, 'center');
 
+
+                #->insert($main, 'center')
+                #->insert($bt, $btnposition, 30, 0)
 // Banee
 //        if ($imgExist && $useWhole == null) {
 //            $img = Image::make(Input::file('file_image'))

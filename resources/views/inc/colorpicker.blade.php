@@ -74,7 +74,7 @@
                     $("[href='#tab2']").click(function () {
                         var arButton = $('input[name=bannertemplate]:checked').val();
                         if (arButton == 'Leaderboard') {
-                            aspect = 9 / 1;
+                            aspect = 364 / 45;
 
                         } else if (arButton == 'Rectangle') {
                             aspect = 6 / 5;
