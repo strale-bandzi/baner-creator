@@ -39,6 +39,13 @@
 
     {!! Form::text('banertextFollow' , '', ['class'=>'form-control', 'placeholder'=>'Following text goes here'])!!}
 
+
+    <br>
+
+    {!! Form::label('banertextFollow2', 'Insert your following 2 text') !!}
+
+    {!! Form::text('banertextFollow2' , '', ['class'=>'form-control', 'placeholder'=>'Following text goes here'])!!}
+
 </div>
 
 <script>

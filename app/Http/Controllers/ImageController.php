@@ -27,8 +27,10 @@ class ImageController extends Controller
 
         switch (strtolower($pos)) {
             case 'center':
+                #$tX = 364;
+               # $tY = 45;
                 $tX = 364;
-                $tY = 45;
+                $tY = 25;
                 break;
 
             case 'left':
@@ -43,11 +45,13 @@ class ImageController extends Controller
         }
 
         return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
-            $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
-            $font->color($txtColor);
+            #$font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
+            $font->file(public_path('fonts/160MKA.ttf'));
+            #$font->color($txtColor);
+            $font->color('#534992');
             $font->align('center');
             $font->valign('middle');
-            $font->size(40);
+            $font->size(26);
         });
       #  Myriad_Pro_Semibold_italic.ttf
 
@@ -68,7 +72,7 @@ class ImageController extends Controller
         switch (strtolower($pos)) {
             case 'center':
                 $tX = 364;
-                $tY = 57;
+                $tY = 53;
                 break;
 
             case 'left':
@@ -83,14 +87,35 @@ class ImageController extends Controller
         }
 
         return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
-            $font->file(public_path('fonts/MyriadProItalic.ttf'));
-            $font->color('#363636');
+            $font->file(public_path('fonts/160MKA.ttf'));
+            $font->color('#959aa5');
             $font->align('center');
             $font->valign('middle');
             $font->size(14);
         });
+
+//        return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
+//            $font->file(public_path('fonts/MyriadProItalic.ttf'));
+//            $font->color('#363636');
+//            $font->align('center');
+//            $font->valign('middle');
+//            $font->size(14);
+//        });  DANI
         #->blur(1);
 
+    }
+
+    public function addAnotherTxt($x, $y, $banertext)
+    {
+        ## function adds txt ##
+
+        return Image::canvas($x, $y)->text($banertext, 364, 72, function ($font) {
+            $font->file(public_path('fonts/160MKA.ttf'));
+            $font->color('#959aa5');
+            $font->align('center');
+            $font->valign('middle');
+            $font->size(14);
+        });
     }
 
     public function addDaButton($text, $color)
@@ -115,11 +140,19 @@ class ImageController extends Controller
 //                    $font->align('center');
 //                });
 //        }
+// dugme, cela strana kao avion baner
+//        return Image::canvas(122, 90, '#fff')
+//            ->opacity(50)
+//            ->text($text, 61, 51, function ($font) use ($color) {
+//                $font->file(public_path('fonts/MyriadProSemibold.ttf'));
+//                $font->size(14);
+//                $font->color($color);
+//                $font->align('center');
+//            });
 
-        return Image::canvas(122, 90, '#fff')
-            ->opacity(50)
-            ->text($text, 61, 51, function ($font) use ($color) {
-                $font->file(public_path('fonts/MyriadProSemibold.ttf'));
+        return Image::canvas(190, 40, '#3ac6d8')
+            ->text($text, 95, 27, function ($font) use ($color) {
+                $font->file(public_path('fonts/160MKA.ttf'));
                 $font->size(14);
                 $font->color($color);
                 $font->align('center');
@@ -149,9 +182,11 @@ class ImageController extends Controller
         $useWhole = $request->input('wholeImage');
         $alignement = $request->input('txtAlign');
         $btnposition = $request->input('btnposition');
+
      #   dd($alignement);
 
         $banertextFollow = $request->input('banertextFollow');
+        $banertextFollow2 = $request->input('banertextFollow2');
 
         $txtColor = $request->input('textColor');
         $btnTextColor = $request->input('btnTextColor');
@@ -191,15 +226,17 @@ class ImageController extends Controller
 
         $main = $this->addDaText($x, $y, $banertext, $txtColor, $alignement);
         $folow = $this->addDaFollText($x, $y, $banertextFollow, $alignement);
-        $bt = $this->addDaButton($btntext, $btnTextColor);
+        $folow2 = $this->addAnotherTxt($x, $y,$banertextFollow2);
+        $bt = $this->addDaButton($btntext, '#fff');
         $img = Image::make(Input::file('file_image'))
                     ->crop($cropW, $cropH, $cropX1, $cropY1)
                     ->fit($x, $y, function ($c) {
                         $c->upsize();
                     })
                 ->insert($main, 'center')
-                ->insert($bt, $btnposition, 0, 0)
-                ->insert($folow, 'center');
+                ->insert($bt, $btnposition, 20, 0)
+                ->insert($folow, 'center')
+                ->insert($folow2, 'center');
 
 
                 #->insert($main, 'center')
@@ -232,7 +269,7 @@ class ImageController extends Controller
 
         #save and proceed
 
-        $input['imagename'] = $img . "bc" . time() . ".png";
+        $input['imagename'] = $img . 'bc' . time() . '.png';
 
         $destinationPath = public_path('/images');
 
