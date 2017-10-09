@@ -4,6 +4,7 @@
         <div class="col-xs-6">
             {!! Form::select('colorpicker', [
                     '#000000'=>'Black',
+                    '#fff'=>'White',
                     '#7bd148'=> 'Green',
                     '#5484ed'=>'Bold blue',
                     '#a4bdfc'=>'Blue',
@@ -16,6 +17,7 @@
                     '#dc2127'=>'Bold red',
                     '#dbadff'=>'Purple',
                     '#e1e1e1'=>'Gray'
+
             ]) !!}
             <br>
             {!! Form::label('file_image', 'Or you can upload your own photo') !!}
@@ -25,7 +27,6 @@
             {!! Form::checkbox('wholeImage', 'wholeImage', false) !!}
             <br>
             {!! Form::hidden('image', '', ['id'=>'1file1']) !!}
-
 
             {{--JCROP Values--}}
 

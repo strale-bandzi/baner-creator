@@ -30,7 +30,7 @@ class ImageController extends Controller
                 #$tX = 364;
                # $tY = 45;
                 $tX = 364;
-                $tY = 25;
+                $tY = 27;
                 break;
 
             case 'left':
@@ -46,12 +46,12 @@ class ImageController extends Controller
 
         return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
             #$font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
-            $font->file(public_path('fonts/160MKA.ttf'));
+            $font->file(public_path('fonts/TitilliumWeb-Bold.ttf'));
             #$font->color($txtColor);
             $font->color('#534992');
             $font->align('center');
             $font->valign('middle');
-            $font->size(26);
+            $font->size(28);
         });
       #  Myriad_Pro_Semibold_italic.ttf
 
@@ -72,7 +72,7 @@ class ImageController extends Controller
         switch (strtolower($pos)) {
             case 'center':
                 $tX = 364;
-                $tY = 53;
+                $tY = 51;
                 break;
 
             case 'left':
@@ -87,11 +87,11 @@ class ImageController extends Controller
         }
 
         return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
-            $font->file(public_path('fonts/160MKA.ttf'));
+            $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
             $font->color('#959aa5');
             $font->align('center');
             $font->valign('middle');
-            $font->size(14);
+            $font->size(15);
         });
 
 //        return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
@@ -109,12 +109,12 @@ class ImageController extends Controller
     {
         ## function adds txt ##
 
-        return Image::canvas($x, $y)->text($banertext, 364, 72, function ($font) {
-            $font->file(public_path('fonts/160MKA.ttf'));
+        return Image::canvas($x, $y)->text($banertext, 364, 71, function ($font) {
+            $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
             $font->color('#959aa5');
             $font->align('center');
             $font->valign('middle');
-            $font->size(14);
+            $font->size(15);
         });
     }
 
@@ -150,13 +150,32 @@ class ImageController extends Controller
 //                $font->align('center');
 //            });
 
-        return Image::canvas(190, 40, '#3ac6d8')
-            ->text($text, 95, 27, function ($font) use ($color) {
-                $font->file(public_path('fonts/160MKA.ttf'));
+        return Image::canvas(184, 34, '#3ac6d8')
+            ->text($text, 92, 24, function ($font) use ($color) {
+                $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
                 $font->size(14);
                 $font->color($color);
                 $font->align('center');
             });
+
+    }
+
+    public function addDaImage($image, $useWhole)
+    {
+
+        if(file_exists($image) && $useWhole == null)
+        {
+            return Image::make(Input::file($image))
+                ->fit(364, 90, function ($c){
+                    $c->upsize();
+                });
+
+        }
+
+          #  ->crop($cropW, $cropH, $cropX1, $cropY1)
+          #  ->fit($x, $y, function ($c) {
+          #      $c->upsize();
+           # });
 
     }
 
@@ -183,7 +202,7 @@ class ImageController extends Controller
         $alignement = $request->input('txtAlign');
         $btnposition = $request->input('btnposition');
 
-     #   dd($alignement);
+       #  dd($imgExist);
 
         $banertextFollow = $request->input('banertextFollow');
         $banertextFollow2 = $request->input('banertextFollow2');
@@ -228,11 +247,18 @@ class ImageController extends Controller
         $folow = $this->addDaFollText($x, $y, $banertextFollow, $alignement);
         $folow2 = $this->addAnotherTxt($x, $y,$banertextFollow2);
         $bt = $this->addDaButton($btntext, '#fff');
-        $img = Image::make(Input::file('file_image'))
-                    ->crop($cropW, $cropH, $cropX1, $cropY1)
-                    ->fit($x, $y, function ($c) {
-                        $c->upsize();
-                    })
+        $slika = Image::make(Input::file('file_image'))
+            ->fit(180, 90, function ($c) {
+                $c->upsize();
+            });
+//        $img = Image::make(Input::file('file_image'))
+//                    ->crop($cropW, $cropH, $cropX1, $cropY1)
+//                    ->fit($x, $y, function ($c) {
+//                        $c->upsize();
+//                    })
+        if($imgExist)
+            $img =  Image::canvas(728, 90, $colorpicker)
+                ->insert($slika, 'left', 15, 5)
                 ->insert($main, 'center')
                 ->insert($bt, $btnposition, 20, 0)
                 ->insert($folow, 'center')
