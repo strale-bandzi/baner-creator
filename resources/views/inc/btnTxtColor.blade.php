@@ -5,23 +5,33 @@
 
     <br>
 
-    {!! Form::label('btnposition', 'Enter button position:') !!}
-    {{--{!! Form::text('btnposition', '', ['class'=>'form-control'])!!}--}}
+    {!! Form::label('btnColor', 'Select button color') !!}
 
-    {!! Form::select('btnposition', [
-            'center'=>'center',
-            'right'=>'right',
-            'left'=>'left'
+    {!! Form::select('btnColor', [
+    '#fff'=> 'White',
+    '#000000'=>'Black',
+    '#534992'=> 'Indigo',
+    '#5484ed'=>'Bold blue',
+    '#a4bdfc'=>'Blue',
+    '#46d6db'=>'Turquoise',
+    '#7ae7bf'=>'Light green',
+    '#51b749'=>'Bold green',
+    '#fbd75b'=>'Yellow',
+    '#ffb878'=>'Orange',
+    '#ff887c'=>'Red',
+    '#dc2127'=>'Bold red',
+    '#dbadff'=>'Purple',
+    '#e1e1e1'=>'Gray'
     ]) !!}
 
     <br>
 
-
     {!! Form::label('btnTextColor', 'Select button text color') !!}
 
     {!! Form::select('btnTextColor', [
+    '#fff'=> 'White',
     '#000000'=>'Black',
-    '#7bd148'=> 'Green',
+    '#534992'=> 'Indigo',
     '#5484ed'=>'Bold blue',
     '#a4bdfc'=>'Blue',
     '#46d6db'=>'Turquoise',
@@ -44,5 +54,6 @@
 <script>
 
     $('select[name="btnTextColor"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="btnColor"]').simplecolorpicker({theme: 'glyphicons'});
 
 </script>

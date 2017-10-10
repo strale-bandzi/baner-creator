@@ -3,9 +3,9 @@
 
         <div class="col-xs-6">
             {!! Form::select('colorpicker', [
+                    '#ffffff'=>'White',
                     '#000000'=>'Black',
-                    '#fff'=>'White',
-                    '#7bd148'=> 'Green',
+                    '#534992'=> 'Indigo',
                     '#5484ed'=>'Bold blue',
                     '#a4bdfc'=>'Blue',
                     '#46d6db'=>'Turquoise',
@@ -17,7 +17,6 @@
                     '#dc2127'=>'Bold red',
                     '#dbadff'=>'Purple',
                     '#e1e1e1'=>'Gray'
-
             ]) !!}
             <br>
             {!! Form::label('file_image', 'Or you can upload your own photo') !!}
@@ -74,7 +73,7 @@
 
                     $("[href='#tab2']").click(function () {
                         var arButton = $('input[name=bannertemplate]:checked').val();
-                        if (arButton == 'Leaderboard') {
+                        if (arButton == 'leaderboard-car' || 'leaderboard-airplane') {
                             aspect = 364 / 45;
 
                         } else if (arButton == 'Rectangle') {

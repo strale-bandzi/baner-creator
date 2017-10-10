@@ -3,23 +3,15 @@
     {!! Form::label('banertext', 'Insert your main text ') !!}
 
     {!! Form::text('banertext' , '', ['class'=>'form-control'])!!}
-    <br>
-    {!! Form::label('txtAlign', 'Select text align: ') !!}
-
-    {!! Form::select('txtAlign', [
-   'center'=>'center',
-   'left'=>'left',
-   'right'=>'right',
-   ], [ "class"=>"btn-info"]) !!}
-
 
     <br>
 
-    {!! Form::label('textColor', 'Select main text color') !!}
+    {!! Form::label('textColor', 'Main txt color: ') !!}
 
     {!! Form::select('textColor', [
+    '#ffffff'=>'White',
     '#000000'=>'Black',
-    '#7bd148'=> 'Green',
+    '#534992'=> 'Indigo',
     '#5484ed'=>'Bold blue',
     '#a4bdfc'=>'Blue',
     '#46d6db'=>'Turquoise',
@@ -42,15 +34,39 @@
 
     <br>
 
-    {!! Form::label('banertextFollow2', 'Insert your following 2 text') !!}
+    {!! Form::label('banertextFollow2', 'Insert your second following text') !!}
 
     {!! Form::text('banertextFollow2' , '', ['class'=>'form-control', 'placeholder'=>'Following text goes here'])!!}
+
+
+    <br>
+
+    {!! Form::label('FtextColor', 'Follow txt color: ') !!}
+
+    {!! Form::select('FtextColor', [
+    '#ffffff'=>'White',
+    '#000000'=>'Black',
+    '#534992'=> 'Indigo',
+    '#5484ed'=>'Bold blue',
+    '#a4bdfc'=>'Blue',
+    '#46d6db'=>'Turquoise',
+    '#7ae7bf'=>'Light green',
+    '#51b749'=>'Bold green',
+    '#fbd75b'=>'Yellow',
+    '#ffb878'=>'Orange',
+    '#ff887c'=>'Red',
+    '#dc2127'=>'Bold red',
+    '#dbadff'=>'Purple',
+    '#e1e1e1'=>'Gray'
+    ]) !!}
 
 </div>
 
 <script>
 
     $('select[name="textColor"]').simplecolorpicker({theme: 'glyphicons'});
+
+    $('select[name="FtextColor"]').simplecolorpicker({theme: 'glyphicons'});
 
 </script>
 <style>

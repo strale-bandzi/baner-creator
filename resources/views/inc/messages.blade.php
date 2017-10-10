@@ -10,7 +10,7 @@
 @if(session('success'))
     <div class='alert alert-success'>
         <p> Here is your awesome banner!</p>
-        {{session('success')}}
+        <a href="#">{{session('success')}}</a>
     </div>
 @endif
 

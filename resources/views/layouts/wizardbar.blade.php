@@ -49,6 +49,12 @@
                                 <div class="tab-pane active" id="tab1">
                                     <br>
                                     <h3><strong>Step 1 </strong> Select banner template</h3>
+
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#">Leaderboard</a></li>
+                                        <li><a href="#">Rectangle</a></li>
+                                        <li><a href="#">Skycraper</a></li>
+                                    </ul>
                                     <hr>
                                     @include('inc.bannertemplate')
 
@@ -72,20 +78,19 @@
 
                                 <div class="tab-pane" id="tab4">
                                     <br>
-                                    <h3><strong>Step 4</strong> Select Button</h3>
+                                    <h3><strong>Step 4</strong> Enter button text</h3>
                                     <hr>
-
-                                    @include('inc.buttonpicker')
-
+                                    @include('inc.btnTxtColor')
                                 </div>
 
 
                                 <div class="tab-pane" id="tab5">
                                     <br>
-                                    <h3><strong>Step 5</strong> Enter button text</h3>
+                                    <h3><strong>Step 5</strong> Banner preview</h3>
                                     <hr>
 
-                                    @include('inc.btnTxtColor')
+                                    @include('inc.messages')
+                                    <img src="/images/{{ Session::get('imageName') }}"/>
 
                                 </div>
 
@@ -94,11 +99,7 @@
                                     <h3><strong>Step 6</strong> Banner preview</h3>
                                     <hr>
 
-                                    @include('inc.messages')
-
-
-                                    <img src="/images/{{ Session::get('imageName') }}"/>
-
+                                  <p>Don't wait, order here!</p>
 
                                 </div>
                             </div>

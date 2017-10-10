@@ -25,161 +25,133 @@ class ImageController extends Controller
     {
         ## function adds txt ##
 
-        switch (strtolower($pos)) {
-            case 'center':
-                #$tX = 364;
-               # $tY = 45;
-                $tX = 364;
-                $tY = 27;
-                break;
+        if(empty($banertext))
+        { return Image::canvas(728, 90); }
 
-            case 'left':
-                $tX = 174;
-                $tY = 45;
-                break;
+        if ($pos=='leaderboard-car')
+        {
+            $tX = 364;
+            $tY = 27;
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/TitilliumWeb-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(28);
+            });
 
-            case 'right':
-                $tX = 546;
-                $tY = 45;
-                break;
         }
+        else if ($pos=='leaderboard-airplane')
+        {
+            $tX = 174;
+            $tY = 43;
 
-        return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
-            #$font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
-            $font->file(public_path('fonts/TitilliumWeb-Bold.ttf'));
-            #$font->color($txtColor);
-            $font->color('#534992');
-            $font->align('center');
-            $font->valign('middle');
-            $font->size(28);
-        });
-      #  Myriad_Pro_Semibold_italic.ttf
-
-        /*OLD  return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
-            $font->file(public_path('fonts/160MKA.ttf'));
-            $font->color($txtColor);
-            $font->align('center');
-            $font->valign('middle');
-            $font->size(32);
-        })->blur(1);*/
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(39);
+            });
+        }
 
     }
 
-    public function addDaFollText($x, $y, $banertext, $pos)
+    public function addDaFollText($x, $y, $banertext, $color, $pos)
     {
         ## function adds txt ##
 
-        switch (strtolower($pos)) {
-            case 'center':
-                $tX = 364;
-                $tY = 51;
-                break;
-
-            case 'left':
-                $tX = 250;
-                $tY = 75;
-                break;
-
-            case 'right':
-                $tX = 546;
-                $tY = 57;
-                break;
+        if(empty($banertext))
+        {
+            return Image::canvas(728, 90);
         }
 
-        return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
+        if($pos=='leaderboard-car')
+        {
+            $tX = 364;
+            $tY = 51;
+
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
+                $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(15);
+            });
+
+        }
+        else if($pos=='leaderboard-airplane')
+        {
+            $tX = 250;
+            $tY = 75;
+
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
+            $font->file(public_path('fonts/MyriadProItalic.ttf'));
+            $font->color('#363636');
+            $font->align('center');
+            $font->valign('middle');
+            $font->size(14);
+        });
+
+        }
+
+    }
+
+    public function addAnotherTxt($x, $y, $banertext, $color, $type)
+    {
+        ## function adds txt ##
+        if(empty($banertext))
+        {
+            return Image::canvas(728, 90);
+        }
+
+        if($type == 'leaderboard-airplane'){ return Image::canvas(728, 90);}
+
+        return Image::canvas($x, $y)->text($banertext, 364, 71, function ($font) use ($color) {
             $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
-            $font->color('#959aa5');
+            $font->color($color);
             $font->align('center');
             $font->valign('middle');
             $font->size(15);
         });
-
-//        return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
-//            $font->file(public_path('fonts/MyriadProItalic.ttf'));
-//            $font->color('#363636');
-//            $font->align('center');
-//            $font->valign('middle');
-//            $font->size(14);
-//        });  DANI
-        #->blur(1);
-
     }
 
-    public function addAnotherTxt($x, $y, $banertext)
-    {
-        ## function adds txt ##
-
-        return Image::canvas($x, $y)->text($banertext, 364, 71, function ($font) {
-            $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
-            $font->color('#959aa5');
-            $font->align('center');
-            $font->valign('middle');
-            $font->size(15);
-        });
-    }
-
-    public function addDaButton($text, $color)
+    public function addDaButton($text, $color, $btcolor, $type)
     {
 
         ## generate white button with black txt centered, opacity: 60% ##
 
-//        if (empty($text)) {
-//              return Image::canvas(182, 40);
-//          } else {
-//
-//            return Image::canvas(182, 40)
-//                ->ellipse(182, 182, 91, 20, function ($draw) {
-//                    $draw->background('#fff');
-//                    $draw->border(4, '#fff');
-//                })
-//                ->opacity(60)
-//                ->text($text, 91, 28, function ($font) use ($color) {
-//                    $font->file(public_path('fonts/Caviar_Dreams_Bold.ttf'));
-//                    $font->size(16);
-//                    $font->color($color);
-//                    $font->align('center');
-//                });
-//        }
-// dugme, cela strana kao avion baner
-//        return Image::canvas(122, 90, '#fff')
-//            ->opacity(50)
-//            ->text($text, 61, 51, function ($font) use ($color) {
-//                $font->file(public_path('fonts/MyriadProSemibold.ttf'));
-//                $font->size(14);
-//                $font->color($color);
-//                $font->align('center');
-//            });
+        if(empty($text))
+        {
+            return Image::canvas(182,34);
+        }
 
-        return Image::canvas(184, 34, '#3ac6d8')
+        if($type=='leaderboard-car') {
+
+        return Image::canvas(184, 34, $btcolor)
             ->text($text, 92, 24, function ($font) use ($color) {
                 $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
                 $font->size(14);
                 $font->color($color);
                 $font->align('center');
             });
-
-    }
-
-    public function addDaImage($image, $useWhole)
-    {
-
-        if(file_exists($image) && $useWhole == null)
+        }
+        else if($type=='leaderboard-airplane')
         {
-            return Image::make(Input::file($image))
-                ->fit(364, 90, function ($c){
-                    $c->upsize();
+            return Image::canvas(122, 90, '#fff')
+                ->opacity(50)
+                ->text($text, 61, 51, function ($font) use ($color) {
+                    $font->file(public_path('fonts/MyriadProSemibold.ttf'));
+                    $font->size(14);
+                    $font->color($color);
+                    $font->align('center');
                 });
 
         }
 
-          #  ->crop($cropW, $cropH, $cropX1, $cropY1)
-          #  ->fit($x, $y, function ($c) {
-          #      $c->upsize();
-           # });
-
     }
 
-    public function store(Request $request)
+  public function store(Request $request)
     {
         /*
          * Collect data from FORM
@@ -194,21 +166,19 @@ class ImageController extends Controller
         $bannertype = $request->input('bannertemplate');
         $colorpicker = $request->input('colorpicker');
         $banertext = $request->input('banertext');
-        $button = $request->input('button');
         $btntext = $request->input('btntext');
-        $img = $request->input('file_image');
         $imgExist = $request->input('image');
         $useWhole = $request->input('wholeImage');
-        $alignement = $request->input('txtAlign');
         $btnposition = $request->input('btnposition');
-
-       #  dd($imgExist);
 
         $banertextFollow = $request->input('banertextFollow');
         $banertextFollow2 = $request->input('banertextFollow2');
 
         $txtColor = $request->input('textColor');
+        $ftxtColor = $request->input('FtextColor');
+
         $btnTextColor = $request->input('btnTextColor');
+        $btcolor = $request->input('btnColor');
 
         /*
          * Crop image and return values (width, height, coordinates X and Y)
@@ -229,69 +199,60 @@ class ImageController extends Controller
          */
 
         switch (strtolower($bannertype)) {
-            case 'leaderboard':
+            case 'leaderboard-car':
                 $x = 728;
                 $y = 90;
+                $bp = 20;
+                $btnposition = 'right';
                 break;
-            case 'rectangle':
-                $x = 300;
-                $y = 250;
-                break;
-            case 'skycraper':
-                $x = 120;
-                $y = 600;
+            case 'leaderboard-airplane':
+                $x = 728;
+                $y = 90;
+                $bp = 0;
+                $btnposition = 'right';
                 break;
         }
 
-        $main = $this->addDaText($x, $y, $banertext, $txtColor, $alignement);
-        $folow = $this->addDaFollText($x, $y, $banertextFollow, $alignement);
-        $folow2 = $this->addAnotherTxt($x, $y,$banertextFollow2);
-        $bt = $this->addDaButton($btntext, '#fff');
-        $slika = Image::make(Input::file('file_image'))
-            ->fit(180, 90, function ($c) {
-                $c->upsize();
-            });
-//        $img = Image::make(Input::file('file_image'))
-//                    ->crop($cropW, $cropH, $cropX1, $cropY1)
-//                    ->fit($x, $y, function ($c) {
-//                        $c->upsize();
-//                    })
-        if($imgExist)
+        $main = $this->addDaText($x, $y, $banertext, $txtColor, $bannertype);
+        $folow = $this->addDaFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+        $folow2 = $this->addAnotherTxt($x, $y,$banertextFollow2, $ftxtColor, $bannertype);
+        $bt = $this->addDaButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+        if($imgExist && $useWhole==null)
+        {
+                    $img = Image::make(Input::file('file_image'))
+                            ->crop($cropW, $cropH, $cropX1, $cropY1)
+                            ->fit($x, $y, function ($c) {
+                                    $c->upsize();
+                            })
+                            ->insert($main, 'center')
+                            ->insert($bt, $btnposition, $bp, 0)
+                            ->insert($folow, 'center')
+                            ->insert($folow2, 'center');
+        }
+        else if($imgExist && $useWhole == 'wholeImage')
+        {
+
+            $slika = Image::make(Input::file('file_image'))
+                ->fit(180, 90, function ($c) {
+                    $c->upsize();
+                });
+
             $img =  Image::canvas(728, 90, $colorpicker)
                 ->insert($slika, 'left', 15, 5)
                 ->insert($main, 'center')
-                ->insert($bt, $btnposition, 20, 0)
+                ->insert($bt, $btnposition, $bp, 0)
                 ->insert($folow, 'center')
                 ->insert($folow2, 'center');
-
-
-                #->insert($main, 'center')
-                #->insert($bt, $btnposition, 30, 0)
-// Banee
-//        if ($imgExist && $useWhole == null) {
-//            $img = Image::make(Input::file('file_image'))
-//                ->crop($cropW, $cropH, $cropX1, $cropY1)
-//                ->fit($x, $y, function ($c) {
-//                    $c->upsize();
-//                })
-//                ->insert($mainText, 'center')
-//                ->insert($btn, $btnposition, 45, 0);
-//
-//        } else if ($imgExist) {
-//            $img = Image::make(Input::file('file_image'))
-//                ->fit($x, $y, function ($c) {
-//                    $c->upsize();
-//                })
-//                ->insert($mainText, 'center')
-//                ->insert($btn, $btnposition, 45, 0);
-//        } else {
-//
-//            $img = Image::canvas($x, $y)
-//                ->fill($colorpicker)
-//                ->insert($mainText, 'center')
-//                ->insert($btn, $btnposition, 45, 0);
-//
-//        }
+        }
+        else
+        {
+            $img = Image::canvas(728, 90, $colorpicker)
+                ->insert($main, 'center')
+                ->insert($bt, $btnposition, $bp, 0)
+                ->insert($folow, 'center')
+                ->insert($folow2, 'center');
+        }
 
         #save and proceed
 
