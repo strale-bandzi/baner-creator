@@ -73,15 +73,20 @@
 
                     $("[href='#tab2']").click(function () {
                         var arButton = $('input[name=bannertemplate]:checked').val();
+
+
                         if (arButton == 'leaderboard-car' || 'leaderboard-airplane') {
                             aspect = 364 / 45;
-
-                        } else if (arButton == 'Rectangle') {
-                            aspect = 6 / 5;
-
-                        } else {
-                            aspect = 1 / 5;
                         }
+
+
+//                      if checkbox is checked
+//                      $('#wholeImage').click(function(){
+//                                if($(this).is(':checked')){
+//                                    aspect = 1 / 1;
+//                                }
+//                            });
+
 
                         /* display image and crop */
 

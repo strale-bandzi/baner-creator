@@ -138,7 +138,7 @@ class ImageController extends Controller
         }
         else if($type=='leaderboard-airplane')
         {
-            return Image::canvas(122, 90, '#fff')
+            return Image::canvas(122, 90, $btcolor)
                 ->opacity(50)
                 ->text($text, 61, 51, function ($font) use ($color) {
                     $font->file(public_path('fonts/MyriadProSemibold.ttf'));

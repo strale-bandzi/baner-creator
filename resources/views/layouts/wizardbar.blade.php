@@ -50,11 +50,7 @@
                                     <br>
                                     <h3><strong>Step 1 </strong> Select banner template</h3>
 
-                                    <ul class="nav nav-pills">
-                                        <li class="active"><a href="#">Leaderboard</a></li>
-                                        <li><a href="#">Rectangle</a></li>
-                                        <li><a href="#">Skycraper</a></li>
-                                    </ul>
+
                                     <hr>
                                     @include('inc.bannertemplate')
 
