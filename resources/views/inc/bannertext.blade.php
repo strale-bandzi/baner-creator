@@ -64,9 +64,9 @@
 
 <script>
 
-    $('select[name="textColor"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="textColor"]').simplecolorpicker({theme: 'fontawesome'});
 
-    $('select[name="FtextColor"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="FtextColor"]').simplecolorpicker({theme: 'fontawesome'});
 
 </script>
 <style>

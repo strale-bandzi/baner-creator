@@ -53,7 +53,7 @@
 </div>
 <script>
 
-    $('select[name="btnTextColor"]').simplecolorpicker({theme: 'glyphicons'});
-    $('select[name="btnColor"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="btnTextColor"]').simplecolorpicker({theme: 'fontawesome'});
+    $('select[name="btnColor"]').simplecolorpicker({theme: 'fontawesome'});
 
 </script>

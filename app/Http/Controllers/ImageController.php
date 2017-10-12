@@ -21,7 +21,7 @@ class ImageController extends Controller
      * returns
     */
 
-    public function addDaText($x, $y, $banertext, $txtColor, $pos)
+    public function addText($x, $y, $banertext, $txtColor, $pos)
     {
         ## function adds txt ##
 
@@ -55,9 +55,25 @@ class ImageController extends Controller
             });
         }
 
+        else if ($pos=='rectangle-kismetrics')
+        {
+            /* Kismetrics rectangle banner */
+
+            $tX = 150;
+            $tY = 81;
+
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/TitilliumWeb-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(26);
+            });
+        }
+
     }
 
-    public function addDaFollText($x, $y, $banertext, $color, $pos)
+    public function addFollText($x, $y, $banertext, $color, $pos)
     {
         ## function adds txt ##
 
@@ -116,7 +132,7 @@ class ImageController extends Controller
         });
     }
 
-    public function addDaButton($text, $color, $btcolor, $type)
+    public function addButton($text, $color, $btcolor, $type)
     {
 
         ## generate white button with black txt centered, opacity: 60% ##
@@ -144,6 +160,25 @@ class ImageController extends Controller
                     $font->file(public_path('fonts/MyriadProSemibold.ttf'));
                     $font->size(14);
                     $font->color($color);
+                    $font->align('center');
+                });
+
+        }
+
+        else if($type=='rectangle-kismetrics')
+        {
+
+            /* Finish button for kismetrics rectangle type */
+
+            return Image::canvas(120, 40)
+                ->ellipse(120, 120, 60, 20, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                    $draw->border(6, $btcolor);
+                })
+                ->text($text, 60, 32, function ($font) {
+                    $font->file(public_path('fonts/MyriadProSemibold.ttf'));
+                    $font->size(24);
+                    $font->color('#000');
                     $font->align('center');
                 });
 
@@ -211,12 +246,17 @@ class ImageController extends Controller
                 $bp = 0;
                 $btnposition = 'right';
                 break;
+            case 'rectangle-kismetrics':
+                $x = 300;
+                $y = 250;
+                $bp = 0;
+                break;
         }
 
-        $main = $this->addDaText($x, $y, $banertext, $txtColor, $bannertype);
-        $folow = $this->addDaFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+        $main = $this->addText($x, $y, $banertext, $txtColor, $bannertype);
+        $folow = $this->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
         $folow2 = $this->addAnotherTxt($x, $y,$banertextFollow2, $ftxtColor, $bannertype);
-        $bt = $this->addDaButton($btntext, $btnTextColor, $btcolor, $bannertype);
+        $bt = $this->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
 
         if($imgExist && $useWhole==null)
         {
@@ -238,7 +278,7 @@ class ImageController extends Controller
                     $c->upsize();
                 });
 
-            $img =  Image::canvas(728, 90, $colorpicker)
+            $img =  Image::canvas($x, $y, $colorpicker)
                 ->insert($slika, 'left', 15, 5)
                 ->insert($main, 'center')
                 ->insert($bt, $btnposition, $bp, 0)
@@ -247,7 +287,7 @@ class ImageController extends Controller
         }
         else
         {
-            $img = Image::canvas(728, 90, $colorpicker)
+            $img = Image::canvas($x, $y, $colorpicker)
                 ->insert($main, 'center')
                 ->insert($bt, $btnposition, $bp, 0)
                 ->insert($folow, 'center')

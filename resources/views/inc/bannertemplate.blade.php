@@ -1,50 +1,56 @@
 <div class="container">
-    <div class='form-group col-xs-6'>
 
 
-        <div class="nav">
-            <button class="btn btn-info" data-rel="leaderboard">Leaderboard</button>
-            <button class="btn btn-success" data-rel="rectangle">Rectangle</button>
-            <button class="btn btn-primary" data-rel="skycraper">Skycraper</button>
-        </div>
+    <div class="nav">
+        <button class="btn btn-info" data-rel="leaderboard">Leaderboard</button>
+        <button class="btn btn-success" data-rel="rectangle">Rectangle</button>
+        <button class="btn btn-primary" data-rel="skycraper">Skycraper</button>
+    </div>
+<br>
+    {!! Form::open(['method'=>'POST', 'action'=>'ImageController@store','files'=>true, 'id'=>'upload']) !!}
 
-        {!! Form::open(['method'=>'POST', 'action'=>'ImageController@store','files'=>true, 'id'=>'upload']) !!}
-
-        <div id="leaderboard">
-            {!! Form::label('bannertemplate', 'Leaderboard (728x90)') !!}
+    <div id="leaderboard">
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-car') !!}
             <img src="/template/leaderboard.jpg" alt="car.jpg"/>
-
-            {!! Form::label('bannertemplate', 'Leaderboard (728x90)') !!}
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-airplane')!!}
             <img src="/template/airplane.jpg" alt="airplane.jpg"/>
-        </div>
-
-
-        <div id="rectangle" class="presented">
-            {!! Form::label('bannertemplate', 'Rectangle (300x250)') !!}
-            {!! Form::radio('bannertemplate', 'rectangle-kissmetrics') !!}
-            <img src="/template/kissmetrics.jpg" alt="kissmetrics.jpg"/>
-
-            {!! Form::label('bannertemplate', 'Rectangle (300x250)') !!}
-            {!! Form::radio('bannertemplate', 'rectangle-get-around') !!}
-            <img src="/template/getting-around.jpg" alt="getting-around.jpg"/>
-        </div>
-
-        <div id="skycraper" class="presented">
-            <p>
-                {!! Form::label('bannertemplate', 'Skycraper (120x600)') !!}
-                {!! Form::radio('bannertemplate', 'skycraper-antivirus') !!}
-                <img src="/template/baner-antivirus.jpg" alt="skycraper-antivirus.jpg"/>
-            </p>
-            <p>
-                {!! Form::label('bannertemplate', 'Skycraper (120x600)') !!}
-                {!! Form::radio('bannertemplate', 'skycraper-iphone7') !!}
-                <img src="/template/baneriPhone7.jpg" alt="skycraper-iPhone7.jpg"/>
-            </p>
-        </div>
-
+        </p>
     </div>
+
+    <br>
+    <div id="rectangle" class="presented">
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-kismetrics') !!}<br>
+            <img src="/template/kissmetrics.jpg" alt="kissmetrics.jpg"/>
+        </p>
+
+
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-get-around') !!}<br>
+            <img src="/template/getting-around.jpg" alt="getting-around.jpg"/>
+        </p>
+    </div>
+
+    <div id="skycraper" class="presented"><br>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 120x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-antivirus') !!}
+            <img src="/template/baner-antivirus.jpg" alt="skycraper-antivirus.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 120x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-iphone7') !!}
+            <img src="/template/baneriPhone7.jpg" alt="skycraper-iPhone7.jpg"/>
+        </p>
+    </div>
+
 </div>
 
 <style type="text/css">
@@ -56,8 +62,13 @@
         float: left;
     }
 
-    p{
+    #skycraper p {
         display: inline-block;
+    }
+
+    p
+    {
+        margin: 5px;
     }
 
 </style>

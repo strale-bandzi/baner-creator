@@ -34,9 +34,9 @@
 
             {!! Form::hidden('w', '', ['id'=>'w']) !!}
             {!! Form::hidden('h', '', ['id'=>'h']) !!}
-
-
-            <br>
+        </div>
+        <br>
+        <div class="col-xs-12">
 
             <img src="" id="imageDisplay"/>
 
@@ -70,23 +70,21 @@
                     /*Check for aspect ratio*/
 
                     var aspect;
+                    var select;
 
                     $("[href='#tab2']").click(function () {
-                        var arButton = $('input[name=bannertemplate]:checked').val();
 
+                        var arButton = $('input[name=bannertemplate]:checked').val();
 
                         if (arButton == 'leaderboard-car' || 'leaderboard-airplane') {
                             aspect = 364 / 45;
+                            select = [0, 0, 728, 90];
                         }
 
-
-//                      if checkbox is checked
-//                      $('#wholeImage').click(function(){
-//                                if($(this).is(':checked')){
-//                                    aspect = 1 / 1;
-//                                }
-//                            });
-
+                        if (arButton == 'rectangle-kismetrics'){
+                            aspect = 6 / 5;
+                            select = [0, 0, 300, 250];
+                        }
 
                         /* display image and crop */
 
@@ -94,7 +92,7 @@
                             trackDocument: true,
                             bgColor: 'black',
                             bgOpacity: .4,
-                            setSelect: [100, 100, 50, 50],
+                            setSelect: select,
                             boxWidth: 900,
                             boxHeight: 450,
                             aspectRatio: aspect,
@@ -134,6 +132,6 @@
 
 <script>
 
-    $('select[name="colorpicker"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker"]').simplecolorpicker({theme:'fontawesome'});
 
 </script>
