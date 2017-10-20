@@ -1,0 +1,138 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+use Intervention\Image\Facades\Image as Image;
+
+class Skycraper extends Model
+{
+
+    public function addText($x, $y, $banertext, $txtColor, $pos)
+    {
+        ## function adds txt ##
+
+        if (empty($banertext)) {
+            return Image::canvas(160, 600);
+        }
+
+        if ($pos == 'skycraper-antivirus') {
+
+            $tX = 80;
+            $tY = 98;
+
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Roboto-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(34);
+            });
+
+        }
+    }
+
+    public function addFollText($x, $y, $banertext, $color, $pos)
+    {
+        ## function adds follow txt ##
+
+        if (empty($banertext)) {
+            return Image::canvas(160, 600);
+        }
+
+        if ($pos == 'skycraper-antivirus') {
+            $tX = 80;
+            $tY = 145;
+
+            $position = strpos($banertext, ' ');    // position of first word
+
+            $first = substr($banertext, 0, $position);  //gives first word
+            $secondString = substr($banertext, $position); // Gives next 2 strings
+
+            $secondPosition = strpos($secondString, ' ', 1);
+
+            $second = substr($secondString, 0, $secondPosition); //gives second word
+            $third = substr($secondString, $secondPosition); // gives third word
+
+
+            return Image::canvas($x, $y)->text($first, $tX, $tY, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(35);
+            })->text($second, 80, 183, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(32);
+            })
+            ->text($third, 80, 225, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(35);
+            });
+
+        }
+
+
+    }
+
+    public function addButton($text, $color, $btcolor, $type)
+    {
+
+        ## generate white button with black txt centered, opacity: 60% ##
+
+        if (empty($text)) {
+            return Image::canvas(182, 34);
+        }
+
+        if ($type == 'skycraper-antivirus') {
+
+            $position = strpos($text, ' ');
+
+            $firstHalf = substr($text, 0, $position);
+            $secondHalf = substr($text, $position +1);
+
+            return Image::canvas(160, 600)
+                ->circle(60, 80, 350, function ($draw) use ($btcolor){
+                    $draw->background($btcolor);
+                })->text(' > ', 80, 350, function ($font) use ($color){
+                    $font->file(public_path('fonts/PTM55FT.ttf'));
+                    $font->color($color);
+                    $font->size(60);
+                    $font->align('center');
+                    $font->valign('middle');
+                })
+                ->text('CLICK HERE', 80, 410, function ($font) use ($btcolor){
+                    $font->file(public_path('fonts/Roboto-Bold.ttf'));
+                    $font->color($btcolor);
+                    $font->size(16);
+                    $font->align('center');
+                    $font->valign('middle');
+                })
+                ->circle(160, 80, 600, function ($draw) use ($btcolor){
+                    $draw->background($btcolor);
+                })
+                ->text($secondHalf, 103, 590, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Lato-Bold.ttf'));
+                    $font->size(25);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('bottom');
+                })
+                ->text($firstHalf, 63, 552, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                    $font->size(38);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->angle(20);
+                });
+        }
+    }
+}

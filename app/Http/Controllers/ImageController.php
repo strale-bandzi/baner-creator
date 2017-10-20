@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Skycraper;
+use App\Leaderboard;
+use App\Rectangle;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Intervention\Image\Facades\Image as Image;
@@ -17,174 +20,8 @@ class ImageController extends Controller
 
     /*
      * Collect data from form.
-     *
-     * returns
+     * returns ingredients for banner
     */
-
-    public function addText($x, $y, $banertext, $txtColor, $pos)
-    {
-        ## function adds txt ##
-
-        if(empty($banertext))
-        { return Image::canvas(728, 90); }
-
-        if ($pos=='leaderboard-car')
-        {
-            $tX = 364;
-            $tY = 27;
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
-                $font->file(public_path('fonts/TitilliumWeb-Bold.ttf'));
-                $font->color($txtColor);
-                $font->align('center');
-                $font->valign('middle');
-                $font->size(28);
-            });
-
-        }
-        else if ($pos=='leaderboard-airplane')
-        {
-            $tX = 174;
-            $tY = 43;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
-                $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
-                $font->color($txtColor);
-                $font->align('center');
-                $font->valign('middle');
-                $font->size(39);
-            });
-        }
-
-        else if ($pos=='rectangle-kismetrics')
-        {
-            /* Kismetrics rectangle banner */
-
-            $tX = 150;
-            $tY = 81;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
-                $font->file(public_path('fonts/TitilliumWeb-Bold.ttf'));
-                $font->color($txtColor);
-                $font->align('center');
-                $font->valign('middle');
-                $font->size(26);
-            });
-        }
-
-    }
-
-    public function addFollText($x, $y, $banertext, $color, $pos)
-    {
-        ## function adds txt ##
-
-        if(empty($banertext))
-        {
-            return Image::canvas(728, 90);
-        }
-
-        if($pos=='leaderboard-car')
-        {
-            $tX = 364;
-            $tY = 51;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
-                $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
-                $font->color($color);
-                $font->align('center');
-                $font->valign('middle');
-                $font->size(15);
-            });
-
-        }
-        else if($pos=='leaderboard-airplane')
-        {
-            $tX = 250;
-            $tY = 75;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) {
-            $font->file(public_path('fonts/MyriadProItalic.ttf'));
-            $font->color('#363636');
-            $font->align('center');
-            $font->valign('middle');
-            $font->size(14);
-        });
-
-        }
-
-    }
-
-    public function addAnotherTxt($x, $y, $banertext, $color, $type)
-    {
-        ## function adds txt ##
-        if(empty($banertext))
-        {
-            return Image::canvas(728, 90);
-        }
-
-        if($type == 'leaderboard-airplane'){ return Image::canvas(728, 90);}
-
-        return Image::canvas($x, $y)->text($banertext, 364, 71, function ($font) use ($color) {
-            $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
-            $font->color($color);
-            $font->align('center');
-            $font->valign('middle');
-            $font->size(15);
-        });
-    }
-
-    public function addButton($text, $color, $btcolor, $type)
-    {
-
-        ## generate white button with black txt centered, opacity: 60% ##
-
-        if(empty($text))
-        {
-            return Image::canvas(182,34);
-        }
-
-        if($type=='leaderboard-car') {
-
-        return Image::canvas(184, 34, $btcolor)
-            ->text($text, 92, 24, function ($font) use ($color) {
-                $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
-                $font->size(14);
-                $font->color($color);
-                $font->align('center');
-            });
-        }
-        else if($type=='leaderboard-airplane')
-        {
-            return Image::canvas(122, 90, $btcolor)
-                ->opacity(50)
-                ->text($text, 61, 51, function ($font) use ($color) {
-                    $font->file(public_path('fonts/MyriadProSemibold.ttf'));
-                    $font->size(14);
-                    $font->color($color);
-                    $font->align('center');
-                });
-
-        }
-
-        else if($type=='rectangle-kismetrics')
-        {
-
-            /* Finish button for kismetrics rectangle type */
-
-            return Image::canvas(120, 40)
-                ->ellipse(120, 120, 60, 20, function ($draw) use ($btcolor) {
-                    $draw->background($btcolor);
-                    $draw->border(6, $btcolor);
-                })
-                ->text($text, 60, 32, function ($font) {
-                    $font->file(public_path('fonts/MyriadProSemibold.ttf'));
-                    $font->size(24);
-                    $font->color('#000');
-                    $font->align('center');
-                });
-
-        }
-
-    }
 
   public function store(Request $request)
     {
@@ -207,7 +44,6 @@ class ImageController extends Controller
         $btnposition = $request->input('btnposition');
 
         $banertextFollow = $request->input('banertextFollow');
-        $banertextFollow2 = $request->input('banertextFollow2');
 
         $txtColor = $request->input('textColor');
         $ftxtColor = $request->input('FtextColor');
@@ -237,26 +73,69 @@ class ImageController extends Controller
             case 'leaderboard-car':
                 $x = 728;
                 $y = 90;
-                $bp = 20;
+                $bpX = 20;
+                $bpY = 0;
                 $btnposition = 'right';
+
+                $lead = new Leaderboard();
+                $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $lead->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $lead->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
                 break;
             case 'leaderboard-airplane':
                 $x = 728;
                 $y = 90;
-                $bp = 0;
+                $bpX = 0;
+                $bpY = 0;
                 $btnposition = 'right';
+
+                $lead = new Leaderboard();
+                $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $lead->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $lead->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
                 break;
             case 'rectangle-kismetrics':
                 $x = 300;
                 $y = 250;
-                $bp = 0;
+                $bpX = 15;
+                $bpY = 190;
+
+                $rect = new Rectangle();
+                $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $rect->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $rect->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
+            case 'rectangle-get-around':
+                $x = 300;
+                $y = 250;
+                $bpX = 15;
+                $bpY = 190;
+
+                $rect = new Rectangle();
+                $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $rect->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $rect->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
+            case 'skycraper-antivirus':
+                $x = 160;
+                $y = 600;
+                $bpX = 80;
+                $bpY = 280;
+                $btnposition = 'center';
+
+                $skycraper = new Skycraper();
+                $main = $skycraper->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $skycraper->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $skycraper->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
                 break;
         }
-
-        $main = $this->addText($x, $y, $banertext, $txtColor, $bannertype);
-        $folow = $this->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
-        $folow2 = $this->addAnotherTxt($x, $y,$banertextFollow2, $ftxtColor, $bannertype);
-        $bt = $this->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
 
         if($imgExist && $useWhole==null)
         {
@@ -266,9 +145,8 @@ class ImageController extends Controller
                                     $c->upsize();
                             })
                             ->insert($main, 'center')
-                            ->insert($bt, $btnposition, $bp, 0)
-                            ->insert($folow, 'center')
-                            ->insert($folow2, 'center');
+                            ->insert($bt, $btnposition, $bpX, $bpY)
+                            ->insert($folow, 'center');
         }
         else if($imgExist && $useWhole == 'wholeImage')
         {
@@ -281,22 +159,20 @@ class ImageController extends Controller
             $img =  Image::canvas($x, $y, $colorpicker)
                 ->insert($slika, 'left', 15, 5)
                 ->insert($main, 'center')
-                ->insert($bt, $btnposition, $bp, 0)
-                ->insert($folow, 'center')
-                ->insert($folow2, 'center');
+                ->insert($bt, $btnposition, $bpX, $bpY)
+                ->insert($folow, 'center');
         }
-        else
+        else if(!$imgExist)
         {
             $img = Image::canvas($x, $y, $colorpicker)
                 ->insert($main, 'center')
-                ->insert($bt, $btnposition, $bp, 0)
-                ->insert($folow, 'center')
-                ->insert($folow2, 'center');
+                ->insert($bt, $btnposition, $bpX, $bpY)
+                ->insert($folow, 'center');
         }
 
         #save and proceed
 
-        $input['imagename'] = $img . 'bc' . time() . '.png';
+        $input['imagename'] = $img . 'bc' . time() . '.jpg';
 
         $destinationPath = public_path('/images');
 

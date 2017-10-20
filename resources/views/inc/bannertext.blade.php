@@ -34,13 +34,6 @@
 
     <br>
 
-    {!! Form::label('banertextFollow2', 'Insert your second following text') !!}
-
-    {!! Form::text('banertextFollow2' , '', ['class'=>'form-control', 'placeholder'=>'Following text goes here'])!!}
-
-
-    <br>
-
     {!! Form::label('FtextColor', 'Follow txt color: ') !!}
 
     {!! Form::select('FtextColor', [

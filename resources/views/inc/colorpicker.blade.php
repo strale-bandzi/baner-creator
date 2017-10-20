@@ -81,9 +81,14 @@
                             select = [0, 0, 728, 90];
                         }
 
-                        if (arButton == 'rectangle-kismetrics'){
+                        if (arButton == 'rectangle-kismetrics' || 'rectangle-get-around'){
                             aspect = 6 / 5;
                             select = [0, 0, 300, 250];
+                        }
+
+                        if (arButton == 'skycraper-antivirus'){
+                            aspect = 4 / 15;
+                            select = [0, 0, 120, 600];
                         }
 
                         /* display image and crop */

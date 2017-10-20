@@ -40,12 +40,12 @@
 
     <div id="skycraper" class="presented"><br>
         <p>
-            {!! Form::label('bannertemplate', 'Dims: 120x600') !!}
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
             {!! Form::radio('bannertemplate', 'skycraper-antivirus') !!}
             <img src="/template/baner-antivirus.jpg" alt="skycraper-antivirus.jpg"/>
         </p>
         <p>
-            {!! Form::label('bannertemplate', 'Dims: 120x600') !!}
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
             {!! Form::radio('bannertemplate', 'skycraper-iphone7') !!}
             <img src="/template/baneriPhone7.jpg" alt="skycraper-iPhone7.jpg"/>
         </p>
