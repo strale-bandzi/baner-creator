@@ -1,7 +1,7 @@
 <div class='form-group col-xs-6'>
 
     {!! Form::label('btntext', 'Your text here:') !!}
-    {!! Form::text('btntext', '', ['class'=>'form-control', 'id'=>'nosam'])!!}
+    {!! Form::text('btntext', '', ['class'=>'form-control', 'id'=>'nosam', 'placeholder'=>'Button text goes here'])!!}
 
     <br>
 

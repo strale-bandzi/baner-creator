@@ -23,7 +23,7 @@ class ImageController extends Controller
      * returns ingredients for banner
     */
 
-  public function store(Request $request)
+    public function store(Request $request)
     {
         /*
          * Collect data from FORM
@@ -75,6 +75,8 @@ class ImageController extends Controller
                 $y = 90;
                 $bpX = 20;
                 $bpY = 0;
+                $imgX = 15;
+                $imgY = 5;
                 $btnposition = 'right';
 
                 $lead = new Leaderboard();
@@ -88,6 +90,8 @@ class ImageController extends Controller
                 $y = 90;
                 $bpX = 0;
                 $bpY = 0;
+                $imgX = 0;
+                $imgY = 0;
                 $btnposition = 'right';
 
                 $lead = new Leaderboard();
@@ -101,6 +105,8 @@ class ImageController extends Controller
                 $y = 250;
                 $bpX = 15;
                 $bpY = 190;
+                $imgX = 0;
+                $imgY = 0;
 
                 $rect = new Rectangle();
                 $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
@@ -114,6 +120,8 @@ class ImageController extends Controller
                 $y = 250;
                 $bpX = 15;
                 $bpY = 190;
+                $imgX = 0;
+                $imgY = 0;
 
                 $rect = new Rectangle();
                 $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
@@ -127,7 +135,25 @@ class ImageController extends Controller
                 $y = 600;
                 $bpX = 80;
                 $bpY = 280;
+                $imgX = 0;
+                $imgY = 0;
                 $btnposition = 'center';
+
+                $skycraper = new Skycraper();
+                $main = $skycraper->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $skycraper->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $skycraper->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
+            case 'skycraper-iphone7':
+                $x = 160;
+                $y = 600;
+                $bpX = 80;
+                $bpY = 0;
+                $imgX = 0;
+                $imgY = 0;
+                $btnposition = 'bottom';
 
                 $skycraper = new Skycraper();
                 $main = $skycraper->addText($x, $y, $banertext, $txtColor, $bannertype);
@@ -137,47 +163,41 @@ class ImageController extends Controller
                 break;
         }
 
-        if($imgExist && $useWhole==null)
-        {
-                    $img = Image::make(Input::file('file_image'))
-                            ->crop($cropW, $cropH, $cropX1, $cropY1)
-                            ->fit($x, $y, function ($c) {
-                                    $c->upsize();
-                            })
-                            ->insert($main, 'center')
-                            ->insert($bt, $btnposition, $bpX, $bpY)
-                            ->insert($folow, 'center');
-        }
-        else if($imgExist && $useWhole == 'wholeImage')
-        {
-
-            $slika = Image::make(Input::file('file_image'))
-                ->fit(180, 90, function ($c) {
+        if ($imgExist && $useWhole == null) {
+            $img = Image::make(Input::file('file_image'))
+                ->crop($cropW, $cropH, $cropX1, $cropY1)
+                ->fit($x, $y, function ($c) {
                     $c->upsize();
-                });
-
-            $img =  Image::canvas($x, $y, $colorpicker)
-                ->insert($slika, 'left', 15, 5)
+                })
                 ->insert($main, 'center')
                 ->insert($bt, $btnposition, $bpX, $bpY)
                 ->insert($folow, 'center');
-        }
-        else if(!$imgExist)
-        {
+        } else if ($imgExist && $useWhole == 'wholeImage') {
+
+            $slika = Image::make(Input::file('file_image'))
+                ->fit($x, $y, function ($c) {
+                    $c->upsize();
+                });
+
+            $img = Image::canvas($x, $y, $colorpicker)
+                ->insert($slika, 'left', $imgX, $imgY)
+                ->insert($main, 'center')
+                ->insert($bt, $btnposition, $bpX, $bpY)
+                ->insert($folow, 'center');
+        } else if (!$imgExist) {
             $img = Image::canvas($x, $y, $colorpicker)
                 ->insert($main, 'center')
                 ->insert($bt, $btnposition, $bpX, $bpY)
                 ->insert($folow, 'center');
         }
 
-        #save and proceed
+        /*
+         *save and proceed
+        */
 
         $input['imagename'] = $img . 'bc' . time() . '.jpg';
-
         $destinationPath = public_path('/images');
-
         $img->save($destinationPath . '/' . $input['imagename']);
-
         return back()->with('imageName', $input['imagename'])->with('success', ' Click button to confirm!');
 
     }

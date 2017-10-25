@@ -2,7 +2,7 @@
 
     {!! Form::label('banertext', 'Insert your main text ') !!}
 
-    {!! Form::text('banertext' , '', ['class'=>'form-control'])!!}
+    {!! Form::text('banertext' , '', ['class'=>'form-control', 'placeholder'=>'Main text goes here'])!!}
 
     <br>
 

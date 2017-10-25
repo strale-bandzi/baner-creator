@@ -31,6 +31,33 @@ class Skycraper extends Model
             });
 
         }
+        else if ($pos == 'skycraper-iphone7') {
+
+            $tX = 80;
+            $tY = 101;
+
+            if(str_word_count($banertext) >= 3 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0]. ' ' .$c[1];
+                $length = strlen($firstHalf);
+                $secondHalf = substr($banertext, $length+1);
+            }
+
+            return Image::canvas($x, $y)->text($firstHalf, $tX, $tY, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(27.5);
+            })->text($secondHalf, 80, 141, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                    $font->color($txtColor);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(57);
+                });
+
+        }
     }
 
     public function addFollText($x, $y, $banertext, $color, $pos)
@@ -75,6 +102,21 @@ class Skycraper extends Model
                 $font->align('center');
                 $font->valign('middle');
                 $font->size(35);
+            });
+
+        }
+
+        else if ($pos == 'skycraper-iphone7') {
+
+            $tX = 80;
+            $tY = 196;
+
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(37);
             });
 
         }
@@ -132,6 +174,17 @@ class Skycraper extends Model
                     $font->align('center');
                     $font->valign('middle');
                     $font->angle(20);
+                });
+        }
+
+        else if($type == 'skycraper-iphone7'){
+
+            return Image::canvas(160, 40, $btcolor)->text($text, 80, 20, function ($font) use ($color){
+                    $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                    $font->color($color);
+                    $font->size(22);
+                    $font->align('center');
+                    $font->valign('middle');
                 });
         }
     }

@@ -19,23 +19,36 @@ class Rectangle extends Model
         {
             /* Kismetrics rectangle banner */
 
-            $tX = 150;
+
+            if(strstr($banertext, ',')){
+            $tX = 20;
             $tY = 80;
 
             $position = strpos($banertext, ',');
             $firstHalf = substr($banertext, 0, $position +1); #will display text and comma
-            $secondHalf = substr($banertext, $position +1); #will display text after comma
+            $secondHalf = substr($banertext, $position +2); #will display text after comma
+
+             }else {
+
+                $tX = 20;
+                $tY = 80;
+                $firstHalf = $banertext;
+                $secondHalf = null;
+
+            }
+
 
             return Image::canvas($x, $y)->text($firstHalf, $tX, $tY, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Gudea-Bold.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(28);
-            })->text($secondHalf, 130, 110, function ($font) use ($txtColor) {
+            })
+            ->text($secondHalf, $tX, 110, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Gudea-Bold.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(28);
             });
@@ -79,13 +92,13 @@ class Rectangle extends Model
 
         if(empty($banertext))
         {
-            return Image::canvas(728, 90);
+            return Image::canvas(300, 250);
         }
 
 
         if($pos== 'rectangle-kismetrics')
         {
-            $tX = 120;
+            $tX = 122;
             $tY = 142;
 
             return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color){

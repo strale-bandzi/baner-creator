@@ -70,34 +70,42 @@
                     /*Check for aspect ratio*/
 
                     var aspect;
-                    var select;
 
                     $("[href='#tab2']").click(function () {
 
-                        var arButton = $('input[name=bannertemplate]:checked').val();
+                     var arButton = $('input[name=bannertemplate]:checked').val();
 
-                        if (arButton == 'leaderboard-car' || 'leaderboard-airplane') {
-                            aspect = 364 / 45;
-                            select = [0, 0, 728, 90];
-                        }
+                     switch(arButton){
+                         case 'leaderboard-car':
+                             aspect = 364 / 45;
+                            break;
+                         case  'leaderboard-airplane':
+                             aspect = 364 / 45;
+                             break;
 
-                        if (arButton == 'rectangle-kismetrics' || 'rectangle-get-around'){
-                            aspect = 6 / 5;
-                            select = [0, 0, 300, 250];
-                        }
+                         case 'rectangle-kismetrics':
+                                 aspect = 6 / 5;
+                             break;
+                         case 'rectangle-get-around':
+                             aspect = 6 / 5;
+                             break;
+                         case 'skycraper-antivirus':
+                                 aspect = 1 / 5;
+                             break;
+                         case 'skycraper-iphone7':
+                             aspect = 1 / 5;
+                             break;
 
-                        if (arButton == 'skycraper-antivirus'){
-                            aspect = 4 / 15;
-                            select = [0, 0, 120, 600];
-                        }
+                     }
 
                         /* display image and crop */
+                        console.log(arButton);
 
                         $('#imageDisplay').Jcrop({
                             trackDocument: true,
                             bgColor: 'black',
                             bgOpacity: .4,
-                            setSelect: select,
+                            setSelect: [0, 10, 50, 10],
                             boxWidth: 900,
                             boxHeight: 450,
                             aspectRatio: aspect,

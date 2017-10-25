@@ -58,13 +58,20 @@ class Leaderboard extends Model
             if(strstr($banertext, '.'))
             {
                 $position = strpos($banertext, '.');
+                $firstHalf = substr($banertext, 0, $position+1);
+                $secondHalf = substr($banertext, $position +1);
+            }
+            else if(strstr($banertext, ' ') &&  str_word_count($banertext) >= 3 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0]. ' ' .$c[1];
+                $length = strlen($firstHalf);
+                $secondHalf = substr($banertext, $length+1);
             }
             else {
-                $position = strpos($banertext, ' ');
+                $firstHalf = $banertext;
+                $secondHalf = null;
             }
 
-            $firstHalf = substr($banertext, 0, $position+1);
-            $secondHalf = substr($banertext, $position +1);
 
             return Image::canvas($x, $y)->text($firstHalf, $tX, $tY, function ($font) use ($color) {
                 $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
