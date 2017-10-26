@@ -73,30 +73,30 @@
 
                     $("[href='#tab2']").click(function () {
 
-                     var arButton = $('input[name=bannertemplate]:checked').val();
+                        var arButton = $('input[name=bannertemplate]:checked').val();
 
-                     switch(arButton){
-                         case 'leaderboard-car':
-                             aspect = 364 / 45;
-                            break;
-                         case  'leaderboard-airplane':
-                             aspect = 364 / 45;
-                             break;
+                        switch (arButton) {
+                            case 'leaderboard-car':
+                                aspect = 364 / 45;
+                                break;
+                            case  'leaderboard-airplane':
+                                aspect = 364 / 45;
+                                break;
 
-                         case 'rectangle-kismetrics':
-                                 aspect = 6 / 5;
-                             break;
-                         case 'rectangle-get-around':
-                             aspect = 6 / 5;
-                             break;
-                         case 'skycraper-antivirus':
-                                 aspect = 1 / 5;
-                             break;
-                         case 'skycraper-iphone7':
-                             aspect = 1 / 5;
-                             break;
+                            case 'rectangle-kismetrics':
+                                aspect = 6 / 5;
+                                break;
+                            case 'rectangle-get-around':
+                                aspect = 6 / 5;
+                                break;
+                            case 'skycraper-antivirus':
+                                aspect = 1 / 5;
+                                break;
+                            case 'skycraper-iphone7':
+                                aspect = 1 / 5;
+                                break;
 
-                     }
+                        }
 
                         /* display image and crop */
                         console.log(arButton);
@@ -145,6 +145,6 @@
 
 <script>
 
-    $('select[name="colorpicker"]').simplecolorpicker({theme:'fontawesome'});
+    $('select[name="colorpicker"]').simplecolorpicker({theme: 'fontawesome'});
 
 </script>

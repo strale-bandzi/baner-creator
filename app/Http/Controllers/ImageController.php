@@ -18,15 +18,13 @@ class ImageController extends Controller
         return view('welcome');
     }
 
-    /*
-     * Collect data from form.
-     * returns ingredients for banner
-    */
+    /**
+     * Collect data from form
+     */
 
     public function store(Request $request)
     {
-        /*
-         * Collect data from FORM
+        /**
          * Validate first step
          *
          */
@@ -51,7 +49,7 @@ class ImageController extends Controller
         $btnTextColor = $request->input('btnTextColor');
         $btcolor = $request->input('btnColor');
 
-        /*
+        /**
          * Crop image and return values (width, height, coordinates X and Y)
          */
 
@@ -61,10 +59,11 @@ class ImageController extends Controller
         $cropY1 = round($request->input('y1'));
 
 
-        /*
-         * Insert cropped image
-         * Add main banner text
-         * Add button and button text
+        /**
+         * Insert image
+         * Add main and follow banner text
+         * Pick text color
+         * Add button, color and button text
          *
          * return result
          */
@@ -178,6 +177,7 @@ class ImageController extends Controller
                 ->fit($x, $y, function ($c) {
                     $c->upsize();
                 });
+            ## fit function watch out! need other dimensions
 
             $img = Image::canvas($x, $y, $colorpicker)
                 ->insert($slika, 'left', $imgX, $imgY)
@@ -191,9 +191,9 @@ class ImageController extends Controller
                 ->insert($folow, 'center');
         }
 
-        /*
+        /**
          *save and proceed
-        */
+         */
 
         $input['imagename'] = $img . 'bc' . time() . '.jpg';
         $destinationPath = public_path('/images');

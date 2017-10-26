@@ -9,13 +9,20 @@ use Intervention\Image\Facades\Image as Image;
 class Skycraper extends Model
 {
 
+    /**
+     * function adds main txt
+     */
+
     public function addText($x, $y, $banertext, $txtColor, $pos)
     {
-        ## function adds txt ##
 
         if (empty($banertext)) {
             return Image::canvas(160, 600);
         }
+
+        /**
+         * Skycraper-antivirus banner type
+         */
 
         if ($pos == 'skycraper-antivirus') {
 
@@ -32,6 +39,10 @@ class Skycraper extends Model
 
         }
         else if ($pos == 'skycraper-iphone7') {
+
+            /**
+             * Skycraper-iphone7 banner type
+             */
 
             $tX = 80;
             $tY = 101;
@@ -62,7 +73,9 @@ class Skycraper extends Model
 
     public function addFollText($x, $y, $banertext, $color, $pos)
     {
-        ## function adds follow txt ##
+        /**
+         * function adds follow txt
+         */
 
         if (empty($banertext)) {
             return Image::canvas(160, 600);
@@ -127,7 +140,10 @@ class Skycraper extends Model
     public function addButton($text, $color, $btcolor, $type)
     {
 
-        ## generate white button with black txt centered, opacity: 60% ##
+        /**
+         * generate button for skycraper types
+         */
+
 
         if (empty($text)) {
             return Image::canvas(182, 34);

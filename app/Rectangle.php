@@ -8,62 +8,68 @@ use Intervention\Image\Facades\Image as Image;
 
 class Rectangle extends Model
 {
+    /**
+     * function adds main txt
+     */
+
     public function addText($x, $y, $banertext, $txtColor, $pos)
     {
-        ## function adds txt ##
 
-        if(empty($banertext))
-        { return Image::canvas(300, 250); }
-
-        if ($pos=='rectangle-kismetrics')
-        {
-            /* Kismetrics rectangle banner */
-
-
-            if(strstr($banertext, ',')){
-            $tX = 20;
-            $tY = 80;
-
-            $position = strpos($banertext, ',');
-            $firstHalf = substr($banertext, 0, $position +1); #will display text and comma
-            $secondHalf = substr($banertext, $position +2); #will display text after comma
-
-             }else {
-
-                $tX = 20;
-                $tY = 80;
-                $firstHalf = $banertext;
-                $secondHalf = null;
-
-            }
-
-
-            return Image::canvas($x, $y)->text($firstHalf, $tX, $tY, function ($font) use ($txtColor) {
-                $font->file(public_path('fonts/Gudea-Bold.ttf'));
-                $font->color($txtColor);
-                $font->align('left');
-                $font->valign('middle');
-                $font->size(28);
-            })
-            ->text($secondHalf, $tX, 110, function ($font) use ($txtColor) {
-                $font->file(public_path('fonts/Gudea-Bold.ttf'));
-                $font->color($txtColor);
-                $font->align('left');
-                $font->valign('middle');
-                $font->size(28);
-            });
+        if (empty($banertext)) {
+            return Image::canvas(300, 250);
         }
 
-        else if ($pos == 'rectangle-get-around')
-        {
-            /*Get Around Rectangle Banner */
+        if ($pos == 'rectangle-kismetrics') {
+
+            /**
+             * Kismetrics rectangle banner
+             */
+
+            if (strstr($banertext, ',')) {
+
+                $position = strpos($banertext, ',');
+                $firstHalf = substr($banertext, 0, $position + 1); #will display text and comma
+                $secondHalf = substr($banertext, $position + 2); #will display text after comma
+
+            } else if (strstr($banertext, ' ') && str_word_count($banertext) >= 3) {
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0] . ' ' . $c[1];
+                $length = strlen($firstHalf);
+                $secondHalf = substr($banertext, $length + 1);
+
+            } else {
+
+                $firstHalf = $banertext;
+                $secondHalf = null;
+            }
+
+            return Image::canvas($x, $y)->text($firstHalf, 18, 80, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Gudea-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(28.5);
+            })
+                ->text($secondHalf, 18, 110, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/Gudea-Bold.ttf'));
+                    $font->color($txtColor);
+                    $font->align('left');
+                    $font->valign('middle');
+                    $font->size(28.5);
+                });
+
+        } else if ($pos == 'rectangle-get-around') {
+
+            /**
+             * Get Around Rectangle Banner
+             */
 
             $tX = 150;
             $tY = 66;
             $position = strpos($banertext, ' ');
 
             $firstHalf = substr($banertext, 0, $position);
-            $secondHalf = substr($banertext, $position +1);
+            $secondHalf = substr($banertext, $position + 1);
 
             $line = Image::canvas(180, 3, $txtColor);
 
@@ -73,7 +79,7 @@ class Rectangle extends Model
                 $font->align('center');
                 $font->valign('middle');
                 $font->size(40);
-            })->text($secondHalf, 150, 106, function ($font) use ($txtColor){
+            })->text($secondHalf, 150, 106, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Merriweather-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -88,30 +94,45 @@ class Rectangle extends Model
 
     public function addFollText($x, $y, $banertext, $color, $pos)
     {
-        ## function adds txt ##
+        /**
+         * function adds follow txt
+         */
 
-        if(empty($banertext))
-        {
+        if (empty($banertext)) {
             return Image::canvas(300, 250);
         }
 
+        if ($pos == 'rectangle-kismetrics') {
 
-        if($pos== 'rectangle-kismetrics')
-        {
-            $tX = 122;
-            $tY = 142;
+            if (strstr($banertext, ' ') && str_word_count($banertext) >= 5) {
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0] . ' ' . $c[1] . ' ' . $c[2] . ' ' . $c[3];
+                $length = strlen($firstHalf);
+                $secondHalf = substr($banertext, $length + 1);
+            } else {
+                $firstHalf = $banertext;
+                $secondHalf = null;
+            }
 
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color){
+
+            return Image::canvas($x, $y)->text($firstHalf, 18, 142, function ($font) use ($color) {
                 $font->file(public_path('fonts/MyriadProItalic.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
-                $font->size(17);
+                $font->size(16.5);
+            })->text($secondHalf, 18, 159, function ($font) use ($color) {
+                $font->file(public_path('fonts/MyriadProItalic.ttf'));
+                $font->color($color);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(16.5);
             });
-        }
-        else if ($pos == 'rectangle-get-around')
-        {
-            /*Get Around Rectangle Banner follow text */
+        } else if ($pos == 'rectangle-get-around') {
+
+            /**
+             * Get Around Rectangle Banner follow text
+             */
 
             $tX = 150;
             $tY = 152;
@@ -132,32 +153,25 @@ class Rectangle extends Model
     public function addButton($text, $color, $btcolor, $type)
     {
 
-        ## generate white button with black txt centered, opacity: 60% ##
+        /**
+         * generate button for kismetrics rectangle type
+         */
 
-        if(empty($text))
-        {
-            return Image::canvas(182,34);
-        }
+        if (empty($text)) {
+            return Image::canvas(182, 34);
+        } else if ($type == 'rectangle-kismetrics') {
 
-        else if($type=='rectangle-kismetrics')
-        {
+            $width = 146;
+            $height = 38;
 
-            /* Finish button for kismetrics rectangle type */
-
-            return Image::canvas(138, 39)
-                ->ellipse(140.5, 142.2, 69.2, 19.5, function ($draw) use ($btcolor) {
+            return Image::canvas(145, 40)
+                ->circle($width, $width / 2 - 1, $height / 2, function ($draw) use ($btcolor) {
                     $draw->background($btcolor);
-                    $draw->border(2.8, $btcolor);
+                    $draw->border($btcolor);
                 })
-
-//                ->circle(139.98, 68.95, 19.5, function ($draw) use ($btcolor){
-//                    $draw->background($btcolor);
-//                    #$draw->border($btcolor);
-//                })
-                ->sharpen(30)
-                ->text($text, 70, 28, function ($font) use ($color){
+                ->text($text, 70, 28, function ($font) use ($color) {
                     $font->file(public_path('fonts/IstokWeb-Bold.ttf'));
-                    $font->size(16);
+                    $font->size(14);
                     $font->color($color);
                     $font->align('center');
                 });

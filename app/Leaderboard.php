@@ -8,15 +8,23 @@ use Intervention\Image\Facades\Image as Image;
 
 class Leaderboard extends Model
 {
+    /**
+     * function adds main txt
+     */
+
     public function addText($x, $y, $banertext, $txtColor, $pos)
     {
-        ## function adds txt ##
 
         if (empty($banertext)) {
             return Image::canvas(728, 90);
         }
 
         if ($pos == 'leaderboard-car') {
+
+            /**
+             * leaderboard-car banner type
+             */
+
             $tX = 364;
             $tY = 27;
             return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
@@ -28,6 +36,11 @@ class Leaderboard extends Model
             });
 
         } else if ($pos == 'leaderboard-airplane') {
+
+            /**
+             * leaderboard-airplane banner type
+             */
+
             $tX = 174;
             $tY = 43;
 
@@ -43,7 +56,9 @@ class Leaderboard extends Model
 
     public function addFollText($x, $y, $banertext, $color, $pos)
     {
-        ## function adds txt ##
+        /**
+         * function adds follow txt
+         */
 
         if(empty($banertext))
         {
@@ -107,7 +122,9 @@ class Leaderboard extends Model
     public function addButton($text, $color, $btcolor, $type)
     {
 
-        ## generate white button with black txt centered, opacity: 60% ##
+        /**
+         * generate button for leaderboard types
+         */
 
         if(empty($text))
         {
