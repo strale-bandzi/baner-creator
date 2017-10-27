@@ -19,7 +19,7 @@ class ImageController extends Controller
     }
 
     /**
-     * Collect data from form
+     * Collect data from FORM
      */
 
     public function store(Request $request)
@@ -72,11 +72,14 @@ class ImageController extends Controller
             case 'leaderboard-car':
                 $x = 728;
                 $y = 90;
+
                 $bpX = 20;
                 $bpY = 0;
-                $imgX = 15;
-                $imgY = 5;
                 $btnposition = 'right';
+
+                $imgX = 180;
+                $imgY = 90;
+                $imgPos = 'left';
 
                 $lead = new Leaderboard();
                 $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
@@ -87,11 +90,14 @@ class ImageController extends Controller
             case 'leaderboard-airplane':
                 $x = 728;
                 $y = 90;
+
                 $bpX = 0;
                 $bpY = 0;
-                $imgX = 0;
-                $imgY = 0;
                 $btnposition = 'right';
+
+                $imgX = 550;
+                $imgY = 90;
+                $imgPos = 'right';
 
                 $lead = new Leaderboard();
                 $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
@@ -148,11 +154,14 @@ class ImageController extends Controller
             case 'skycraper-iphone7':
                 $x = 160;
                 $y = 600;
+
                 $bpX = 80;
                 $bpY = 0;
-                $imgX = 0;
-                $imgY = 0;
                 $btnposition = 'bottom';
+
+                $imgX = 160;
+                $imgY = 375;
+                $imgPos = 'bottom';
 
                 $skycraper = new Skycraper();
                 $main = $skycraper->addText($x, $y, $banertext, $txtColor, $bannertype);
@@ -163,27 +172,41 @@ class ImageController extends Controller
         }
 
         if ($imgExist && $useWhole == null) {
-            $img = Image::make(Input::file('file_image'))
+
+            $image = Image::make(Input::file('file_image'))
                 ->crop($cropW, $cropH, $cropX1, $cropY1)
                 ->fit($x, $y, function ($c) {
                     $c->upsize();
-                })
+                });
+            $img = Image::canvas($x, $y, $colorpicker)
+                ->insert($image)
                 ->insert($main, 'center')
                 ->insert($bt, $btnposition, $bpX, $bpY)
                 ->insert($folow, 'center');
+
         } else if ($imgExist && $useWhole == 'wholeImage') {
 
-            $slika = Image::make(Input::file('file_image'))
-                ->fit($x, $y, function ($c) {
+            $image = Image::make(Input::file('file_image'));
+
+            if ($image->mime == 'image/png') {
+
+                $image->fit($imgX, $imgY, function ($c) {
                     $c->upsize();
                 });
-            ## fit function watch out! need other dimensions
+
+            } else {
+                $image->fit($x, $y, function ($c) {
+                    $c->upsize();
+                });
+
+            }
 
             $img = Image::canvas($x, $y, $colorpicker)
-                ->insert($slika, 'left', $imgX, $imgY)
+                ->insert($image, $imgPos)
                 ->insert($main, 'center')
                 ->insert($bt, $btnposition, $bpX, $bpY)
                 ->insert($folow, 'center');
+
         } else if (!$imgExist) {
             $img = Image::canvas($x, $y, $colorpicker)
                 ->insert($main, 'center')
