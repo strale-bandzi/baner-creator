@@ -112,6 +112,7 @@ class ImageController extends Controller
                 $bpY = 190;
                 $imgX = 0;
                 $imgY = 0;
+                $imgPos = 'center';
 
                 $rect = new Rectangle();
                 $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
@@ -127,6 +128,7 @@ class ImageController extends Controller
                 $bpY = 190;
                 $imgX = 0;
                 $imgY = 0;
+                $imgPos = 'center';
 
                 $rect = new Rectangle();
                 $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
@@ -142,6 +144,7 @@ class ImageController extends Controller
                 $bpY = 280;
                 $imgX = 0;
                 $imgY = 0;
+                $imgPos = 'center';
                 $btnposition = 'center';
 
                 $skycraper = new Skycraper();

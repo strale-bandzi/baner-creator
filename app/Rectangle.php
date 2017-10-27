@@ -176,6 +176,9 @@ class Rectangle extends Model
                     $font->align('center');
                 });
 
+        }else if ($type == 'rectangle-get-around') {
+
+            return Image::canvas(145, 40);
         }
 
     }
