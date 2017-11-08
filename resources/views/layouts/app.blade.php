@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-    <link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
 
@@ -69,26 +69,24 @@
     </style>
 </head>
 <body>
-<div class="navbar navbar-default navbar-fixed-top">
+
+<nav  class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
         <div class="navbar-header">
-            <a href="/" class="navbar-brand">BanerCreator</a>
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+            <a href="#" class="navbar-brand">BanerCreator</a>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{url('makeown')}}">or Send us csv data </a></li>
-
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="active"><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
             </ul>
-
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item"><a class="navbar-brand nav-link" href="{{url('makeown')}}">Send us .csv</a></li>
+            </ul>
         </div>
     </div>
-</div>
+</nav>
 
 @yield('content')
 

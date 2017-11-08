@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-xs-6">
+        <div class="col-md-12">
             {!! Form::select('colorpicker', [
                     '#ffffff'=>'White',
                     '#000000'=>'Black',
@@ -18,10 +18,11 @@
                     '#dbadff'=>'Purple',
                     '#e1e1e1'=>'Gray'
             ]) !!}
+
             <br>
             {!! Form::label('file_image', 'Or you can upload your own photo') !!}
             {!! Form::file('file_image', ['class'=>'filestyle', 'data-buttonName'=>'btn-primary', 'id'=>'imgId']) !!}
-
+            <br>
             {!! Form::label('wholeImage', 'Check to use whole image') !!}
             {!! Form::checkbox('wholeImage', 'wholeImage', false) !!}
             <br>
@@ -67,11 +68,11 @@
 
                 $('document').ready(function () {
 
-                    /*Check for aspect ratio*/
+                    /**Check for aspect ratio*/
 
                     var aspect;
 
-                    $("[href='#tab2']").click(function () {
+                    $("#tab2").click(function () {
 
                         var arButton = $('input[name=bannertemplate]:checked').val();
 
@@ -142,9 +143,9 @@
         </div>
     </div>
 </div>
-
 <script>
 
     $('select[name="colorpicker"]').simplecolorpicker({theme: 'fontawesome'});
+
 
 </script>
