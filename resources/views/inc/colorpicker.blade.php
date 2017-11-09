@@ -83,7 +83,15 @@
                             case  'leaderboard-airplane':
                                 aspect = 364 / 45;
                                 break;
-
+                            case  'leaderboard-get-around':
+                                aspect = 364 / 45;
+                                break;
+                            case 'leaderboard-iphone7':
+                                aspect = 364 / 45;
+                                break;
+                            case 'leaderboard-antivirus':
+                                aspect = 364 / 45;
+                                break;
                             case 'rectangle-kismetrics':
                                 aspect = 6 / 5;
                                 break;

@@ -51,6 +51,66 @@ class Leaderboard extends Model
                 $font->valign('middle');
                 $font->size(39);
             });
+        } else if ($pos == 'leaderboard-get-around') {
+
+            /**
+             * leaderboard-get-around banner type
+             */
+
+            if (str_word_count($banertext) >= 2) {
+                $position = strpos($banertext, ' ');
+                $firstHalf = substr($banertext, 0, $position);
+                $length = strlen($firstHalf);
+                $secondHalf = substr($banertext, $length + 1);
+            } else {
+                $firstHalf = $banertext;
+                $secondHalf = null;
+            }
+
+            $line = Image::canvas(183, 3, $txtColor);
+
+            return Image::canvas($x, $y)->text($firstHalf, 364, 25, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Merriweather-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(40);
+            })->text($secondHalf, 364, 65, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Merriweather-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(40);
+            })->insert($line, 'left', 44, 35);
+        } else if ($pos == 'leaderboard-iphone7') {
+
+            /**
+             * leaderboard-iphone banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 364, 25, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(32);
+            });
+
+        }
+        else if ($pos == 'leaderboard-antivirus') {
+
+            /**
+             * leaderboard-iphone banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 126, 16, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Roboto-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(25);
+            });
+
         }
     }
 
@@ -60,29 +120,24 @@ class Leaderboard extends Model
          * function adds follow txt
          */
 
-        if(empty($banertext))
-        {
+        if (empty($banertext)) {
             return Image::canvas(728, 90);
         }
 
-        if($pos=='leaderboard-car')
-        {
+        if ($pos == 'leaderboard-car') {
             $tX = 364;
             $tY = 51;
 
-            if(strstr($banertext, '.'))
-            {
+            if (strstr($banertext, '.')) {
                 $position = strpos($banertext, '.');
-                $firstHalf = substr($banertext, 0, $position+1);
-                $secondHalf = substr($banertext, $position +1);
-            }
-            else if(strstr($banertext, ' ') &&  str_word_count($banertext) >= 3 ){
+                $firstHalf = substr($banertext, 0, $position + 1);
+                $secondHalf = substr($banertext, $position + 1);
+            } else if (strstr($banertext, ' ') && str_word_count($banertext) >= 3) {
                 $c = str_word_count($banertext, 1);
-                $firstHalf = $c[0]. ' ' .$c[1];
+                $firstHalf = $c[0] . ' ' . $c[1];
                 $length = strlen($firstHalf);
-                $secondHalf = substr($banertext, $length+1);
-            }
-            else {
+                $secondHalf = substr($banertext, $length + 1);
+            } else {
                 $firstHalf = $banertext;
                 $secondHalf = null;
             }
@@ -95,20 +150,18 @@ class Leaderboard extends Model
                 $font->valign('middle');
                 $font->size(15);
             })->text($secondHalf, 364, 71, function ($font) use ($color) {
-                    $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
-                    $font->color($color);
-                    $font->align('center');
-                    $font->valign('middle');
-                    $font->size(15);
-                });
+                $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(15);
+            });
 
-        }
-        else if($pos=='leaderboard-airplane')
-        {
+        } else if ($pos == 'leaderboard-airplane') {
             $tX = 250;
             $tY = 75;
 
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color){
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
                 $font->file(public_path('fonts/MyriadProItalic.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -116,6 +169,68 @@ class Leaderboard extends Model
                 $font->size(14);
             });
 
+        } else if ($pos == 'leaderboard-get-around') {
+
+            /**
+             * leaderboard-get-around banner type
+             */
+
+            $tX = 590;
+            $tY = 45;
+
+            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
+                $font->file(public_path('fonts/Oswald-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12);
+            });
+        }
+        else if ($pos == 'leaderboard-iphone7') {
+
+            /**
+             * leaderboard-iphone banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 364, 68, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(38);
+            });
+
+        }
+        else if($pos == 'leaderboard-antivirus'){
+
+            /**
+             * leaderboard-antivirus banner type
+             */
+
+            if(str_word_count($banertext) >= 2 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0]. ' ' .$c[1];
+                $length = strlen($firstHalf);
+                $secondHalf = substr($banertext, $length+1);
+            }
+            else {
+                $firstHalf = $banertext;
+                $secondHalf = null;
+            }
+
+            return Image::canvas($x, $y)->text($firstHalf, 126, 45, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(21);
+            })->text($secondHalf, 126, 70, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(25);
+            });
         }
     }
 
@@ -126,12 +241,11 @@ class Leaderboard extends Model
          * generate button for leaderboard types
          */
 
-        if(empty($text))
-        {
-            return Image::canvas(182,34);
+        if (empty($text)) {
+            return Image::canvas(182, 34);
         }
 
-        if($type=='leaderboard-car') {
+        if ($type == 'leaderboard-car') {
 
             return Image::canvas(184, 34, $btcolor)
                 ->text($text, 92, 24, function ($font) use ($color) {
@@ -140,9 +254,7 @@ class Leaderboard extends Model
                     $font->color($color);
                     $font->align('center');
                 });
-        }
-        else if($type=='leaderboard-airplane')
-        {
+        } else if ($type == 'leaderboard-airplane') {
             return Image::canvas(122, 90, $btcolor)
                 ->opacity(50)
                 ->text($text, 61, 51, function ($font) use ($color) {
@@ -150,6 +262,90 @@ class Leaderboard extends Model
                     $font->size(14);
                     $font->color($color);
                     $font->align('center');
+                });
+
+        } else if ($type == 'leaderboard-get-around') {
+
+            return Image::canvas(145, 40);
+        }
+
+        else if ($type == 'leaderboard-iphone7') {
+
+            if (str_word_count($text) >= 2) {
+                $position = strpos($text, ' ');
+                $firstHalf = substr($text, 0, $position);
+                $length = strlen($firstHalf);
+                $secondHalf = substr($text, $length + 1);
+            }
+            else{
+                $firstHalf = $text;
+                $secondHalf = null;
+            }
+
+            return Image::canvas(140, 90, $btcolor)
+                ->text($firstHalf, 70, 40, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                    $font->size(22);
+                    $font->color($color);
+                    $font->align('center');
+                })
+                ->text($secondHalf, 70, 70, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                    $font->size(30);
+                    $font->color($color);
+                    $font->align('center');
+                });
+
+        }
+
+        else if($type == 'leaderboard-antivirus'){
+
+            if (str_word_count($text) == 2) {
+                $position = strpos($text, ' ');
+                $firstHalf = substr($text, 0, $position);
+                $length = strlen($firstHalf);
+                $secondHalf = substr($text, $length + 1);
+            }
+            else if (str_word_count($text) ==1){
+                $firstHalf = $text;
+                $secondHalf = null;
+            }
+            /** what if there is no word in last input field? :) */
+
+            return Image::canvas(728, 90)
+                ->circle(50, 355, 35, function ($draw) use ($btcolor){
+                    $draw->background($btcolor);
+                })->text(' > ', 355, 35, function ($font) use ($color){
+                    $font->file(public_path('fonts/PTM55FT.ttf'));
+                    $font->color($color);
+                    $font->size(50);
+                    $font->align('center');
+                    $font->valign('middle');
+                })
+                ->text('CLICK HERE', 355, 75, function ($font) use ($btcolor){
+                    $font->file(public_path('fonts/Roboto-Bold.ttf'));
+                    $font->color($btcolor);
+                    $font->size(16);
+                    $font->align('center');
+                    $font->valign('middle');
+                })
+                ->circle(160, 655, 90, function ($draw) use ($btcolor){
+                    $draw->background($btcolor);
+                })
+                ->text($secondHalf, 680, 82, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Lato-Bold.ttf'));
+                    $font->size(26);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('bottom');
+                })
+                ->text($firstHalf, 640, 40, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                    $font->size(40);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->angle(20);
                 });
 
         }

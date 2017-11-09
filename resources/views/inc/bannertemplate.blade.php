@@ -20,6 +20,21 @@
             {!! Form::radio('bannertemplate', 'leaderboard-airplane')!!}
             <img src="/template/airplane.jpg" alt="airplane.jpg"/>
         </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-get-around')!!}
+            <img src="/template/baner728x90gettingaround.jpg" alt="get-around.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-iphone7')!!}
+            <img src="/template/leaderboard-iphone.jpg" alt="iphone.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-antivirus')!!}
+            <img src="/template/leaderboard-antivirus.jpg" alt="antivirus.jpg"/>
+        </p>
     </div>
 
     <br>

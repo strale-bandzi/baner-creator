@@ -105,6 +105,66 @@ class ImageController extends Controller
                 $bt = $lead->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
 
                 break;
+
+            case 'leaderboard-get-around':
+                $x = 728;
+                $y = 90;
+
+                $bpX = 0;
+                $bpY = 0;
+                $btnposition = 'right';
+
+                $imgX = 550;
+                $imgY = 90;
+                $imgPos = 'right';
+
+                $lead = new Leaderboard();
+                $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $lead->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $lead->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
+            case 'leaderboard-iphone7':
+                $x = 728;
+                $y = 90;
+
+                $bpX = 0;
+                $bpY = 0;
+                $btnposition = 'right';
+
+                $imgX = 550;
+                $imgY = 90;
+                $imgPos = 'right';
+
+                $lead = new Leaderboard();
+                $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $lead->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $lead->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
+            case 'leaderboard-antivirus':
+                $x = 728;
+                $y = 90;
+
+                $bpX = 0;
+                $bpY = 0;
+                $btnposition = 'right';
+
+                $imgX = 550;
+                $imgY = 90;
+                $imgPos = 'right';
+
+                $lead = new Leaderboard();
+                $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $lead->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $lead->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
+
+
             case 'rectangle-kismetrics':
                 $x = 300;
                 $y = 250;
