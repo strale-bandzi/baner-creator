@@ -181,11 +181,11 @@ class ImageController extends Controller
 
                 break;
 
-            case 'rectangle-get-around':
+            case 'rectangle-get-around' || 'rectangle-iphone':
                 $x = 300;
                 $y = 250;
-                $bpX = 15;
-                $bpY = 190;
+                $bpX = 0;
+                $bpY = 215;
                 $imgX = 0;
                 $imgY = 0;
                 $imgPos = 'center';
@@ -196,6 +196,23 @@ class ImageController extends Controller
                 $bt = $rect->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
 
                 break;
+
+            case 'rectangle-airplane':
+                $x = 300;
+                $y = 250;
+                $bpX = 0;
+                $bpY = 195;
+                $imgX = 0;
+                $imgY = 0;
+                $imgPos = 'center';
+
+                $rect = new Rectangle();
+                $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $rect->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $rect->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
 
             case 'skycraper-antivirus':
                 $x = 160;
@@ -220,6 +237,24 @@ class ImageController extends Controller
 
                 $bpX = 80;
                 $bpY = 0;
+                $btnposition = 'bottom';
+
+                $imgX = 160;
+                $imgY = 375;
+                $imgPos = 'bottom';
+
+                $skycraper = new Skycraper();
+                $main = $skycraper->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $skycraper->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $skycraper->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+            case 'skycraper-airplane' || 'skycraper-get-around':
+                $x = 160;
+                $y = 600;
+
+                $bpX = 80;
+                $bpY = 40;
                 $btnposition = 'bottom';
 
                 $imgX = 160;

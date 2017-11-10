@@ -44,9 +44,6 @@ class Skycraper extends Model
              * Skycraper-iphone7 banner type
              */
 
-            $tX = 80;
-            $tY = 101;
-
             if(str_word_count($banertext) >= 3 ){
                 $c = str_word_count($banertext, 1);
                 $firstHalf = $c[0]. ' ' .$c[1];
@@ -54,7 +51,7 @@ class Skycraper extends Model
                 $secondHalf = substr($banertext, $length+1);
             }
 
-            return Image::canvas($x, $y)->text($firstHalf, $tX, $tY, function ($font) use ($txtColor) {
+            return Image::canvas($x, $y)->text($firstHalf, 80, 101, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -67,6 +64,69 @@ class Skycraper extends Model
                     $font->valign('middle');
                     $font->size(57);
                 });
+
+        }
+        else if ($pos == 'skycraper-airplane') {
+
+            /**
+             * Skycraper-airplane banner type
+             */
+
+            if(str_word_count($banertext) >= 2 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0];
+                $secondHalf = $c[1];
+            } else {
+                $firstHalf = $banertext;
+                $secondHalf = null;
+            }
+
+            return Image::canvas($x, $y)->text($firstHalf, 80, 83, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(36);
+            })
+            ->text($secondHalf, 80, 130, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(36);
+            });
+
+        }
+
+        else if ($pos == 'skycraper-get-around') {
+
+            /**
+             * Skycraper-get around banner type
+             */
+
+            if(str_word_count($banertext) >= 2 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0];
+                $secondHalf = $c[1];
+            } else {
+                $firstHalf = $banertext;
+                $secondHalf = null;
+            }
+            $line = Image::canvas(146, 3, $txtColor);
+
+            return Image::canvas($x, $y)->text($firstHalf, 80, 213, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Merriweather-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(31);
+            })->text($secondHalf, 80, 245, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/Merriweather-Bold.ttf'));
+                    $font->color($txtColor);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(31);
+                })->insert($line, 'bottom', 10, 90);
 
         }
     }
@@ -121,15 +181,50 @@ class Skycraper extends Model
 
         else if ($pos == 'skycraper-iphone7') {
 
-            $tX = 80;
-            $tY = 196;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
+            return Image::canvas($x, $y)->text($banertext, 80, 196, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($color);
                 $font->align('center');
                 $font->valign('middle');
                 $font->size(37);
+            });
+
+        } else if ($pos == 'skycraper-airplane') {
+
+            return Image::canvas($x, $y)->text($banertext, 80, 583, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12);
+            });
+
+        }
+        else if ($pos == 'skycraper-get-around') {
+
+            if (str_word_count($banertext) >= 2) {
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0] . ' ' . $c[1];
+                $length = strlen($firstHalf);
+                $secondHalf = substr($banertext, $length + 1);
+            } else {
+                $firstHalf = $banertext;
+                $secondHalf = null;
+            }
+
+
+            return Image::canvas($x, $y)->text($firstHalf, 80, 530, function ($font) use ($color) {
+                $font->file(public_path('fonts/OpenSans-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(14);
+            })->text($secondHalf, 80, 549, function ($font) use ($color) {
+                $font->file(public_path('fonts/OpenSans-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(14);
             });
 
         }
@@ -145,7 +240,7 @@ class Skycraper extends Model
          */
 
 
-        if (empty($text)) {
+        if (empty($text) || $type == 'skycraper-get-around') {
             return Image::canvas(182, 34);
         }
 
@@ -202,6 +297,18 @@ class Skycraper extends Model
                     $font->align('center');
                     $font->valign('middle');
                 });
+        }
+        else if($type == 'skycraper-airplane'){
+
+            return Image::canvas(140, 55, $btcolor)
+                ->opacity(50)
+                ->text($text, 70, 30, function ($font) use ($color){
+                $font->file(public_path('fonts/MyriadProSemibold.ttf'));
+                $font->color($color);
+                $font->size(20);
+                $font->align('center');
+                $font->valign('middle');
+            });
         }
     }
 }

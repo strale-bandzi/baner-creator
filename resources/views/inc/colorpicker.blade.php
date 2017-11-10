@@ -92,7 +92,7 @@
                             case 'leaderboard-antivirus':
                                 aspect = 364 / 45;
                                 break;
-                            case 'rectangle-kismetrics':
+                            case 'rectangle-kismetrics' || 'rectangle-airplane' || 'rectangle-iphone':
                                 aspect = 6 / 5;
                                 break;
                             case 'rectangle-get-around':
@@ -102,6 +102,9 @@
                                 aspect = 1 / 5;
                                 break;
                             case 'skycraper-iphone7':
+                                aspect = 1 / 5;
+                                break;
+                            case 'skycraper-airplane' || 'skycraper-get-around':
                                 aspect = 1 / 5;
                                 break;
 

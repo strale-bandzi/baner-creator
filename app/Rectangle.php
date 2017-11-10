@@ -64,16 +64,13 @@ class Rectangle extends Model
              * Get Around Rectangle Banner
              */
 
-            $tX = 150;
-            $tY = 66;
             $position = strpos($banertext, ' ');
-
             $firstHalf = substr($banertext, 0, $position);
             $secondHalf = substr($banertext, $position + 1);
 
             $line = Image::canvas(180, 3, $txtColor);
 
-            return Image::canvas($x, $y)->text($firstHalf, $tX, $tY, function ($font) use ($txtColor) {
+            return Image::canvas($x, $y)->text($firstHalf, 150, 66, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Merriweather-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -88,6 +85,37 @@ class Rectangle extends Model
             })->insert($line, 'bottom', 0, 35);
 
         }
+        else if ($pos == 'rectangle-airplane') {
+
+            /**
+             * Airplane Rectangle Banner text
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 150, 150, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(36);
+            });
+
+        }
+        else if ($pos == 'rectangle-iphone') {
+
+            /**
+             * rectangle-iphone banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 107, 29, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(30);
+            });
+
+        }
+
 
     }
 
@@ -134,15 +162,42 @@ class Rectangle extends Model
              * Get Around Rectangle Banner follow text
              */
 
-            $tX = 150;
-            $tY = 152;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
+            return Image::canvas($x, $y)->text($banertext, 150, 152, function ($font) use ($color) {
                 $font->file(public_path('fonts/OpenSans-Bold.ttf'));
                 $font->color($color);
                 $font->align('center');
                 $font->valign('middle');
                 $font->size(9);
+            });
+
+        }
+        else if ($pos == 'rectangle-airplane') {
+
+            /**
+             * Airplane Rectangle Banner follow text
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 150, 240, function ($font) use ($color) {
+                $font->file(public_path('fonts/MyriadProItalic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(9);
+            });
+
+        }
+        else if ($pos == 'rectangle-iphone') {
+
+            /**
+             * rectangle-iphone banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 106, 72, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(34);
             });
 
         }
@@ -157,7 +212,7 @@ class Rectangle extends Model
          * generate button for kismetrics rectangle type
          */
 
-        if (empty($text)) {
+        if (empty($text) || $type == 'rectangle-get-around') {
             return Image::canvas(182, 34);
         } else if ($type == 'rectangle-kismetrics') {
 
@@ -176,9 +231,26 @@ class Rectangle extends Model
                     $font->align('center');
                 });
 
-        }else if ($type == 'rectangle-get-around') {
+        } else if ($type == 'rectangle-airplane') {
+            return Image::canvas(300, 35, $btcolor)
+                ->opacity(50)
+                ->text($text, 150, 24, function ($font) use ($color) {
+                    $font->file(public_path('fonts/MyriadProSemibold.ttf'));
+                    $font->size(13);
+                    $font->color($color);
+                    $font->align('center');
+                });
 
-            return Image::canvas(145, 40);
+        }
+        else if ($type == 'rectangle-iphone') {
+            return Image::canvas(300, 35, $btcolor)
+                ->text($text, 150, 28, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                    $font->size(21.5);
+                    $font->color($color);
+                    $font->align('center');
+                });
+
         }
 
     }

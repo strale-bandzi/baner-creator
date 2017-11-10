@@ -300,16 +300,17 @@ class Leaderboard extends Model
 
         else if($type == 'leaderboard-antivirus'){
 
-            if (str_word_count($text) == 2) {
+            if (str_word_count($text) >= 2) {
                 $position = strpos($text, ' ');
                 $firstHalf = substr($text, 0, $position);
                 $length = strlen($firstHalf);
                 $secondHalf = substr($text, $length + 1);
             }
-            else if (str_word_count($text) ==1){
+            else if (str_word_count($text) == 1){
                 $firstHalf = $text;
                 $secondHalf = null;
             }
+
             /** what if there is no word in last input field? :) */
 
             return Image::canvas(728, 90)
