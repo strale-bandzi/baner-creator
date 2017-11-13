@@ -35,6 +35,12 @@
             {!! Form::radio('bannertemplate', 'leaderboard-antivirus')!!}
             <img src="/template/leaderboard-antivirus.jpg" alt="antivirus.jpg"/>
         </p>
+
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-iphone-blue')!!}
+            <img src="/template/leaderboard-iphone-blue.jpg" alt="iphone-blue.jpg"/>
+        </p>
     </div>
 
     <br>
@@ -61,6 +67,16 @@
             {!! Form::radio('bannertemplate', 'rectangle-iphone') !!}<br>
             <img src="/template/iphone7-rectangle.jpg" alt="Rectangle Iphone.jpg"/>
         </p>
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-antivirus') !!}<br>
+            <img src="/template/rectangle-antivirus.jpg" alt="Rectangle Antivirus.jpg"/>
+        </p>
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-iphoneblue') !!}<br>
+            <img src="/template/rectangle-iphone-blue.jpg" alt="Rectangle Iphone Blue"/>
+        </p>
     </div>
 
     <div id="skycraper" class="presented"><br>
@@ -83,6 +99,11 @@
             {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
             {!! Form::radio('bannertemplate', 'skycraper-get-around') !!}
             <img src="/template/sky-get-around.jpg" alt="skycraper-get-around.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-iphone-blue') !!}
+            <img src="/template/sky-iphoneblue.jpg" alt="skycraper-iphone-blue.jpg"/>
         </p>
     </div>
 

@@ -112,6 +112,22 @@ class Leaderboard extends Model
             });
 
         }
+
+        else if ($pos == 'leaderboard-iphone-blue') {
+
+            /**
+             * leaderboard-iphone-blue banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 190, 45, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(36);
+            });
+
+        }
     }
 
     public function addFollText($x, $y, $banertext, $color, $pos)
@@ -232,6 +248,22 @@ class Leaderboard extends Model
                 $font->size(25);
             });
         }
+
+        else if ($pos == 'leaderboard-iphone-blue') {
+
+            /**
+             * leaderboard-iphone-blue banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 460, 45, function ($font) use ($color) {
+                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(50);
+            });
+
+        }
     }
 
     public function addButton($text, $color, $btcolor, $type)
@@ -300,7 +332,7 @@ class Leaderboard extends Model
 
         else if($type == 'leaderboard-antivirus'){
 
-            if (str_word_count($text) >= 2) {
+            if (str_word_count($text) > 1) {
                 $position = strpos($text, ' ');
                 $firstHalf = substr($text, 0, $position);
                 $length = strlen($firstHalf);
@@ -348,6 +380,32 @@ class Leaderboard extends Model
                     $font->valign('middle');
                     $font->angle(20);
                 });
+
+        }
+        else if ($type == 'leaderboard-iphone-blue') {
+
+            /**
+             * leaderboard-iphone-blue banner type
+             */
+
+            // define polygon points
+                $points = array(
+                    693,  21, // Point 2 (x, y)E
+                    710,  45,  // Point 3 (x, y)D
+                    693, 72,  // Point 4 (x, y)C
+                    576,  72,  // Point 5 (x, y)B
+                    576,  21   // Point 6 (x, y)A
+                );
+
+            return Image::canvas(728, 90)->polygon($points, function ($draw) use ($color) {
+                $draw->border(2, $color);
+            })->text($text, 638, 46, function ($font) use ($color) {
+                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(28);
+            });
 
         }
     }

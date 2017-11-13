@@ -115,6 +115,21 @@ class Rectangle extends Model
             });
 
         }
+        else if ($pos == 'rectangle-antivirus') {
+
+            /**
+             * rectangle-antivirus banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 205, 45, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Roboto-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(38);
+            });
+
+        }
 
 
     }
@@ -201,6 +216,53 @@ class Rectangle extends Model
             });
 
         }
+        else if ($pos == 'rectangle-antivirus') {
+
+            /**
+             * rectangle-antivirus banner type
+             */
+
+            if(str_word_count($banertext) >= 2 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0]. ' ' .$c[1];
+                $length = strlen($firstHalf);
+                $secondHalf = substr($banertext, $length+1);
+            }
+            else {
+                $firstHalf = $banertext;
+                $secondHalf = null;
+            }
+
+            return Image::canvas($x, $y)->text($firstHalf, 180, 91, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(34);
+            })->text($secondHalf, 230, 136, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(38);
+            });
+
+        }
+        else if ($pos == 'rectangle-iphoneblue') {
+
+            /**
+             * leaderboard-iphone-blue banner type
+             */
+
+            return Image::canvas($x, $y)->text($banertext, 150, 168, function ($font) use ($color) {
+                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(37);
+            });
+
+        }
 
     }
 
@@ -212,9 +274,13 @@ class Rectangle extends Model
          * generate button for kismetrics rectangle type
          */
 
-        if (empty($text) || $type == 'rectangle-get-around') {
+       if (empty($text)) {
+           return Image::canvas(182, 34);
+       }
+       else if ($type == 'rectangle-get-around') {
             return Image::canvas(182, 34);
-        } else if ($type == 'rectangle-kismetrics') {
+        }
+       else if ($type == 'rectangle-kismetrics') {
 
             $width = 146;
             $height = 38;
@@ -252,6 +318,32 @@ class Rectangle extends Model
                 });
 
         }
+        else if ($type == 'rectangle-antivirus'){
+
+           return Image::canvas(100, 100)
+                ->text($text, 50, 50, function ($font) use ($color){
+                    $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+                    $font->size(21.5);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                });
+        }
+        else if ($type == 'rectangle-iphoneblue'){
+
+            return Image::canvas(300, 250)->rectangle(96, 197, 201, 237, function ($draw) use ($color) {
+                $draw->border(2, $color);
+            })->text($text, 150, 216, function ($font) use ($color) {
+                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(21);
+            });
+        }
+
+
+
 
     }
 

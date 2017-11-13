@@ -57,7 +57,7 @@ class ImageController extends Controller
         $cropH = round($request->input('h'));
         $cropX1 = round($request->input('x1'));
         $cropY1 = round($request->input('y1'));
-
+//
 
         /**
          * Insert image
@@ -164,6 +164,25 @@ class ImageController extends Controller
                 break;
 
 
+            case 'leaderboard-iphone-blue':
+                $x = 728;
+                $y = 90;
+
+                $bpX = 0;
+                $bpY = 0;
+                $btnposition = 'right';
+
+                $imgX = 550;
+                $imgY = 90;
+                $imgPos = 'right';
+
+                $lead = new Leaderboard();
+                $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $lead->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $lead->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
 
             case 'rectangle-kismetrics':
                 $x = 300;
@@ -213,6 +232,44 @@ class ImageController extends Controller
 
                 break;
 
+            case 'rectangle-antivirus':
+                $x = 300;
+                $y = 250;
+
+                $bpX = 50;
+                $bpY = 50;
+                $btnposition = 'center';
+
+                $imgX = 50;
+                $imgY = 50;
+                $imgPos = 'center';
+
+                $rect = new Rectangle();
+                $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $rect->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $rect->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+            case 'rectangle-iphoneblue':
+                $x = 300;
+                $y = 250;
+
+                $bpX = 0;
+                $bpY = 0;
+                $btnposition = 'bottom';
+
+                $imgX = 50;
+                $imgY = 50;
+                $imgPos = 'center';
+
+                $rect = new Rectangle();
+                $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $rect->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $rect->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
+
 
             case 'skycraper-antivirus':
                 $x = 160;
@@ -249,7 +306,7 @@ class ImageController extends Controller
                 $bt = $skycraper->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
 
                 break;
-            case 'skycraper-airplane' || 'skycraper-get-around':
+            case 'skycraper-airplane':
                 $x = 160;
                 $y = 600;
 
@@ -267,6 +324,45 @@ class ImageController extends Controller
                 $bt = $skycraper->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
 
                 break;
+
+            case 'skycraper-get-around':
+                $x = 160;
+                $y = 600;
+
+                $bpX = 80;
+                $bpY = 40;
+                $btnposition = 'bottom';
+
+                $imgX = 160;
+                $imgY = 375;
+                $imgPos = 'bottom';
+
+                $skycraper = new Skycraper();
+                $main = $skycraper->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $skycraper->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $skycraper->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
+
+            case 'skycraper-iphone-blue':
+
+                $x = 160;
+                $y = 600;
+
+                $bpX = 80;
+                $bpY = 40;
+                $btnposition = 'bottom';
+
+                $imgX = 160;
+                $imgY = 375;
+                $imgPos = 'bottom';
+
+                $sky = new Skycraper();
+                $main = $sky->addText($x, $y, $banertext, $txtColor, $bannertype);
+                $folow = $sky->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+                $bt = $sky->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
+
+                break;
         }
 
         if ($imgExist && $useWhole == null) {
@@ -276,13 +372,15 @@ class ImageController extends Controller
                 ->fit($x, $y, function ($c) {
                     $c->upsize();
                 });
+
             $img = Image::canvas($x, $y, $colorpicker)
                 ->insert($image)
                 ->insert($main, 'center')
                 ->insert($bt, $btnposition, $bpX, $bpY)
                 ->insert($folow, 'center');
 
-        } else if ($imgExist && $useWhole == 'wholeImage') {
+        }
+        else if ($imgExist && $useWhole == 'wholeImage') {
 
             $image = Image::make(Input::file('file_image'));
 
@@ -302,14 +400,17 @@ class ImageController extends Controller
             $img = Image::canvas($x, $y, $colorpicker)
                 ->insert($image, $imgPos)
                 ->insert($main, 'center')
-                ->insert($bt, $btnposition, $bpX, $bpY)
-                ->insert($folow, 'center');
+//                ->insert($bt, $btnposition, $bpX, $bpY)
+                ->insert($folow, 'center')
+                ->insert($bt);
 
         } else if (!$imgExist) {
+
             $img = Image::canvas($x, $y, $colorpicker)
                 ->insert($main, 'center')
-                ->insert($bt, $btnposition, $bpX, $bpY)
-                ->insert($folow, 'center');
+                ->insert($folow, 'center')
+                ->insert($bt);
+//                ->insert($bt, $btnposition, $bpX, $bpY);
         }
 
         /**

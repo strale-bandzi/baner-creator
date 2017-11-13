@@ -80,6 +80,9 @@
                             case 'leaderboard-car':
                                 aspect = 364 / 45;
                                 break;
+                            case 'leaderboard-iphone-blue':
+                                aspect = 364 / 45;
+                                break;
                             case  'leaderboard-airplane':
                                 aspect = 364 / 45;
                                 break;
@@ -92,10 +95,22 @@
                             case 'leaderboard-antivirus':
                                 aspect = 364 / 45;
                                 break;
-                            case 'rectangle-kismetrics' || 'rectangle-airplane' || 'rectangle-iphone':
+                            case 'rectangle-airplane':
+                                aspect = 6 / 5;
+                                break;
+                            case 'rectangle-kismetrics':
+                                aspect = 6 / 5;
+                                break;
+                            case 'rectangle-iphone':
                                 aspect = 6 / 5;
                                 break;
                             case 'rectangle-get-around':
+                                aspect = 6 / 5;
+                                break;
+                            case 'rectangle-antivirus':
+                                aspect = 6 / 5;
+                                break;
+                            case 'rectangle-iphoneblue':
                                 aspect = 6 / 5;
                                 break;
                             case 'skycraper-antivirus':
@@ -104,7 +119,13 @@
                             case 'skycraper-iphone7':
                                 aspect = 1 / 5;
                                 break;
-                            case 'skycraper-airplane' || 'skycraper-get-around':
+                            case 'skycraper-airplane':
+                                aspect = 1 / 5;
+                                break;
+                            case 'skycraper-get-around':
+                                aspect = 1 / 5;
+                                break;
+                            case 'skycraper-iphone-blue':
                                 aspect = 1 / 5;
                                 break;
 

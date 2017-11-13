@@ -129,6 +129,8 @@ class Skycraper extends Model
                 })->insert($line, 'bottom', 10, 90);
 
         }
+
+
     }
 
     public function addFollText($x, $y, $banertext, $color, $pos)
@@ -141,7 +143,7 @@ class Skycraper extends Model
             return Image::canvas(160, 600);
         }
 
-        if ($pos == 'skycraper-antivirus') {
+         if ($pos == 'skycraper-antivirus') {
             $tX = 80;
             $tY = 145;
 
@@ -230,6 +232,7 @@ class Skycraper extends Model
         }
 
 
+
     }
 
     public function addButton($text, $color, $btcolor, $type)
@@ -310,5 +313,32 @@ class Skycraper extends Model
                 $font->valign('middle');
             });
         }
+
+//        else if ($type == 'skycraper-iphone-blue') {
+//
+//            /**
+//             * skycraper-iphone-blue banner type
+//             */
+//
+//            // define polygon points
+//            $points = array(
+//                130,  530, // Point 2 (x, y)E
+//                147,  555,  // Point 3 (x, y)D
+//                130, 580,  // Point 4 (x, y)C
+//                20,  580,  // Point 5 (x, y)B
+//                20,  530   // Point 6 (x, y)A
+//            );
+//
+//            return Image::canvas(140, 55)->polygon($points, function ($draw) use ($color) {
+//                $draw->border(2, $color);
+//            })->text($text, 80, 555, function ($font) use ($color) {
+//                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+//                $font->color($color);
+//                $font->align('center');
+//                $font->valign('middle');
+//                $font->size(28);
+//            });
+//
+//        }
     }
 }
