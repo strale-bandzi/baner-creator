@@ -129,6 +129,44 @@ class Skycraper extends Model
                 })->insert($line, 'bottom', 10, 90);
 
         }
+         else if ($pos == 'skycraper-iphoneblue') {
+
+            /**
+             * skycraper-iphone-blue banner type
+             */
+
+             $position = strpos($banertext, ' ');    // position of first word
+
+             $first = substr($banertext, 0, $position);  //gives first word
+             $secondString = substr($banertext, $position); // Gives next 2 strings
+
+             $secondPosition = strpos($secondString, ' ', 1);
+
+             $second = substr($secondString, 0, $secondPosition); //gives second word
+             $third = substr($secondString, $secondPosition); // gives third word
+
+
+            return Image::canvas(160, 600)->text($first, 80, 172, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(36);
+            })->text($second, 80, 215, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(36);
+            })->text($third, 80, 260, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(36);
+            });
+
+        }
 
 
     }
@@ -144,8 +182,6 @@ class Skycraper extends Model
         }
 
          if ($pos == 'skycraper-antivirus') {
-            $tX = 80;
-            $tY = 145;
 
             $position = strpos($banertext, ' ');    // position of first word
 
@@ -158,7 +194,7 @@ class Skycraper extends Model
             $third = substr($secondString, $secondPosition); // gives third word
 
 
-            return Image::canvas($x, $y)->text($first, $tX, $tY, function ($font) use ($color) {
+            return Image::canvas($x, $y)->text($first, 80, 145, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-Regular.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -227,6 +263,21 @@ class Skycraper extends Model
                 $font->align('center');
                 $font->valign('middle');
                 $font->size(14);
+            });
+
+        }
+        else if ($pos == 'skycraper-iphoneblue') {
+
+            /**
+             * skycraper-iphone-blue banner type
+             */
+
+            return Image::canvas(160, 600)->text($banertext, 81, 305, function ($font) use ($color) {
+                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(32);
             });
 
         }
@@ -314,31 +365,31 @@ class Skycraper extends Model
             });
         }
 
-//        else if ($type == 'skycraper-iphone-blue') {
-//
-//            /**
-//             * skycraper-iphone-blue banner type
-//             */
-//
-//            // define polygon points
-//            $points = array(
-//                130,  530, // Point 2 (x, y)E
-//                147,  555,  // Point 3 (x, y)D
-//                130, 580,  // Point 4 (x, y)C
-//                20,  580,  // Point 5 (x, y)B
-//                20,  530   // Point 6 (x, y)A
-//            );
-//
-//            return Image::canvas(140, 55)->polygon($points, function ($draw) use ($color) {
-//                $draw->border(2, $color);
-//            })->text($text, 80, 555, function ($font) use ($color) {
-//                $font->file(public_path('fonts/Arimo-Bold.ttf'));
-//                $font->color($color);
-//                $font->align('center');
-//                $font->valign('middle');
-//                $font->size(28);
-//            });
-//
-//        }
+        else if ($type == 'skycraper-iphoneblue') {
+
+            /**
+             * skycraper-iphone-blue banner type
+             */
+
+            // define polygon points
+            $points = array(
+                133,  517, // Point 2 (x, y)E
+                150,  542,  // Point 3 (x, y)D
+                133, 568,  // Point 4 (x, y)C
+                16,  568,  // Point 5 (x, y)B
+                16,  517   // Point 6 (x, y)A
+            );
+
+            return Image::canvas(160, 600)->polygon($points, function ($draw) use ($color) {
+                $draw->border(2, $color);
+            })->text($text, 80, 543, function ($font) use ($color) {
+                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(26);
+            });
+
+        }
     }
 }

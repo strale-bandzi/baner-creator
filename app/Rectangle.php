@@ -130,6 +130,33 @@ class Rectangle extends Model
             });
 
         }
+        else if ($pos == 'rectangle-iphoneblue') {
+
+            /**
+             * rectangle-iphone-blue banner type
+             */
+
+            return Image::canvas(300, 250)->text($banertext, 150, 51, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                    $font->color($txtColor);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(66);
+                })->text($banertext, 150, 95, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                    $font->color($txtColor);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(41);
+                })->text($banertext, 150, 133, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                    $font->color($txtColor);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(50);
+                });
+
+        }
 
 
     }
@@ -251,7 +278,7 @@ class Rectangle extends Model
         else if ($pos == 'rectangle-iphoneblue') {
 
             /**
-             * leaderboard-iphone-blue banner type
+             * rectangle-iphone-blue banner type
              */
 
             return Image::canvas($x, $y)->text($banertext, 150, 168, function ($font) use ($color) {
@@ -298,12 +325,16 @@ class Rectangle extends Model
                 });
 
         } else if ($type == 'rectangle-airplane') {
-            return Image::canvas(300, 35, $btcolor)
+            return Image::canvas(300, 250)
+                ->rectangle(0, 195, 300, 230, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                })
                 ->opacity(50)
-                ->text($text, 150, 24, function ($font) use ($color) {
+                ->text($text, 150, 212, function ($font) use ($color) {
                     $font->file(public_path('fonts/MyriadProSemibold.ttf'));
                     $font->size(13);
                     $font->color($color);
+                    $font->valign('middle');
                     $font->align('center');
                 });
 
@@ -320,14 +351,43 @@ class Rectangle extends Model
         }
         else if ($type == 'rectangle-antivirus'){
 
-           return Image::canvas(100, 100)
-                ->text($text, 50, 50, function ($font) use ($color){
-                    $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
-                    $font->size(21.5);
-                    $font->color($color);
-                    $font->align('center');
-                    $font->valign('middle');
-                });
+            $position = strpos($text, ' ');
+
+            $firstHalf = substr($text, 0, $position);
+            $secondHalf = substr($text, $position +1);
+
+           return Image::canvas(300, 250)->circle(53, 77, 177, function ($draw) use ($btcolor){
+                   $draw->background($btcolor);
+               })->text(' > ', 77, 177, function ($font) use ($color){
+               $font->file(public_path('fonts/PTM55FT.ttf'));
+               $font->color($color);
+               $font->size(60);
+               $font->align('center');
+               $font->valign('middle');
+           })->text('CLICK HERE', 80, 220, function ($font) use ($btcolor){
+               $font->file(public_path('fonts/Roboto-Bold.ttf'));
+               $font->color($btcolor);
+               $font->size(18);
+               $font->align('center');
+               $font->valign('middle');
+           }) ->circle(198, 275, 268, function ($draw) use ($btcolor){
+               $draw->background($btcolor);
+           })->text($secondHalf, 265, 237, function ($font) use ($color) {
+               $font->file(public_path('fonts/Lato-Bold.ttf'));
+               $font->size(16);
+               $font->color($color);
+               $font->align('center');
+               $font->valign('bottom');
+           })->text($firstHalf, 238, 209, function ($font) use ($color) {
+                   $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                   $font->size(32);
+                   $font->color($color);
+                   $font->align('center');
+                   $font->valign('middle');
+                   $font->angle(20);
+               });
+
+
         }
         else if ($type == 'rectangle-iphoneblue'){
 

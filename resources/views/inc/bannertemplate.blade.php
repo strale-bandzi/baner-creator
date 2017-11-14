@@ -102,7 +102,7 @@
         </p>
         <p>
             {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
-            {!! Form::radio('bannertemplate', 'skycraper-iphone-blue') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-iphoneblue') !!}
             <img src="/template/sky-iphoneblue.jpg" alt="skycraper-iphone-blue.jpg"/>
         </p>
     </div>

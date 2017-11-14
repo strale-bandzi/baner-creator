@@ -113,7 +113,7 @@ class Leaderboard extends Model
 
         }
 
-        else if ($pos == 'leaderboard-iphone-blue') {
+        else if ($pos == 'leaderboard-iphoneblue') {
 
             /**
              * leaderboard-iphone-blue banner type
@@ -141,8 +141,6 @@ class Leaderboard extends Model
         }
 
         if ($pos == 'leaderboard-car') {
-            $tX = 364;
-            $tY = 51;
 
             if (strstr($banertext, '.')) {
                 $position = strpos($banertext, '.');
@@ -159,7 +157,7 @@ class Leaderboard extends Model
             }
 
 
-            return Image::canvas($x, $y)->text($firstHalf, $tX, $tY, function ($font) use ($color) {
+            return Image::canvas($x, $y)->text($firstHalf, 364, 51, function ($font) use ($color) {
                 $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -174,10 +172,8 @@ class Leaderboard extends Model
             });
 
         } else if ($pos == 'leaderboard-airplane') {
-            $tX = 250;
-            $tY = 75;
 
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
+            return Image::canvas($x, $y)->text($banertext, 250, 75, function ($font) use ($color) {
                 $font->file(public_path('fonts/MyriadProItalic.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -191,10 +187,7 @@ class Leaderboard extends Model
              * leaderboard-get-around banner type
              */
 
-            $tX = 590;
-            $tY = 45;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($color) {
+            return Image::canvas($x, $y)->text($banertext, 590, 45, function ($font) use ($color) {
                 $font->file(public_path('fonts/Oswald-Bold.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -249,7 +242,7 @@ class Leaderboard extends Model
             });
         }
 
-        else if ($pos == 'leaderboard-iphone-blue') {
+        else if ($pos == 'leaderboard-iphoneblue') {
 
             /**
              * leaderboard-iphone-blue banner type
@@ -332,13 +325,13 @@ class Leaderboard extends Model
 
         else if($type == 'leaderboard-antivirus'){
 
-            if (str_word_count($text) > 1) {
+            if (str_word_count($text) >= 1) {
                 $position = strpos($text, ' ');
                 $firstHalf = substr($text, 0, $position);
                 $length = strlen($firstHalf);
-                $secondHalf = substr($text, $length + 1);
+                $secondHalf = substr($text, $length);
             }
-            else if (str_word_count($text) == 1){
+            else if (str_word_count($text) == 0){
                 $firstHalf = $text;
                 $secondHalf = null;
             }
@@ -382,7 +375,7 @@ class Leaderboard extends Model
                 });
 
         }
-        else if ($type == 'leaderboard-iphone-blue') {
+        else if ($type == 'leaderboard-iphoneblue') {
 
             /**
              * leaderboard-iphone-blue banner type

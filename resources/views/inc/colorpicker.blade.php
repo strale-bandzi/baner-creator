@@ -125,7 +125,7 @@
                             case 'skycraper-get-around':
                                 aspect = 1 / 5;
                                 break;
-                            case 'skycraper-iphone-blue':
+                            case 'skycraper-iphoneblue':
                                 aspect = 1 / 5;
                                 break;
 
