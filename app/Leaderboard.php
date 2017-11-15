@@ -383,11 +383,11 @@ class Leaderboard extends Model
 
             // define polygon points
                 $points = array(
-                    693,  21, // Point 2 (x, y)E
-                    710,  45,  // Point 3 (x, y)D
-                    693, 72,  // Point 4 (x, y)C
-                    576,  72,  // Point 5 (x, y)B
-                    576,  21   // Point 6 (x, y)A
+                    693,  21, // Point 2 (x, y)E top right
+                    710,  45,  // Point 3 (x, y)D krak
+                    693, 72,  // Point 4 (x, y)C bottom right
+                    576,  72,  // Point 5 (x, y)B bottom left
+                    576,  21   // Point 6 (x, y)A top left
                 );
 
             return Image::canvas(728, 90)->polygon($points, function ($draw) use ($color) {
@@ -400,6 +400,64 @@ class Leaderboard extends Model
                 $font->size(28);
             });
 
+        }
+        else if ($type == 'leaderboard-thai') {
+
+            /**
+             * leaderboard-thai banner type
+             */
+
+            if(str_word_count($text) >= 5 ){
+                $c = str_word_count($text, 1);
+                $firstHalf = $c[0]. ' ' .$c[1] . ' ' .$c[2];
+                $secondHalf = substr($text, strlen($firstHalf), strpos($firstHalf,' '));
+
+                $length = strlen($firstHalf) + strlen($secondHalf);
+                $third = substr($text, $length);
+
+            } else if (str_word_count($text) <= 2){
+                $firstHalf = null;
+                $secondHalf = $text;
+                $third = null;
+            }
+            else if (str_word_count($text) > 2 && str_word_count($text) < 5){
+                $position = strpos($text, ' ');
+
+                $firstHalf = substr($text, 0, $position);
+                $secondString = substr($text, $position);
+
+                $secondPosition = strpos($secondString, ' ', 1);
+
+                $secondHalf = substr($secondString, 0, $secondPosition);
+                $third = substr($secondString, $secondPosition);
+            }
+
+            return Image::canvas(728, 90)
+                ->circle(90, 525, 45, function ($draw) use ($btcolor){
+                        $draw->background($btcolor);
+                    })
+                ->opacity(90)
+                ->text($firstHalf, 527, 32, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(24);
+                    })
+                ->text($secondHalf, 527, 45, function ($font) use ($color) {
+                        $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                        $font->color($color);
+                        $font->align('center');
+                        $font->valign('middle');
+                        $font->size(21);
+                    })
+                 ->text($third, 527, 62, function ($font) use ($color) {
+                        $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                        $font->color($color);
+                        $font->align('center');
+                        $font->valign('middle');
+                        $font->size(25);
+                    });
         }
     }
 }

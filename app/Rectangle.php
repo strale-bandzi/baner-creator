@@ -401,6 +401,64 @@ class Rectangle extends Model
                 $font->size(21);
             });
         }
+        else if ($type == 'rectangle-thai') {
+
+            /**
+             * rectangle-thai banner type
+             */
+
+            if(str_word_count($text) >= 5 ){
+                $c = str_word_count($text, 1);
+                $firstHalf = $c[0]. ' ' .$c[1] . ' ' .$c[2];
+                $secondHalf = substr($text, strlen($firstHalf), strpos($firstHalf,' '));
+
+                $length = strlen($firstHalf) + strlen($secondHalf);
+                $third = substr($text, $length);
+
+            } else if (str_word_count($text) <= 2){
+                $firstHalf = null;
+                $secondHalf = $text;
+                $third = null;
+            }
+            else if (str_word_count($text) > 2 && str_word_count($text) < 5){
+                $position = strpos($text, ' ');
+
+                $firstHalf = substr($text, 0, $position);
+                $secondString = substr($text, $position);
+
+                $secondPosition = strpos($secondString, ' ', 1);
+
+                $secondHalf = substr($secondString, 0, $secondPosition);
+                $third = substr($secondString, $secondPosition);
+            }
+
+            return Image::canvas(300, 250)
+                ->circle(181, 150, 125, function ($draw) use ($btcolor){
+                    $draw->background($btcolor);
+                })
+                ->opacity(90)
+                ->text($firstHalf, 150, 100, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(46);
+                })
+                ->text($secondHalf, 150, 126, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(42);
+                })
+                ->text($third, 146, 164, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(50);
+                });
+        }
 
 
 

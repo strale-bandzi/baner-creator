@@ -5,9 +5,11 @@
         <button class="btn btn-info" data-rel="leaderboard">Leaderboard</button>
         <button class="btn btn-success" data-rel="rectangle">Rectangle</button>
         <button class="btn btn-primary" data-rel="skycraper">Skycraper</button>
+        <button class="btn btn-secondary" data-rel="rectwide">Rectangle Wide</button>
     </div>
 <br>
     {!! Form::open(['method'=>'POST', 'action'=>'ImageController@store','files'=>true, 'id'=>'upload']) !!}
+    {{ csrf_field() }}
 
     <div id="leaderboard">
         <p>
@@ -40,6 +42,11 @@
             {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-iphone-blue')!!}
             <img src="/template/leaderboard-iphone-blue.jpg" alt="iphone-blue.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-thai')!!}
+            <img src="/template/leaderboard-thai.jpg" alt="thai.jpg"/>
         </p>
     </div>
 
@@ -77,6 +84,11 @@
             {!! Form::radio('bannertemplate', 'rectangle-iphoneblue') !!}<br>
             <img src="/template/rectangle-iphone-blue.jpg" alt="Rectangle Iphone Blue"/>
         </p>
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-thai') !!}<br>
+            <img src="/template/rectangle-thai.jpg" alt="Rectangle Thai"/>
+        </p>
     </div>
 
     <div id="skycraper" class="presented"><br>
@@ -105,6 +117,29 @@
             {!! Form::radio('bannertemplate', 'skycraper-iphoneblue') !!}
             <img src="/template/sky-iphoneblue.jpg" alt="skycraper-iphone-blue.jpg"/>
         </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-thai') !!}
+            <img src="/template/sky-thai.jpg" alt="skycraper-thai.jpg"/>
+        </p>
+    </div>
+    <div id="rectwide" class="presented"><br>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-airplane') !!}
+            <img src="/template/rectanglewide-airplane.jpg" alt="rectanglewide-airplane.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-get-around') !!}
+            <img src="/template/rectanglewide-get-around.jpg" alt="rectanglewide-get-around"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-thai') !!}
+            <img src="/template/rectanglewide-thai.jpg" alt="rectanglewide-thai"/>
+        </p>
+
     </div>
 
 </div>
@@ -140,16 +175,25 @@
                 $('#leaderboard ').show();
                 $('#rectangle ').hide();
                 $('#skycraper').hide();
+                $('#rectwide').hide();
             }
             else if (selected == 'rectangle') {
                 $('#leaderboard ').hide();
                 $('#skycraper').hide();
                 $('#rectangle ').show();
+                $('#rectwide').hide();
             }
             else if (selected == 'skycraper') {
                 $('#leaderboard ').hide();
                 $('#rectangle ').hide();
                 $('#skycraper').show();
+                $('#rectwide').hide();
+            }
+            else if (selected == 'rectwide') {
+                $('#leaderboard ').hide();
+                $('#rectangle ').hide();
+                $('#skycraper').hide();
+                $('#rectwide').show();
             }
 
         });

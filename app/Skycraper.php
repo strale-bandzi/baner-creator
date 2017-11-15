@@ -26,10 +26,7 @@ class Skycraper extends Model
 
         if ($pos == 'skycraper-antivirus') {
 
-            $tX = 80;
-            $tY = 98;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
+            return Image::canvas($x, $y)->text($banertext, 80, 98, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Roboto-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -390,6 +387,64 @@ class Skycraper extends Model
                 $font->size(26);
             });
 
+        }
+        else if ($type == 'skycraper-thai') {
+
+            /**
+             * skycraper-thai banner type
+             */
+
+            if(str_word_count($text) >= 5 ){
+                $c = str_word_count($text, 1);
+                $firstHalf = $c[0]. ' ' .$c[1] . ' ' .$c[2];
+                $secondHalf = substr($text, strlen($firstHalf), strpos($firstHalf,' '));
+
+                $length = strlen($firstHalf) + strlen($secondHalf);
+                $third = substr($text, $length);
+
+            } else if (str_word_count($text) <= 2){
+                $firstHalf = null;
+                $secondHalf = $text;
+                $third = null;
+            }
+            else if (str_word_count($text) > 2 && str_word_count($text) < 5){
+                $position = strpos($text, ' ');
+
+                $firstHalf = substr($text, 0, $position);
+                $secondString = substr($text, $position);
+
+                $secondPosition = strpos($secondString, ' ', 1);
+
+                $secondHalf = substr($secondString, 0, $secondPosition);
+                $third = substr($secondString, $secondPosition);
+            }
+
+            return Image::canvas(160, 600)
+                ->circle(140, 80, 304, function ($draw) use ($btcolor){
+                    $draw->background($btcolor);
+                })
+                ->opacity(90)
+                ->text($firstHalf, 80, 282, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(36);
+                })
+                ->text($secondHalf, 80, 305, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(40);
+                })
+                ->text($third, 79, 332, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BodoniMTCondensedBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(40);
+                });
         }
     }
 }

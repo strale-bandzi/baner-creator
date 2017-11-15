@@ -76,63 +76,25 @@
 
                         var arButton = $('input[name=bannertemplate]:checked').val();
 
-                        switch (arButton) {
-                            case 'leaderboard-car':
-                                aspect = 364 / 45;
-                                break;
-                            case 'leaderboard-iphone-blue':
-                                aspect = 364 / 45;
-                                break;
-                            case  'leaderboard-airplane':
-                                aspect = 364 / 45;
-                                break;
-                            case  'leaderboard-get-around':
-                                aspect = 364 / 45;
-                                break;
-                            case 'leaderboard-iphone7':
-                                aspect = 364 / 45;
-                                break;
-                            case 'leaderboard-antivirus':
-                                aspect = 364 / 45;
-                                break;
-                            case 'rectangle-airplane':
-                                aspect = 6 / 5;
-                                break;
-                            case 'rectangle-kismetrics':
-                                aspect = 6 / 5;
-                                break;
-                            case 'rectangle-iphone':
-                                aspect = 6 / 5;
-                                break;
-                            case 'rectangle-get-around':
-                                aspect = 6 / 5;
-                                break;
-                            case 'rectangle-antivirus':
-                                aspect = 6 / 5;
-                                break;
-                            case 'rectangle-iphoneblue':
-                                aspect = 6 / 5;
-                                break;
-                            case 'skycraper-antivirus':
-                                aspect = 1 / 5;
-                                break;
-                            case 'skycraper-iphone7':
-                                aspect = 1 / 5;
-                                break;
-                            case 'skycraper-airplane':
-                                aspect = 1 / 5;
-                                break;
-                            case 'skycraper-get-around':
-                                aspect = 1 / 5;
-                                break;
-                            case 'skycraper-iphoneblue':
-                                aspect = 1 / 5;
-                                break;
+                        var pos = arButton.indexOf('-');
+                        var res = arButton.substr(0, pos);
 
+                        switch (res) {
+                            case 'leaderboard':
+                                aspect = 364 / 45;
+                                break;
+                            case 'rectangle':
+                                aspect = 6 / 5;
+                                break;
+                            case  'skycraper':
+                                aspect = 1 / 5;
+                                break;
+                            case 'rectanglewide':
+                                aspect = 3/5;
+                                break;
                         }
 
                         /* display image and crop */
-                        console.log(arButton);
 
                         $('#imageDisplay').Jcrop({
                             trackDocument: true,
