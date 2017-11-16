@@ -15,7 +15,7 @@ class Leaderboard extends Model
     public function addText($x, $y, $banertext, $txtColor, $pos)
     {
 
-        if (empty($banertext)) {
+        if (empty($banertext) || $pos == 'leaderboard-thai') {
             return Image::canvas(728, 90);
         }
 
@@ -128,6 +128,22 @@ class Leaderboard extends Model
             });
 
         }
+        else if ($pos == 'leaderboard-medicine') {
+
+            /**
+             * leaderboard-medicine banner type
+             */
+
+            return Image::canvas(728, 90)
+                ->text($banertext, 355, 34, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                    $font->color($txtColor);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(46);
+            });
+
+        }
     }
 
     public function addFollText($x, $y, $banertext, $color, $pos)
@@ -136,7 +152,7 @@ class Leaderboard extends Model
          * function adds follow txt
          */
 
-        if (empty($banertext)) {
+        if (empty($banertext) || $pos == 'leaderboard-thai' || $pos == 'leaderboard-medicine') {
             return Image::canvas(728, 90);
         }
 
@@ -266,19 +282,23 @@ class Leaderboard extends Model
          * generate button for leaderboard types
          */
 
-        if (empty($text)) {
+        if (empty($text) || $type == 'leaderboard-get-around') {
             return Image::canvas(182, 34);
         }
 
         if ($type == 'leaderboard-car') {
 
-            return Image::canvas(184, 34, $btcolor)
-                ->text($text, 92, 24, function ($font) use ($color) {
+            return Image::canvas(728, 90)
+                ->rectangle(523, 28, 707, 63, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                })
+                ->text($text, 616, 52, function ($font) use ($color) {
                     $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
                     $font->size(14);
                     $font->color($color);
                     $font->align('center');
                 });
+
         } else if ($type == 'leaderboard-airplane') {
             return Image::canvas(122, 90, $btcolor)
                 ->opacity(50)
@@ -289,9 +309,6 @@ class Leaderboard extends Model
                     $font->align('center');
                 });
 
-        } else if ($type == 'leaderboard-get-around') {
-
-            return Image::canvas(145, 40);
         }
 
         else if ($type == 'leaderboard-iphone7') {
@@ -458,6 +475,26 @@ class Leaderboard extends Model
                         $font->valign('middle');
                         $font->size(25);
                     });
+        }
+        else if ($type == 'leaderboard-medicine') {
+
+            /**
+             * leaderboard-medicine button type
+             */
+
+            return Image::canvas(728, 90)
+                ->rectangle(420, 56, 700, 90, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                })
+                ->opacity(50)
+                ->text($text, 560, 72, function ($font) use ($color) {
+                $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(33);
+            });
+
         }
     }
 }

@@ -15,7 +15,7 @@ class Rectangle extends Model
     public function addText($x, $y, $banertext, $txtColor, $pos)
     {
 
-        if (empty($banertext)) {
+        if (empty($banertext) || $pos == 'rectangle-thai') {
             return Image::canvas(300, 250);
         }
 
@@ -135,26 +135,63 @@ class Rectangle extends Model
             /**
              * rectangle-iphone-blue banner type
              */
+            if(str_word_count($banertext) >=3){
+                $position = strpos($banertext, ' ');    // position of first word
 
-            return Image::canvas(300, 250)->text($banertext, 150, 51, function ($font) use ($txtColor) {
+                $first = substr($banertext, 0, $position);  //gives first word
+                $secondString = substr($banertext, $position); // Gives next 2 strings
+
+                $secondPosition = strpos($secondString, ' ', 1);
+
+                $second = substr($secondString, 0, $secondPosition); //gives second word
+                $third = substr($secondString, $secondPosition); // gives third word
+
+            } else if (str_word_count($banertext) ==2) {
+                $c = str_word_count($banertext, 1);
+                $first = $c[0];
+                $second = $c[1];
+                $third = null;
+            }
+            else {
+                $first = $banertext;
+                $second = null;
+                $third = null;
+            }
+
+            return Image::canvas(300, 250)->text($first, 150, 51, function ($font) use ($txtColor) {
                     $font->file(public_path('fonts/Arimo-Bold.ttf'));
                     $font->color($txtColor);
                     $font->align('center');
                     $font->valign('middle');
                     $font->size(66);
-                })->text($banertext, 150, 95, function ($font) use ($txtColor) {
+                })->text($second, 148, 95, function ($font) use ($txtColor) {
                     $font->file(public_path('fonts/Arimo-Bold.ttf'));
                     $font->color($txtColor);
                     $font->align('center');
                     $font->valign('middle');
-                    $font->size(41);
-                })->text($banertext, 150, 133, function ($font) use ($txtColor) {
+                    $font->size(42);
+                })->text($third, 148, 133, function ($font) use ($txtColor) {
                     $font->file(public_path('fonts/Arimo-Bold.ttf'));
                     $font->color($txtColor);
                     $font->align('center');
                     $font->valign('middle');
                     $font->size(50);
                 });
+
+        }
+        else if ($pos == 'rectangle-medicine') {
+
+            /**
+             * rectangle-medicine banner type
+             */
+
+            return Image::canvas(300, 250)->text($banertext, 150, 44, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(48);
+            });
 
         }
 
@@ -168,7 +205,7 @@ class Rectangle extends Model
          * function adds follow txt
          */
 
-        if (empty($banertext)) {
+        if (empty($banertext) || $pos == 'rectangle-thai') {
             return Image::canvas(300, 250);
         }
 
@@ -281,12 +318,27 @@ class Rectangle extends Model
              * rectangle-iphone-blue banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 150, 168, function ($font) use ($color) {
+            return Image::canvas(300, 250)->text($banertext, 152, 168, function ($font) use ($color) {
                 $font->file(public_path('fonts/Arimo-Bold.ttf'));
                 $font->color($color);
                 $font->align('center');
                 $font->valign('middle');
                 $font->size(37);
+            });
+
+        }
+        else if ($pos == 'rectangle-medicine') {
+
+            /**
+             * rectangle-medicine banner type
+             */
+
+            return Image::canvas(300, 250)->text($banertext, 135, 95, function ($font) use ($color) {
+                $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(46);
             });
 
         }
@@ -301,12 +353,9 @@ class Rectangle extends Model
          * generate button for kismetrics rectangle type
          */
 
-       if (empty($text)) {
+       if (empty($text) || $type == 'rectangle-get-around') {
            return Image::canvas(182, 34);
        }
-       else if ($type == 'rectangle-get-around') {
-            return Image::canvas(182, 34);
-        }
        else if ($type == 'rectangle-kismetrics') {
 
             $width = 146;
@@ -340,8 +389,11 @@ class Rectangle extends Model
 
         }
         else if ($type == 'rectangle-iphone') {
-            return Image::canvas(300, 35, $btcolor)
-                ->text($text, 150, 28, function ($font) use ($color) {
+            return Image::canvas(300, 250)
+                ->rectangle(0, 215, 300, 250, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                })
+                ->text($text, 150, 243, function ($font) use ($color) {
                     $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                     $font->size(21.5);
                     $font->color($color);
@@ -458,6 +510,22 @@ class Rectangle extends Model
                     $font->valign('middle');
                     $font->size(50);
                 });
+        }
+        else if ($type == 'rectangle-medicine') {
+
+            /** Rectangle medicine banner button */
+
+            return Image::canvas(300, 250)
+                ->rectangle(0, 210, 300, 250, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                })
+                ->text($text, 150, 243, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                    $font->size(31);
+                    $font->color($color);
+                    $font->align('center');
+                });
+
         }
 
 

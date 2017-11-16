@@ -15,17 +15,17 @@
         <p>
             {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-car') !!}
-            <img src="/template/leaderboard.jpg" alt="car.jpg"/>
+            <img src="/template/leaderboard.jpg" alt="car"/>
         </p>
         <p>
             {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-airplane')!!}
-            <img src="/template/airplane.jpg" alt="airplane.jpg"/>
+            <img src="/template/airplane.jpg" alt="airplane"/>
         </p>
         <p>
             {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-get-around')!!}
-            <img src="/template/baner728x90gettingaround.jpg" alt="get-around.jpg"/>
+            <img src="/template/baner728x90gettingaround.jpg" alt="get-around"/>
         </p>
         <p>
             {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
@@ -35,18 +35,23 @@
         <p>
             {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-antivirus')!!}
-            <img src="/template/leaderboard-antivirus.jpg" alt="antivirus.jpg"/>
+            <img src="/template/leaderboard-antivirus.jpg" alt="antivirus"/>
         </p>
 
         <p>
             {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-iphone-blue')!!}
-            <img src="/template/leaderboard-iphone-blue.jpg" alt="iphone-blue.jpg"/>
+            <img src="/template/leaderboard-iphone-blue.jpg" alt="iphone-blue"/>
         </p>
         <p>
             {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
             {!! Form::radio('bannertemplate', 'leaderboard-thai')!!}
-            <img src="/template/leaderboard-thai.jpg" alt="thai.jpg"/>
+            <img src="/template/leaderboard-thai.jpg" alt="thai"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-medicine')!!}
+            <img src="/template/leaderboard-medicine.jpg" alt="leaderboard-medicine"/>
         </p>
     </div>
 
@@ -89,6 +94,12 @@
             {!! Form::radio('bannertemplate', 'rectangle-thai') !!}<br>
             <img src="/template/rectangle-thai.jpg" alt="Rectangle Thai"/>
         </p>
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-medicine') !!}<br>
+            <img src="/template/rectangle-medicine.jpg" alt="Rectangle Medicine"/>
+        </p>
+
     </div>
 
     <div id="skycraper" class="presented"><br>
@@ -139,6 +150,26 @@
             {!! Form::radio('bannertemplate', 'rectanglewide-thai') !!}
             <img src="/template/rectanglewide-thai.jpg" alt="rectanglewide-thai"/>
         </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-iphoneblue') !!}
+            <img src="/template/rectanglewide-iphoneblue.jpg" alt="rectanglewide-iphoneblue"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-iphone7') !!}
+            <img src="/template/rectanglewide-iphone7.jpg" alt="rectanglewide-iphone7"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-antivirus') !!}
+            <img src="/template/rectanglewide-antivirus.jpg" alt="rectanglewide-antivirus"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-medicine') !!}
+            <img src="/template/rectanglewide-medicine.jpg" alt="rectanglewide-medicine"/>
+        </p>
 
     </div>
 
@@ -153,7 +184,7 @@
         float: left;
     }
 
-    #skycraper p {
+    #skycraper p, #rectwide p {
         display: inline-block;
     }
 

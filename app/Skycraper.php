@@ -16,7 +16,7 @@ class Skycraper extends Model
     public function addText($x, $y, $banertext, $txtColor, $pos)
     {
 
-        if (empty($banertext)) {
+        if (empty($banertext) || $pos == 'skycraper-thai') {
             return Image::canvas(160, 600);
         }
 
@@ -174,7 +174,7 @@ class Skycraper extends Model
          * function adds follow txt
          */
 
-        if (empty($banertext)) {
+        if (empty($banertext) || $pos == 'skycraper-thai') {
             return Image::canvas(160, 600);
         }
 

@@ -40,7 +40,6 @@ class ImageController extends Controller
         $btntext = $request->input('btntext');
         $imgExist = $request->input('image');
         $useWhole = $request->input('wholeImage');
-        $btnposition = $request->input('btnposition');
 
         $banertextFollow = $request->input('banertextFollow');
 
@@ -58,7 +57,6 @@ class ImageController extends Controller
         $cropH = round($request->input('h'));
         $cropX1 = round($request->input('x1'));
         $cropY1 = round($request->input('y1'));
-//
 
         /**
          * Insert image
@@ -72,222 +70,6 @@ class ImageController extends Controller
         $pos = strpos($bannertype, '-');
         $check = substr($bannertype, 0, $pos);
 
-////        dd($check, $bannertype);
-//
-//        switch (strtolower($bannertype)) {
-//            case 'leaderboard-car':
-//                $x = 728;
-//                $y = 90;
-//
-//                $bpX = 20;
-//                $bpY = 0;
-//                $btnposition = 'right';
-//
-//                $imgX = 180;
-//                $imgY = 90;
-//                $imgPos = 'left';
-//                break;
-//
-//            case 'leaderboard-airplane':
-//                $x = 728;
-//                $y = 90;
-//
-//                $bpX = 0;
-//                $bpY = 0;
-//                $btnposition = 'right';
-//
-//                $imgX = 550;
-//                $imgY = 90;
-//                $imgPos = 'right';
-//                break;
-//
-//            case 'leaderboard-get-around':
-//                $x = 728;
-//                $y = 90;
-//
-//                $bpX = 0;
-//                $bpY = 0;
-//                $btnposition = 'right';
-//
-//                $imgX = 550;
-//                $imgY = 90;
-//                $imgPos = 'right';
-//                break;
-//
-//            case 'leaderboard-iphone7':
-//                $x = 728;
-//                $y = 90;
-//
-//                $bpX = 0;
-//                $bpY = 0;
-//                $btnposition = 'right';
-//
-//                $imgX = 550;
-//                $imgY = 90;
-//                $imgPos = 'right';
-//                break;
-//
-//            case 'leaderboard-antivirus':
-//                $x = 728;
-//                $y = 90;
-//
-//                $bpX = 0;
-//                $bpY = 0;
-//                $btnposition = 'right';
-//
-//                $imgX = 550;
-//                $imgY = 90;
-//                $imgPos = 'right';
-//                break;
-//
-//
-//            case 'leaderboard-iphone-blue':
-//                $x = 728;
-//                $y = 90;
-//
-//                $bpX = 0;
-//                $bpY = 0;
-//                $btnposition = 'right';
-//
-//                $imgX = 550;
-//                $imgY = 90;
-//                $imgPos = 'right';
-//                break;
-//
-//
-//            case 'rectangle-kismetrics':
-//                $x = 300;
-//                $y = 250;
-//                $bpX = 15;
-//                $bpY = 190;
-//                $imgX = 0;
-//                $imgY = 0;
-//                $imgPos = 'center';
-//                break;
-//
-//            case 'rectangle-get-around':
-//                $x = 300;
-//                $y = 250;
-//                $bpX = 0;
-//                $bpY = 215;
-//                $imgX = 0;
-//                $imgY = 0;
-//                $imgPos = 'center';
-//                break;
-//            case 'rectangle-iphone':
-//                $x = 300;
-//                $y = 250;
-//                $bpX = 0;
-//                $bpY = 215;
-//                $imgX = 0;
-//                $imgY = 0;
-//                $imgPos = 'center';
-//                break;
-//
-//            case 'rectangle-airplane':
-//                $x = 300;
-//                $y = 250;
-//
-//                $bpX = 0;
-//                $bpY = 20;
-//                $btnposition = 'bottom'; //ovaj kod radi proveriti sa Ivanom
-//
-//                $imgX = 0;
-//                $imgY = 0;
-//                $imgPos = 'center';
-//                break;
-//
-//            case 'rectangle-antivirus':
-//                $x = 300;
-//                $y = 250;
-//
-//                $bpX = 50;
-//                $bpY = 50;
-//                $btnposition = 'center';
-//
-//                $imgX = 50;
-//                $imgY = 50;
-//                $imgPos = 'center';
-//                break;
-//
-//            case 'rectangle-iphoneblue':
-//                $x = 300;
-//                $y = 250;
-//
-//                $bpX = 0;
-//                $bpY = 0;
-//                $btnposition = 'bottom';
-//
-//                $imgX = 50;
-//                $imgY = 50;
-//                $imgPos = 'center';
-//                break;
-//
-//
-//            case 'skycraper-antivirus':
-//                $x = 160;
-//                $y = 600;
-//                $bpX = 80;
-//                $bpY = 280;
-//                $imgX = 0;
-//                $imgY = 0;
-//                $imgPos = 'center';
-//                $btnposition = 'center';
-//                break;
-//
-//            case 'skycraper-iphone7':
-//                $x = 160;
-//                $y = 600;
-//
-//                $bpX = 80;
-//                $bpY = 0;
-//                $btnposition = 'bottom';
-//
-//                $imgX = 160;
-//                $imgY = 375;
-//                $imgPos = 'bottom';
-//                break;
-//
-//            case 'skycraper-airplane':
-//                $x = 160;
-//                $y = 600;
-//
-//                $bpX = 80;
-//                $bpY = 40;
-//                $btnposition = 'bottom';
-//
-//                $imgX = 160;
-//                $imgY = 375;
-//                $imgPos = 'bottom';
-//                break;
-//
-//            case 'skycraper-get-around':
-//                $x = 160;
-//                $y = 600;
-//
-//                $bpX = 80;
-//                $bpY = 40;
-//                $btnposition = 'bottom';
-//
-//                $imgX = 160;
-//                $imgY = 375;
-//                $imgPos = 'bottom';
-//                break;
-//
-//            case 'skycraper-iphoneblue':
-//
-//                $x = 160;
-//                $y = 600;
-//
-//                $bpX = 80;
-//                $bpY = 40;
-//                $btnposition = 'bottom';
-//
-//                $imgX = 160;
-//                $imgY = 375;
-//                $imgPos = 'bottom';
-//                break;
-//        }
 
         /** GENERATOR BLOCK OF CODE */
 
@@ -339,12 +121,6 @@ class ImageController extends Controller
                 ->insert($bt)
                 ->insert($folow, 'center');
 
-            /**$img = Image::canvas($x, $y, $colorpicker)
-            ->insert($image)
-            ->insert($main, 'center')
-            ->insert($bt, $btnposition, $bpX, $bpY)
-            ->insert($folow, 'center');*/
-
         } else if ($imgExist && $useWhole == 'wholeImage') {
 
             $image = Input::file('file_image');
@@ -363,12 +139,6 @@ class ImageController extends Controller
 //
 //            }
 
-//            $img = Image::canvas($x, $y)
-//                ->insert($image, $imgPos)
-//                ->insert($main, 'center')
-//                ->insert($bt, $btnposition, $bpX, $bpY)
-//                ->insert($folow, 'center');
-
             $img = Image::canvas($x, $y)
                 ->insert($image2)
                 ->insert($main)
@@ -382,10 +152,6 @@ class ImageController extends Controller
                 ->insert($main)
                 ->insert($bt)
                 ->insert($folow);
-//            $img = Image::canvas($x, $y, $colorpicker)
-//                ->insert($main, 'center')
-//                ->insert($bt, $btnposition, $bpX, $bpY)
-//                ->insert($folow, 'center');
         }
 
 
