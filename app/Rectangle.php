@@ -43,7 +43,7 @@ class Rectangle extends Model
                 $secondHalf = null;
             }
 
-            return Image::canvas($x, $y)->text($firstHalf, 18, 80, function ($font) use ($txtColor) {
+            return Image::canvas(300, 250)->text($firstHalf, 18, 80, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Gudea-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('left');
@@ -70,7 +70,7 @@ class Rectangle extends Model
 
             $line = Image::canvas(180, 3, $txtColor);
 
-            return Image::canvas($x, $y)->text($firstHalf, 150, 66, function ($font) use ($txtColor) {
+            return Image::canvas(300, 250)->text($firstHalf, 150, 66, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Merriweather-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -192,6 +192,48 @@ class Rectangle extends Model
                 $font->valign('middle');
                 $font->size(48);
             });
+
+        }
+        else if ($pos == 'rectangle-digimon') {
+
+            /**
+             * rectangle-digimon banner type
+             */
+
+            return Image::canvas(300, 250)->text($banertext, 245, 175, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(40);
+            });
+
+        }
+        else if ($pos == 'rectangle-jewels') {
+
+            /**
+             * Jewels Rectangle Banner main text
+             */
+
+            $position = strpos($banertext, ' ');
+            $firstHalf = substr($banertext, 0, $position);
+            $secondHalf = substr($banertext, $position + 1);
+
+            $line = Image::canvas(155, 2, $txtColor);
+
+            return Image::canvas(300, 250)->text($firstHalf, 148, 31, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMTCondensedItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(35);
+            })->text($secondHalf, 150, 61, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMTCondensedItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(35);
+            })->insert($line, 'top', 0, 77);
 
         }
 
@@ -342,6 +384,39 @@ class Rectangle extends Model
             });
 
         }
+        else if ($pos == 'rectangle-digimon') {
+
+            /**
+             * rectangle-digimon banner type
+             */
+
+            return Image::canvas(300, 250)->text($banertext, 245, 197, function ($font) use ($color) {
+                $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(13);
+            });
+
+        }
+
+        else if ($pos == 'rectangle-jewels') {
+
+            /**
+             * Jewels Rectangle Banner follow text
+             */
+
+
+            return Image::canvas(300, 250)->text($banertext, 150, 88, function ($font) use ($color) {
+                $font->file(public_path('fonts/RobotoCondensed-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(13);
+            });
+
+        }
+
 
     }
 
@@ -353,7 +428,7 @@ class Rectangle extends Model
          * generate button for kismetrics rectangle type
          */
 
-       if (empty($text) || $type == 'rectangle-get-around') {
+       if (empty($text) || $type == 'rectangle-get-around' || $type == 'rectangle-jewels') {
            return Image::canvas(182, 34);
        }
        else if ($type == 'rectangle-kismetrics') {
@@ -527,8 +602,25 @@ class Rectangle extends Model
                 });
 
         }
+        else if ($type == 'rectangle-digimon') {
 
+            /**
+             * rectangle-digimon button type
+             */
 
+            return Image::canvas(300, 250)
+                ->rectangle(0, 210, 300, 250, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                })
+                ->text($text, 150, 230, function ($font) use ($color) {
+                    $font->file(public_path('fonts/CenturyGothicBold.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(32);
+                });
+
+        }
 
 
     }

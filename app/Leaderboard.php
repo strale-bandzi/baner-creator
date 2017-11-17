@@ -15,7 +15,7 @@ class Leaderboard extends Model
     public function addText($x, $y, $banertext, $txtColor, $pos)
     {
 
-        if (empty($banertext) || $pos == 'leaderboard-thai') {
+        if (empty($banertext) || $pos == 'leaderboard-thai' || $pos == 'leaderboard-digimon') {
             return Image::canvas(728, 90);
         }
 
@@ -152,7 +152,8 @@ class Leaderboard extends Model
          * function adds follow txt
          */
 
-        if (empty($banertext) || $pos == 'leaderboard-thai' || $pos == 'leaderboard-medicine') {
+        if (empty($banertext) || $pos == 'leaderboard-thai' || $pos == 'leaderboard-medicine'
+            || $pos == 'leaderboard-digimon') {
             return Image::canvas(728, 90);
         }
 
@@ -494,6 +495,25 @@ class Leaderboard extends Model
                 $font->valign('middle');
                 $font->size(33);
             });
+
+        }
+        else if ($type == 'leaderboard-digimon') {
+
+            /**
+             * leaderboard-digimon button type
+             */
+
+            return Image::canvas(728, 90)
+                ->rectangle(593, 1, 726, 88, function ($draw) use ($btcolor) {
+                    $draw->border(3, $btcolor);
+                })
+                ->text($text, 660, 48, function ($font) use ($color) {
+                    $font->file(public_path('fonts/CenturyGothicBold.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(32);
+                });
 
         }
     }

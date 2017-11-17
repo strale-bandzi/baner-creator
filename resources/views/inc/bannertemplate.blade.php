@@ -53,6 +53,11 @@
             {!! Form::radio('bannertemplate', 'leaderboard-medicine')!!}
             <img src="/template/leaderboard-medicine.jpg" alt="leaderboard-medicine"/>
         </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-digimon')!!}
+            <img src="/template/leaderboard-digimon.jpg" alt="leaderboard-digimon"/>
+        </p>
     </div>
 
     <br>
@@ -100,6 +105,17 @@
             <img src="/template/rectangle-medicine.jpg" alt="Rectangle Medicine"/>
         </p>
 
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-digimon') !!}<br>
+            <img src="/template/rectangle-digimon.jpg" alt="Rectangle Digimon"/>
+        </p>
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-jewels') !!}<br>
+            <img src="/template/rectangle-jewels.jpg" alt="Rectangle jewels"/>
+        </p>
+
     </div>
 
     <div id="skycraper" class="presented"><br>
@@ -132,6 +148,16 @@
             {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
             {!! Form::radio('bannertemplate', 'skycraper-thai') !!}
             <img src="/template/sky-thai.jpg" alt="skycraper-thai.jpg"/>
+        </p>
+        {{--<p>--}}
+            {{--{!! Form::label('bannertemplate', 'Dims: 160x600') !!}--}}
+            {{--{!! Form::radio('bannertemplate', 'skycraper-medicine') !!}--}}
+            {{--<img src="/template/sky-medicine.jpg" alt="skycraper medicine.jpg"/>--}}
+        {{--</p>--}}
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-digimon') !!}
+            <img src="/template/sky-digimon.jpg" alt="skycraper digimon.jpg"/>
         </p>
     </div>
     <div id="rectwide" class="presented"><br>
@@ -169,6 +195,16 @@
             {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
             {!! Form::radio('bannertemplate', 'rectanglewide-medicine') !!}
             <img src="/template/rectanglewide-medicine.jpg" alt="rectanglewide-medicine"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-digimon') !!}
+            <img src="/template/rectanglewide-digimon.jpg" alt="rectanglewide digimon"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-jewels') !!}
+            <img src="/template/rectanglewide-jewels.jpg" alt="rectanglewide jewels"/>
         </p>
 
     </div>

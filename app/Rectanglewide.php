@@ -10,7 +10,8 @@ class Rectanglewide extends Model
 
     public function addText($x, $y, $banertext, $txtColor, $pos){
 
-        if (empty($banertext) || $pos == 'rectanglewide-get-around' || $pos == 'rectanglewide-thai') {
+        if (empty($banertext) || $pos == 'rectanglewide-get-around' || $pos == 'rectanglewide-thai'
+            || $pos == 'rectanglewide-digimon') {
             return Image::canvas(240, 400);
         }
 
@@ -170,12 +171,41 @@ class Rectanglewide extends Model
             });
 
         }
+        else if ($pos == 'rectanglewide-jewels') {
+
+            /**
+             * Jewels rectanglewide Banner main text
+             */
+
+            $position = strpos($banertext, ' ');
+            $firstHalf = substr($banertext, 0, $position);
+            $secondHalf = substr($banertext, $position + 1);
+
+            $line = Image::canvas(192, 3, $txtColor);
+
+            return Image::canvas(240, 400)->text($firstHalf, 115, 305, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMTCondensedItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(43);
+            })->text($secondHalf, 119, 339, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMTCondensedItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(43);
+            })->insert($line, 'top', 0, 358);
+
+        }
+
 
     }
 
     public function addFollText($x, $y, $banertext, $color, $pos){
 
-        if (empty($banertext) || $pos == 'rectanglewide-get-around' || $pos == 'rectanglewide-thai') {
+        if (empty($banertext) || $pos == 'rectanglewide-get-around' || $pos == 'rectanglewide-thai'
+            || $pos == 'rectanglewide-digimon') {
             return Image::canvas(240, 400);
         }
 
@@ -285,6 +315,22 @@ class Rectanglewide extends Model
             });
 
         }
+        else if ($pos == 'rectanglewide-jewels') {
+
+            /**
+             * rectanglewide  Banner follow text
+             */
+
+
+            return Image::canvas(240, 400)->text($banertext, 120, 373, function ($font) use ($color) {
+                $font->file(public_path('fonts/RobotoCondensed-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(17);
+            });
+
+        }
 
 
 
@@ -292,7 +338,7 @@ class Rectanglewide extends Model
 
     public function addButton($text, $color, $btcolor, $type){
 
-        if (empty($text) || $type == 'rectanglewide-get-around') {
+        if (empty($text) || $type == 'rectanglewide-get-around' || $type == 'rectanglewide-jewels') {
             return Image::canvas(240, 400);
         }
 
@@ -412,6 +458,51 @@ class Rectanglewide extends Model
                 });
 
         }
+        else if ($type == 'rectanglewide-antivirus') {
+
+            $position = strpos($text, ' ');
+
+            $firstHalf = substr($text, 0, $position);
+            $secondHalf = substr($text, $position +1);
+
+            return Image::canvas(240, 400)
+                ->circle(68, 125, 234, function ($draw) use ($btcolor){
+                    $draw->background($btcolor);
+                    $draw->border(1, $btcolor);
+                })->text(' > ', 125, 234, function ($font) use ($color){
+                    $font->file(public_path('fonts/PTM55FT.ttf'));
+                    $font->color($color);
+                    $font->size(60);
+                    $font->align('center');
+                    $font->valign('middle');
+                })
+                ->text('CLICK HERE', 125, 290, function ($font) use ($btcolor){
+                    $font->file(public_path('fonts/Roboto-Bold.ttf'));
+                    $font->color($btcolor);
+                    $font->size(24);
+                    $font->align('center');
+                    $font->valign('middle');
+                })
+                ->circle(205, 220, 413, function ($draw) use ($btcolor){
+                    $draw->background($btcolor);
+                    $draw->border(1, $btcolor);
+                })
+                ->text($secondHalf, 208, 380, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Lato-Bold.ttf'));
+                    $font->size(17);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('bottom');
+                })
+                ->text($firstHalf, 180, 351, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Roboto-Regular.ttf'));
+                    $font->size(32);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->angle(21);
+                });
+        }
         else if ($type == 'rectanglewide-medicine') {
 
             return Image::canvas(240, 400)
@@ -421,6 +512,21 @@ class Rectanglewide extends Model
                 ->text($text, 120, 392, function ($font) use ($color) {
                     $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
                     $font->size(29);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('bottom');
+                });
+
+        }
+        else if ($type == 'rectanglewide-digimon') {
+
+            return Image::canvas(240, 400)
+                ->rectangle(0, 346, 240, 400, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                })
+                ->text($text, 120, 385, function ($font) use ($color) {
+                    $font->file(public_path('fonts/CASTELAR.ttf'));
+                    $font->size(20);
                     $font->color($color);
                     $font->align('center');
                     $font->valign('bottom');

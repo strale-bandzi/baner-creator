@@ -16,7 +16,7 @@ class Skycraper extends Model
     public function addText($x, $y, $banertext, $txtColor, $pos)
     {
 
-        if (empty($banertext) || $pos == 'skycraper-thai') {
+        if (empty($banertext) || $pos == 'skycraper-thai' || $pos == 'skycraper-digimon') {
             return Image::canvas(160, 600);
         }
 
@@ -174,7 +174,7 @@ class Skycraper extends Model
          * function adds follow txt
          */
 
-        if (empty($banertext) || $pos == 'skycraper-thai') {
+        if (empty($banertext) || $pos == 'skycraper-thai' || $pos == 'skycraper-digimon') {
             return Image::canvas(160, 600);
         }
 
@@ -446,5 +446,36 @@ class Skycraper extends Model
                     $font->size(40);
                 });
         }
+            else if ($type == 'skycraper-medicine') {
+
+                /** skycraper medicine banner button */
+
+                return Image::canvas(160, 600)
+                    ->rectangle(0, 210, 160, 250, function ($draw) use ($btcolor) {
+                        $draw->background($btcolor);
+                    })
+                    ->text($text, 150, 243, function ($font) use ($color) {
+                        $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                        $font->size(31);
+                        $font->color($color);
+                        $font->align('center');
+                    });
+
+            }
+            else if($type == 'skycraper-digimon'){
+
+                /** skycraper digimon banner button */
+
+                return Image::canvas(160, 600)
+                    ->rectangle(0, 564, 600, 600, function ($draw) use ($btcolor) {
+                        $draw->background($btcolor);
+                    })->text($text, 80, 582, function ($font) use ($color){
+                    $font->file(public_path('fonts/CASTELAR.ttf'));
+                    $font->color($color);
+                    $font->size(30);
+                    $font->align('center');
+                    $font->valign('middle');
+                });
+            }
     }
 }
