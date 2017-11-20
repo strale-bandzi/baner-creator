@@ -26,7 +26,7 @@ class Skycraper extends Model
 
         if ($pos == 'skycraper-antivirus') {
 
-            return Image::canvas($x, $y)->text($banertext, 80, 98, function ($font) use ($txtColor) {
+            return Image::canvas(160, 600)->text($banertext, 80, 98, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Roboto-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -165,6 +165,121 @@ class Skycraper extends Model
 
         }
 
+         else if ($pos == 'skycraper-medicine') {
+
+             /**
+              * Skycraper-medicine banner type
+              */
+
+             if(str_word_count($banertext) >= 4 ){
+                 $c = str_word_count($banertext, 1);
+                 $first = $c[0]. ' '.$c[1];
+                 $second = $c[2];
+                 $third = $c[3];
+                 $fourth = $c[4];
+             } else if(str_word_count($banertext) <= 3 ){
+                 $c = str_word_count($banertext, 1);
+                 $first = $c[0]. ' '.$c[1];
+                 $second = $c[2];;
+                 $third = null;
+                 $fourth = null;
+             }
+
+             return Image::canvas(160, 600)
+                  ->text($first, 10, 71, function ($font) use ($txtColor) {
+                     $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                     $font->color($txtColor);
+                     $font->align('left');
+                     $font->valign('middle');
+                     $font->size(49);
+                })->text($second, 10, 122, function ($font) use ($txtColor) {
+                     $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                     $font->color($txtColor);
+                     $font->align('left');
+                     $font->valign('middle');
+                     $font->size(49);
+                 })->text($third, 10, 180, function ($font) use ($txtColor) {
+                     $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                     $font->color($txtColor);
+                     $font->align('left');
+                     $font->valign('middle');
+                     $font->size(49);
+                 })->text($fourth, 10, 228, function ($font) use ($txtColor) {
+                     $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
+                     $font->color($txtColor);
+                     $font->align('left');
+                     $font->valign('middle');
+                     $font->size(50);
+             });
+
+         }
+
+         else if ($pos == 'skycraper-jewels') {
+
+             /**
+              * Jewels skycraper main banner text
+              */
+
+             $position = strpos($banertext, ' ');
+             $firstHalf = substr($banertext, 0, $position);
+             $secondHalf = substr($banertext, $position + 1);
+
+             $line = Image::canvas(146, 2, $txtColor);
+
+             return Image::canvas(160, 600)->text($firstHalf, 76, 493, function ($font) use ($txtColor) {
+                 $font->file(public_path('fonts/BodoniMTCondensedItalic.ttf'));
+                 $font->color($txtColor);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->size(33);
+             })->text($secondHalf, 79, 520, function ($font) use ($txtColor) {
+                 $font->file(public_path('fonts/BodoniMTCondensedItalic.ttf'));
+                 $font->color($txtColor);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->size(33);
+             })->insert($line, 'bottom', 3, 62);
+
+         }
+         else if ($pos == 'skycraper-i7') {
+
+             /**
+              * skycraper-iphone-7 banner type
+              */
+
+             $position = strpos($banertext, ' ');    // position of first word
+
+             $first = substr($banertext, 0, $position);  //gives first word
+             $secondString = substr($banertext, $position); // Gives next 2 strings
+
+             $secondPosition = strpos($secondString, ' ', 1);
+
+             $second = substr($secondString, 0, $secondPosition); //gives second word
+             $third = substr($secondString, $secondPosition); // gives third word
+
+
+             return Image::canvas(160, 600)->text($first, 80, 55, function ($font) use ($txtColor) {
+                 $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                 $font->color($txtColor);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->size(40);
+             })->text($second, 75, 107, function ($font) use ($txtColor) {
+                 $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                 $font->color($txtColor);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->size(38);
+             })->text($third, 75, 162, function ($font) use ($txtColor) {
+                 $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                 $font->color($txtColor);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->size(38);
+             });
+
+         }
+
 
     }
 
@@ -174,7 +289,8 @@ class Skycraper extends Model
          * function adds follow txt
          */
 
-        if (empty($banertext) || $pos == 'skycraper-thai' || $pos == 'skycraper-digimon') {
+        if (empty($banertext) || $pos == 'skycraper-thai' || $pos == 'skycraper-digimon'
+            || $pos == 'skycraper-medicine') {
             return Image::canvas(160, 600);
         }
 
@@ -278,6 +394,37 @@ class Skycraper extends Model
             });
 
         }
+        else if ($pos == 'skycraper-jewels') {
+
+            /**
+             * skycraper  jewels follow text
+             */
+
+
+            return Image::canvas(160, 600)->text($banertext, 81, 548, function ($font) use ($color) {
+                $font->file(public_path('fonts/RobotoCondensed-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12.2);
+            });
+
+        }
+        else if ($pos == 'skycraper-i7') {
+
+            /**
+             * skycraper-iphon77 banner type
+             */
+
+            return Image::canvas(160, 600)->text($banertext, 80, 481, function ($font) use ($color) {
+                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(32);
+            });
+
+        }
 
 
 
@@ -291,7 +438,7 @@ class Skycraper extends Model
          */
 
 
-        if (empty($text) || $type == 'skycraper-get-around') {
+        if (empty($text) || $type == 'skycraper-get-around' || $type == 'skycraper-jewels') {
             return Image::canvas(182, 34);
         }
 
@@ -450,15 +597,33 @@ class Skycraper extends Model
 
                 /** skycraper medicine banner button */
 
+                $points = array(
+                    160,  194,  // Point D
+                    160, 295,  // Point C
+                    0,  520,  // Point B
+                    0,  424   // Point A
+                );
+                $points2 = array(
+                    160,  194,  // Point D
+                    160, 300,  // Point C
+                    0,  525,  // Point B
+                    0,  424   // Point A
+                );
+
                 return Image::canvas(160, 600)
-                    ->rectangle(0, 210, 160, 250, function ($draw) use ($btcolor) {
+                    ->polygon($points2, function ($draw) use ($btcolor) {
+                        $draw->background($btcolor);
+                    })->opacity(30)
+                    ->polygon($points, function ($draw) use ($btcolor) {
                         $draw->background($btcolor);
                     })
-                    ->text($text, 150, 243, function ($font) use ($color) {
+                    ->text($text, 78, 362, function ($font) use ($color) {
                         $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
-                        $font->size(31);
+                        $font->size(30);
                         $font->color($color);
                         $font->align('center');
+                        $font->valign('middle');
+                        $font->angle(55);
                     });
 
             }
@@ -476,6 +641,24 @@ class Skycraper extends Model
                     $font->align('center');
                     $font->valign('middle');
                 });
+            }
+            else if ($type == 'skycraper-i7') {
+
+                /**
+                 * skycraper-iphone-7 banner type
+                 */
+
+
+                return Image::canvas(160, 600)->rectangle(11, 537, 147, 587, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                })->text($text, 80, 562, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(25);
+                });
+
             }
     }
 }

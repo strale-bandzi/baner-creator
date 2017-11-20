@@ -144,6 +144,33 @@ class Leaderboard extends Model
             });
 
         }
+        else if ($pos == 'leaderboard-jewels') {
+
+            /**
+             * Jewels leaderboard main banner text
+             */
+
+            $position = strpos($banertext, ' ');
+            $firstHalf = substr($banertext, 0, $position);
+            $secondHalf = substr($banertext, $position + 1);
+
+            $line = Image::canvas(152, 2, $txtColor);
+
+            return Image::canvas(728, 90)->text($firstHalf, 544, 23, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMTCondensedItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(34);
+            })->text($secondHalf, 546, 50, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMTCondensedItalic.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(34);
+            })->insert($line, 'bottom-right', 107, 23);
+
+        }
     }
 
     public function addFollText($x, $y, $banertext, $color, $pos)
@@ -274,6 +301,22 @@ class Leaderboard extends Model
             });
 
         }
+        else if ($pos == 'leaderboard-jewels') {
+
+            /**
+             * leaderboard  jewels follow text
+             */
+
+
+            return Image::canvas(728, 90)->text($banertext, 547, 76, function ($font) use ($color) {
+                $font->file(public_path('fonts/RobotoCondensed-Regular.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12.5);
+            });
+
+        }
     }
 
     public function addButton($text, $color, $btcolor, $type)
@@ -283,7 +326,7 @@ class Leaderboard extends Model
          * generate button for leaderboard types
          */
 
-        if (empty($text) || $type == 'leaderboard-get-around') {
+        if (empty($text) || $type == 'leaderboard-get-around' || $type == 'leaderboard-jewels') {
             return Image::canvas(182, 34);
         }
 

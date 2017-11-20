@@ -58,6 +58,11 @@
             {!! Form::radio('bannertemplate', 'leaderboard-digimon')!!}
             <img src="/template/leaderboard-digimon.jpg" alt="leaderboard-digimon"/>
         </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-jewels')!!}
+            <img src="/template/leaderboard-jewels.jpg" alt="leaderboard jewels"/>
+        </p>
     </div>
 
     <br>
@@ -149,15 +154,25 @@
             {!! Form::radio('bannertemplate', 'skycraper-thai') !!}
             <img src="/template/sky-thai.jpg" alt="skycraper-thai.jpg"/>
         </p>
-        {{--<p>--}}
-            {{--{!! Form::label('bannertemplate', 'Dims: 160x600') !!}--}}
-            {{--{!! Form::radio('bannertemplate', 'skycraper-medicine') !!}--}}
-            {{--<img src="/template/sky-medicine.jpg" alt="skycraper medicine.jpg"/>--}}
-        {{--</p>--}}
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-medicine') !!}
+            <img src="/template/sky-medicine.jpg" alt="skycraper medicine.jpg"/>
+        </p>
         <p>
             {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
             {!! Form::radio('bannertemplate', 'skycraper-digimon') !!}
             <img src="/template/sky-digimon.jpg" alt="skycraper digimon.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-jewels') !!}
+            <img src="/template/sky-jewels.jpg" alt="skycraper jewels.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-i7') !!}
+            <img src="/template/sky-iphone77.jpg" alt="skycraper iphone77.jpg"/>
         </p>
     </div>
     <div id="rectwide" class="presented"><br>
