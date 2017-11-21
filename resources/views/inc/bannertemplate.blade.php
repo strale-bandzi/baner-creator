@@ -63,6 +63,11 @@
             {!! Form::radio('bannertemplate', 'leaderboard-jewels')!!}
             <img src="/template/leaderboard-jewels.jpg" alt="leaderboard jewels"/>
         </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-seminar')!!}
+            <img src="/template/leaderboard-seminar.jpg" alt="ui seminar"/>
+        </p>
     </div>
 
     <br>
@@ -119,6 +124,11 @@
             {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
             {!! Form::radio('bannertemplate', 'rectangle-jewels') !!}<br>
             <img src="/template/rectangle-jewels.jpg" alt="Rectangle jewels"/>
+        </p>
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-seminar') !!}<br>
+            <img src="/template/rectangle-seminar.jpg" alt="Rectangle seminar"/>
         </p>
 
     </div>
@@ -220,6 +230,16 @@
             {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
             {!! Form::radio('bannertemplate', 'rectanglewide-jewels') !!}
             <img src="/template/rectanglewide-jewels.jpg" alt="rectanglewide jewels"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-i7') !!}
+            <img src="/template/rectanglewide-iphone77.jpg" alt="rectanglewide iphone7"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-seminar') !!}
+            <img src="/template/rectanglewide-seminar.jpg" alt="seminar"/>
         </p>
 
     </div>

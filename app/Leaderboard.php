@@ -171,6 +171,45 @@ class Leaderboard extends Model
             })->insert($line, 'bottom-right', 107, 23);
 
         }
+        else if ($pos == 'leaderboard-seminar') {
+
+                /**
+                 * UI seminar banner type
+                 */
+            if(str_word_count($banertext) >= 2 ){
+                $c = str_word_count($banertext, 1);
+                $first = $c[0];
+                $second = $c[1];
+                $length = strlen($c[0].$c[1]);
+                $third = substr($banertext, $length+2);
+            }
+            else {
+                $first = null;
+                $second = $banertext;
+                $third = null;
+            }
+
+                return Image::canvas(728, 90)->text($first, 80, 15, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                    $font->color($txtColor);
+                    $font->align('left');
+                    $font->valign('middle');
+                    $font->size(20.5);
+                })->text($second, 80, 43, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                    $font->color($txtColor);
+                    $font->align('left');
+                    $font->valign('middle');
+                    $font->size(20.5);
+                })->text($third, 80, 71, function ($font) use ($txtColor) {
+                    $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                    $font->color($txtColor);
+                    $font->align('left');
+                    $font->valign('middle');
+                    $font->size(20.5);
+                });
+
+            }
     }
 
     public function addFollText($x, $y, $banertext, $color, $pos)
@@ -317,6 +356,51 @@ class Leaderboard extends Model
             });
 
         }
+        else if ($pos == 'leaderboard-seminar') {
+
+            /**
+             * UI seminar follow text
+             */
+            $points3 = array(
+                317, 0, // D
+                404, 90, // C
+                398,  90,      // Point B
+                312,  0   // Point A
+            );
+            $points2 = array(
+                303, 0, // D
+                390, 90, // C
+                384,  90,      // Point B
+                298,  0   // Point A
+            );
+            $points = array(
+                289, 0, // D
+                376, 90, // C
+                370,  90,      // Point B
+                284,  0   // Point A
+            );
+
+
+            $line = Image::canvas(728, 90)
+                ->polygon($points, function ($draw) use ($color) {
+                    $draw->background($color);
+                })
+                ->polygon($points2, function ($draw) use ($color) {
+                    $draw->background($color);
+                })
+                ->polygon($points3, function ($draw) use ($color) {
+                    $draw->background($color);
+                });
+
+            return Image::canvas(728, 90)->text($banertext, 431, 45, function ($font) use ($color) {
+                $font->file(public_path('fonts/CopperplateGothicBold.ttf'));
+                $font->color($color);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(21);
+            })->insert($line);
+
+        }
     }
 
     public function addButton($text, $color, $btcolor, $type)
@@ -326,7 +410,8 @@ class Leaderboard extends Model
          * generate button for leaderboard types
          */
 
-        if (empty($text) || $type == 'leaderboard-get-around' || $type == 'leaderboard-jewels') {
+        if (empty($text) || $type == 'leaderboard-get-around' || $type == 'leaderboard-jewels'
+            || $type == 'leaderboard-seminar') {
             return Image::canvas(182, 34);
         }
 

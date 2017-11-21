@@ -236,6 +236,45 @@ class Rectangle extends Model
             })->insert($line, 'top', 0, 77);
 
         }
+        else if ($pos == 'rectangle-seminar') {
+
+            /**
+             * UI seminar banner type
+             */
+            if(str_word_count($banertext) >= 2 ){
+                $c = str_word_count($banertext, 1);
+                $first = $c[0];
+                $second = $c[1];
+                $length = strlen($c[0].$c[1]);
+                $third = substr($banertext, $length+2);
+            }
+            else {
+                $first = null;
+                $second = $banertext;
+                $third = null;
+            }
+
+            return Image::canvas(300, 250)->text($first, 11, 68, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(32);
+            })->text($second, 11, 111, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(32);
+            })->text($third, 11, 155, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(32);
+            });
+
+        }
 
 
     }
@@ -416,6 +455,51 @@ class Rectangle extends Model
             });
 
         }
+        else if ($pos == 'rectangle-seminar') {
+
+            /**
+             * UI seminar follow text
+             */
+            $points3 = array(
+                171, 0, // D
+                300, 132, // C
+                300,  137,      // Point B
+                166,  0   // Point A
+            );
+            $points2 = array(
+                186, 0, // D
+                300, 117, // C
+                300,  122,      // Point B
+                181,  0   // Point A
+            );
+            $points = array(
+                200, 0, // D
+                300, 102, // C
+                300,  107, // Point B
+                195,  0   // Point A
+            );
+
+
+            $line = Image::canvas(300, 250)
+                ->polygon($points, function ($draw) use ($color) {
+                    $draw->background($color);
+                })
+                ->polygon($points2, function ($draw) use ($color) {
+                    $draw->background($color);
+                })
+                ->polygon($points3, function ($draw) use ($color) {
+                    $draw->background($color);
+                });
+
+            return Image::canvas(300, 250)->text($banertext, 12, 208, function ($font) use ($color) {
+                $font->file(public_path('fonts/CopperplateGothicBold.ttf'));
+                $font->color($color);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(18);
+            })->insert($line);
+
+        }
 
 
     }
@@ -428,25 +512,26 @@ class Rectangle extends Model
          * generate button for kismetrics rectangle type
          */
 
-       if (empty($text) || $type == 'rectangle-get-around' || $type == 'rectangle-jewels') {
+       if (empty($text) || $type == 'rectangle-get-around' || $type == 'rectangle-jewels'
+           || $type == 'rectangle-seminar') {
            return Image::canvas(182, 34);
        }
        else if ($type == 'rectangle-kismetrics') {
 
             $width = 146;
             $height = 38;
-
-            return Image::canvas(145, 40)
+            $btn = Image::canvas(145, 40)
                 ->circle($width, $width / 2 - 1, $height / 2, function ($draw) use ($btcolor) {
                     $draw->background($btcolor);
                     $draw->border($btcolor);
-                })
-                ->text($text, 70, 28, function ($font) use ($color) {
+                }) ->text($text, 70, 28, function ($font) use ($color) {
                     $font->file(public_path('fonts/IstokWeb-Bold.ttf'));
                     $font->size(14);
                     $font->color($color);
                     $font->align('center');
                 });
+
+            return Image::canvas(300, 250)->insert($btn, 'bottom-left', 12, 21);
 
         } else if ($type == 'rectangle-airplane') {
             return Image::canvas(300, 250)

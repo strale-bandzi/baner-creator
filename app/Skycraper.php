@@ -648,7 +648,6 @@ class Skycraper extends Model
                  * skycraper-iphone-7 banner type
                  */
 
-
                 return Image::canvas(160, 600)->rectangle(11, 537, 147, 587, function ($draw) use ($btcolor) {
                     $draw->background($btcolor);
                 })->text($text, 80, 562, function ($font) use ($color) {

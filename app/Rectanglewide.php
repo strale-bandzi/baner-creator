@@ -198,6 +198,83 @@ class Rectanglewide extends Model
             })->insert($line, 'top', 0, 358);
 
         }
+        else if ($pos == 'rectanglewide-i7') {
+
+            /**
+             * rectanglewide-iphone-7 banner type
+             */
+
+            $position = strpos($banertext, ' ');    // position of first word
+
+            $first = substr($banertext, 0, $position);  //gives first word
+            $secondString = substr($banertext, $position); // Gives next 2 strings
+
+            $secondPosition = strpos($secondString, ' ', 1);
+
+            $second = substr($secondString, 0, $secondPosition); //gives second word
+            $third = substr($secondString, $secondPosition); // gives third word
+
+
+            return Image::canvas(240, 400)->text($first, 120, 40, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(34);
+            })->text($second, 119, 65, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(32);
+            })->text($third, 119, 91, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/Arimo-Regular.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(34);
+            });
+
+        }
+        else if ($pos == 'rectanglewide-seminar') {
+
+            /**
+             * UI seminar banner type
+             */
+            if(str_word_count($banertext) >= 2 ){
+                $c = str_word_count($banertext, 1);
+                $first = $c[0];
+                $second = $c[1];
+                $length = strlen($c[0].$c[1]);
+                $third = substr($banertext, $length+2);
+            }
+            else {
+                $first = null;
+                $second = $banertext;
+                $third = null;
+            }
+
+            return Image::canvas(240, 400)->text($first, 11, 148, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(29);
+            })->text($second, 11, 184, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(29);
+            })->text($third, 11, 220, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/GillSansUltraBold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(29);
+            });
+
+        }
 
 
     }
@@ -331,14 +408,74 @@ class Rectanglewide extends Model
             });
 
         }
+        else if ($pos == 'rectanglewide-i7') {
 
+            /**
+             * rectanglewide-iphone7 banner type
+             */
+
+            return Image::canvas(240, 400)->text($banertext, 120, 120, function ($font) use ($color) {
+                $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(32);
+            });
+
+        }
+        else if ($pos == 'rectanglewide-seminar') {
+
+            /**
+             * UI seminar follow text
+             */
+            $points3 = array(
+                94, 0, // D
+                240, 150, // C
+                240, 154,      // Point B
+                90,  0   // Point A
+            );
+            $points2 = array(
+                0, 285, // D
+                240, 285, // C
+                240,  288,      // Point B
+                0,  288   // Point A
+            );
+            $points = array(
+                0, 105, // D
+                240, 105, // C
+                240,  108, // Point B
+                0,  108   // Point A
+            );
+
+
+            $line = Image::canvas(240, 400)
+                ->polygon($points, function ($draw) use ($color) {
+                    $draw->background($color);
+                })
+                ->polygon($points2, function ($draw) use ($color) {
+                    $draw->background($color);
+                })
+                ->polygon($points3, function ($draw) use ($color) {
+                    $draw->background($color);
+                });
+
+            return Image::canvas(240, 400)->text($banertext, 120, 316, function ($font) use ($color) {
+                $font->file(public_path('fonts/CopperplateGothicBold.ttf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(16);
+            })->insert($line);
+
+        }
 
 
     }
 
     public function addButton($text, $color, $btcolor, $type){
 
-        if (empty($text) || $type == 'rectanglewide-get-around' || $type == 'rectanglewide-jewels') {
+        if (empty($text) || $type == 'rectanglewide-get-around' || $type == 'rectanglewide-jewels'
+        || $type == 'rectanglewide-seminar') {
             return Image::canvas(240, 400);
         }
 
@@ -531,6 +668,27 @@ class Rectanglewide extends Model
                     $font->align('center');
                     $font->valign('bottom');
                 });
+
+        }
+        else if ($type == 'rectanglewide-i7') {
+
+            $width = 128;
+            $height = 52;
+
+            $widebro = Image::canvas(124, 50)
+                ->circle($width, $width / 2 -2.1, $height / 2 -1, function ($draw) use ($btcolor) {
+                    $draw->background($btcolor);
+                    $draw->border(1, $btcolor);
+                })
+                ->text($text, 62, 25, function ($font) use ($color) {
+                    $font->file(public_path('fonts/Arimo-Bold.ttf'));
+                    $font->size(20);
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                });
+
+            return Image::canvas(240, 400)->insert($widebro, 'bottom', 50, 18);
 
         }
 
