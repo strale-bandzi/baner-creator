@@ -13,7 +13,7 @@ class Skycraper extends Model
      * function adds main txt
      */
 
-    public function addText($x, $y, $banertext, $txtColor, $pos)
+    public function addText($banertext, $txtColor, $pos)
     {
 
         if (empty($banertext) || $pos == 'skycraper-thai' || $pos == 'skycraper-digimon') {
@@ -48,7 +48,7 @@ class Skycraper extends Model
                 $secondHalf = substr($banertext, $length+1);
             }
 
-            return Image::canvas($x, $y)->text($firstHalf, 80, 101, function ($font) use ($txtColor) {
+            return Image::canvas(160, 600)->text($firstHalf, 80, 101, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -78,7 +78,7 @@ class Skycraper extends Model
                 $secondHalf = null;
             }
 
-            return Image::canvas($x, $y)->text($firstHalf, 80, 83, function ($font) use ($txtColor) {
+            return Image::canvas(160, 600)->text($firstHalf, 80, 83, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -111,7 +111,7 @@ class Skycraper extends Model
             }
             $line = Image::canvas(146, 3, $txtColor);
 
-            return Image::canvas($x, $y)->text($firstHalf, 80, 213, function ($font) use ($txtColor) {
+            return Image::canvas(160, 600)->text($firstHalf, 80, 213, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Merriweather-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -283,7 +283,7 @@ class Skycraper extends Model
 
     }
 
-    public function addFollText($x, $y, $banertext, $color, $pos)
+    public function addFollText($banertext, $color, $pos)
     {
         /**
          * function adds follow txt
@@ -307,7 +307,7 @@ class Skycraper extends Model
             $third = substr($secondString, $secondPosition); // gives third word
 
 
-            return Image::canvas($x, $y)->text($first, 80, 145, function ($font) use ($color) {
+            return Image::canvas(160, 600)->text($first, 80, 145, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-Regular.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -332,7 +332,7 @@ class Skycraper extends Model
 
         else if ($pos == 'skycraper-iphone7') {
 
-            return Image::canvas($x, $y)->text($banertext, 80, 196, function ($font) use ($color) {
+            return Image::canvas(160, 600)->text($banertext, 80, 196, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -342,7 +342,7 @@ class Skycraper extends Model
 
         } else if ($pos == 'skycraper-airplane') {
 
-            return Image::canvas($x, $y)->text($banertext, 80, 583, function ($font) use ($color) {
+            return Image::canvas(160, 600)->text($banertext, 80, 583, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -364,7 +364,7 @@ class Skycraper extends Model
             }
 
 
-            return Image::canvas($x, $y)->text($firstHalf, 80, 530, function ($font) use ($color) {
+            return Image::canvas(160, 600)->text($firstHalf, 80, 530, function ($font) use ($color) {
                 $font->file(public_path('fonts/OpenSans-Bold.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -488,17 +488,18 @@ class Skycraper extends Model
 
         else if($type == 'skycraper-iphone7'){
 
-            return Image::canvas(160, 40, $btcolor)->text($text, 80, 20, function ($font) use ($color){
+            $bt = Image::canvas(160, 40, $btcolor)->text($text, 80, 20, function ($font) use ($color){
                     $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                     $font->color($color);
                     $font->size(22);
                     $font->align('center');
                     $font->valign('middle');
                 });
+            return Image::canvas(160, 600)->insert($bt, 'bottom');
         }
         else if($type == 'skycraper-airplane'){
 
-            return Image::canvas(140, 55, $btcolor)
+            $bt = Image::canvas(140, 55, $btcolor)
                 ->opacity(50)
                 ->text($text, 70, 30, function ($font) use ($color){
                 $font->file(public_path('fonts/MyriadProSemibold.ttf'));
@@ -507,6 +508,8 @@ class Skycraper extends Model
                 $font->align('center');
                 $font->valign('middle');
             });
+                return Image::canvas(160, 600)->insert($bt, 'bottom', 10, 40);
+
         }
 
         else if ($type == 'skycraper-iphoneblue') {

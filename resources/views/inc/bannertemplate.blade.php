@@ -68,6 +68,11 @@
             {!! Form::radio('bannertemplate', 'leaderboard-seminar')!!}
             <img src="/template/leaderboard-seminar.jpg" alt="ui seminar"/>
         </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 728x90') !!}
+            {!! Form::radio('bannertemplate', 'leaderboard-shopping')!!}
+            <img src="/template/leaderboard-shopping.jpg" alt=" shopping"/>
+        </p>
     </div>
 
     <br>

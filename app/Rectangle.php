@@ -12,7 +12,7 @@ class Rectangle extends Model
      * function adds main txt
      */
 
-    public function addText($x, $y, $banertext, $txtColor, $pos)
+    public function addText($banertext, $txtColor, $pos)
     {
 
         if (empty($banertext) || $pos == 'rectangle-thai') {
@@ -91,7 +91,7 @@ class Rectangle extends Model
              * Airplane Rectangle Banner text
              */
 
-            return Image::canvas($x, $y)->text($banertext, 150, 150, function ($font) use ($txtColor) {
+            return Image::canvas(300, 250)->text($banertext, 150, 150, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -106,10 +106,10 @@ class Rectangle extends Model
              * rectangle-iphone banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 107, 29, function ($font) use ($txtColor) {
+            return Image::canvas(300, 250)->text($banertext, 7, 29, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(30);
             });
@@ -121,10 +121,10 @@ class Rectangle extends Model
              * rectangle-antivirus banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 205, 45, function ($font) use ($txtColor) {
+            return Image::canvas(300, 250)->text($banertext, 280, 45, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Roboto-Bold.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('right');
                 $font->valign('middle');
                 $font->size(38);
             });
@@ -185,10 +185,10 @@ class Rectangle extends Model
              * rectangle-medicine banner type
              */
 
-            return Image::canvas(300, 250)->text($banertext, 150, 44, function ($font) use ($txtColor) {
+            return Image::canvas(300, 250)->text($banertext, 22, 43, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(48);
             });
@@ -200,10 +200,10 @@ class Rectangle extends Model
              * rectangle-digimon banner type
              */
 
-            return Image::canvas(300, 250)->text($banertext, 245, 175, function ($font) use ($txtColor) {
+            return Image::canvas(300, 250)->text($banertext, 290, 175, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('right');
                 $font->valign('middle');
                 $font->size(40);
             });
@@ -280,7 +280,7 @@ class Rectangle extends Model
     }
 
 
-    public function addFollText($x, $y, $banertext, $color, $pos)
+    public function addFollText($banertext, $color, $pos)
     {
         /**
          * function adds follow txt
@@ -303,7 +303,7 @@ class Rectangle extends Model
             }
 
 
-            return Image::canvas($x, $y)->text($firstHalf, 18, 142, function ($font) use ($color) {
+            return Image::canvas(300, 250)->text($firstHalf, 18, 142, function ($font) use ($color) {
                 $font->file(public_path('fonts/MyriadProItalic.ttf'));
                 $font->color($color);
                 $font->align('left');
@@ -322,7 +322,7 @@ class Rectangle extends Model
              * Get Around Rectangle Banner follow text
              */
 
-            return Image::canvas($x, $y)->text($banertext, 150, 152, function ($font) use ($color) {
+            return Image::canvas(300, 250)->text($banertext, 150, 152, function ($font) use ($color) {
                 $font->file(public_path('fonts/OpenSans-Bold.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -337,7 +337,7 @@ class Rectangle extends Model
              * Airplane Rectangle Banner follow text
              */
 
-            return Image::canvas($x, $y)->text($banertext, 150, 240, function ($font) use ($color) {
+            return Image::canvas(300, 250)->text($banertext, 150, 240, function ($font) use ($color) {
                 $font->file(public_path('fonts/MyriadProItalic.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -352,10 +352,10 @@ class Rectangle extends Model
              * rectangle-iphone banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 106, 72, function ($font) use ($color) {
+            return Image::canvas(300, 250)->text($banertext, 7, 72, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(34);
             });
@@ -378,16 +378,16 @@ class Rectangle extends Model
                 $secondHalf = null;
             }
 
-            return Image::canvas($x, $y)->text($firstHalf, 180, 91, function ($font) use ($color) {
+            return Image::canvas(300, 250)->text($firstHalf, 281, 92, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-Regular.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('right');
                 $font->valign('middle');
                 $font->size(34);
-            })->text($secondHalf, 230, 136, function ($font) use ($color) {
+            })->text($secondHalf, 279, 135, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-Regular.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('right');
                 $font->valign('middle');
                 $font->size(38);
             });
@@ -414,10 +414,10 @@ class Rectangle extends Model
              * rectangle-medicine banner type
              */
 
-            return Image::canvas(300, 250)->text($banertext, 135, 95, function ($font) use ($color) {
+            return Image::canvas(300, 250)->text($banertext, 22, 95, function ($font) use ($color) {
                 $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(46);
             });
@@ -429,10 +429,10 @@ class Rectangle extends Model
              * rectangle-digimon banner type
              */
 
-            return Image::canvas(300, 250)->text($banertext, 245, 197, function ($font) use ($color) {
+            return Image::canvas(300, 250)->text($banertext, 290, 197, function ($font) use ($color) {
                 $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('right');
                 $font->valign('middle');
                 $font->size(13);
             });

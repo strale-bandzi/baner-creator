@@ -8,7 +8,7 @@ use Intervention\Image\Facades\Image as Image;
 class Rectanglewide extends Model
 {
 
-    public function addText($x, $y, $banertext, $txtColor, $pos){
+    public function addText($banertext, $txtColor, $pos){
 
         if (empty($banertext) || $pos == 'rectanglewide-get-around' || $pos == 'rectanglewide-thai'
             || $pos == 'rectanglewide-digimon') {
@@ -162,12 +162,12 @@ class Rectanglewide extends Model
              * rectanglewide-medicine banner type
              */
 
-            return Image::canvas(240, 400)->text($banertext, 120, 50, function ($font) use ($txtColor) {
+            return Image::canvas(240, 400)->text($banertext, 7, 50, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
-                $font->size(41);
+                $font->size(42);
             });
 
         }
@@ -279,7 +279,7 @@ class Rectanglewide extends Model
 
     }
 
-    public function addFollText($x, $y, $banertext, $color, $pos){
+    public function addFollText($banertext, $color, $pos){
 
         if (empty($banertext) || $pos == 'rectanglewide-get-around' || $pos == 'rectanglewide-thai'
             || $pos == 'rectanglewide-digimon') {
@@ -383,12 +383,12 @@ class Rectanglewide extends Model
              * rectanglewide-medicine follow text
              */
 
-            return Image::canvas(240, 400)->text($banertext, 118, 100, function ($font) use ($color) {
+            return Image::canvas(240, 400)->text($banertext, 10, 100, function ($font) use ($color) {
                 $font->file(public_path('fonts/Myriad-Pro-Bold-Italic.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
-                $font->size(42);
+                $font->size(43);
             });
 
         }

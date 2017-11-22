@@ -12,7 +12,7 @@ class Leaderboard extends Model
      * function adds main txt
      */
 
-    public function addText($x, $y, $banertext, $txtColor, $pos)
+    public function addText($banertext, $txtColor, $pos)
     {
 
         if (empty($banertext) || $pos == 'leaderboard-thai' || $pos == 'leaderboard-digimon') {
@@ -25,9 +25,7 @@ class Leaderboard extends Model
              * leaderboard-car banner type
              */
 
-            $tX = 364;
-            $tY = 27;
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
+            return Image::canvas(728, 90)->text($banertext, 364, 27, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/TitilliumWeb-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -41,13 +39,10 @@ class Leaderboard extends Model
              * leaderboard-airplane banner type
              */
 
-            $tX = 174;
-            $tY = 43;
-
-            return Image::canvas($x, $y)->text($banertext, $tX, $tY, function ($font) use ($txtColor) {
+            return Image::canvas(728, 90)->text($banertext, 18, 41, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Myriad_Pro_Semibold_italic.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(39);
             });
@@ -69,7 +64,7 @@ class Leaderboard extends Model
 
             $line = Image::canvas(183, 3, $txtColor);
 
-            return Image::canvas($x, $y)->text($firstHalf, 364, 25, function ($font) use ($txtColor) {
+            return Image::canvas(728, 90)->text($firstHalf, 364, 25, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Merriweather-Bold.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -88,7 +83,7 @@ class Leaderboard extends Model
              * leaderboard-iphone banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 364, 25, function ($font) use ($txtColor) {
+            return Image::canvas(728, 90)->text($banertext, 363, 23, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($txtColor);
                 $font->align('center');
@@ -103,26 +98,26 @@ class Leaderboard extends Model
              * leaderboard-iphone banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 126, 16, function ($font) use ($txtColor) {
+            return Image::canvas(728, 90)->text($banertext, 78, 17, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Roboto-Bold.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(25);
             });
 
         }
 
-        else if ($pos == 'leaderboard-iphoneblue') {
+        else if ($pos == 'leaderboard-iphone-blue') {
 
             /**
              * leaderboard-iphone-blue banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 190, 45, function ($font) use ($txtColor) {
+            return Image::canvas(728, 90)->text($banertext, 36, 45, function ($font) use ($txtColor) {
                 $font->file(public_path('fonts/Arimo-Regular.ttf'));
                 $font->color($txtColor);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(36);
             });
@@ -210,9 +205,26 @@ class Leaderboard extends Model
                 });
 
             }
+        else if ($pos == 'leaderboard-shopping') {
+
+            /**
+             * shopping banner text
+             */
+
+            return Image::canvas(728, 90)->text($banertext, 18, 70, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMT-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->angle(10);
+                $font->size(68);
+            });
+
+        }
+
     }
 
-    public function addFollText($x, $y, $banertext, $color, $pos)
+    public function addFollText($banertext, $color, $pos)
     {
         /**
          * function adds follow txt
@@ -240,7 +252,7 @@ class Leaderboard extends Model
             }
 
 
-            return Image::canvas($x, $y)->text($firstHalf, 364, 51, function ($font) use ($color) {
+            return Image::canvas(728, 90)->text($firstHalf, 364, 51, function ($font) use ($color) {
                 $font->file(public_path('fonts/TitilliumWeb-Regular.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -256,12 +268,12 @@ class Leaderboard extends Model
 
         } else if ($pos == 'leaderboard-airplane') {
 
-            return Image::canvas($x, $y)->text($banertext, 250, 75, function ($font) use ($color) {
+            return Image::canvas(728, 90)->text($banertext, 150, 74, function ($font) use ($color) {
                 $font->file(public_path('fonts/MyriadProItalic.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
-                $font->size(14);
+                $font->size(13);
             });
 
         } else if ($pos == 'leaderboard-get-around') {
@@ -270,7 +282,7 @@ class Leaderboard extends Model
              * leaderboard-get-around banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 590, 45, function ($font) use ($color) {
+            return Image::canvas(728, 90)->text($banertext, 590, 45, function ($font) use ($color) {
                 $font->file(public_path('fonts/Oswald-Bold.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -284,12 +296,12 @@ class Leaderboard extends Model
              * leaderboard-iphone banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 364, 68, function ($font) use ($color) {
+            return Image::canvas(728, 90)->text($banertext, 363, 68, function ($font) use ($color) {
                 $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                 $font->color($color);
                 $font->align('center');
                 $font->valign('middle');
-                $font->size(38);
+                $font->size(37);
             });
 
         }
@@ -310,28 +322,28 @@ class Leaderboard extends Model
                 $secondHalf = null;
             }
 
-            return Image::canvas($x, $y)->text($firstHalf, 126, 45, function ($font) use ($color) {
-                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+            return Image::canvas(728, 90)->text($firstHalf, 63, 46, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-Regular.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(21);
-            })->text($secondHalf, 126, 70, function ($font) use ($color) {
-                $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
+            })->text($secondHalf, 93, 72, function ($font) use ($color) {
+                $font->file(public_path('fonts/Roboto-Regular.ttf'));
                 $font->color($color);
-                $font->align('center');
+                $font->align('left');
                 $font->valign('middle');
                 $font->size(25);
             });
         }
 
-        else if ($pos == 'leaderboard-iphoneblue') {
+        else if ($pos == 'leaderboard-iphone-blue') {
 
             /**
              * leaderboard-iphone-blue banner type
              */
 
-            return Image::canvas($x, $y)->text($banertext, 460, 45, function ($font) use ($color) {
+            return Image::canvas(728, 90)->text($banertext, 460, 45, function ($font) use ($color) {
                 $font->file(public_path('fonts/Arimo-Bold.ttf'));
                 $font->color($color);
                 $font->align('center');
@@ -392,13 +404,65 @@ class Leaderboard extends Model
                     $draw->background($color);
                 });
 
-            return Image::canvas(728, 90)->text($banertext, 431, 45, function ($font) use ($color) {
+            return Image::canvas(728, 90)->text($banertext, 708, 45, function ($font) use ($color) {
                 $font->file(public_path('fonts/CopperplateGothicBold.ttf'));
                 $font->color($color);
-                $font->align('left');
+                $font->align('right');
                 $font->valign('middle');
                 $font->size(21);
             })->insert($line);
+
+        }
+        else if ($pos == 'leaderboard-shopping') {
+
+            /**
+             * leaderboard  jewels follow text
+             */
+
+            if(str_word_count($banertext) >= 5 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0]. ' ' .$c[1] . ' ' .$c[2];
+                $secondHalf = $c[3]. ' ' .$c[4] . ' ' .$c[5]. ' ' .$c[6];
+                $length = strlen($firstHalf) + strlen($secondHalf)+1;
+                $third = substr($banertext, $length);
+
+            }
+//            else if (str_word_count($banertext) <= 2){
+//                $firstHalf = null;
+//                $secondHalf = $banertext;
+//                $third = null;
+//            }
+//            else if (str_word_count($banertext) > 2 && str_word_count($banertext) < 5){
+//                $position = strpos($banertext, ' ');
+//
+//                $firstHalf = substr($banertext, 0, $position);
+//                $secondString = substr($banertext, $position);
+//
+//                $secondPosition = strpos($secondString, ' ', 1);
+//
+//                $secondHalf = substr($secondString, 0, $secondPosition);
+//                $third = substr($secondString, $secondPosition);
+//            }
+
+            return Image::canvas(728, 90)->text($firstHalf, 505, 31, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12);
+            })->text($secondHalf, 505, 46, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12);
+            })->text($third, 505, 61, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12);
+            });
 
         }
     }
@@ -429,7 +493,8 @@ class Leaderboard extends Model
                 });
 
         } else if ($type == 'leaderboard-airplane') {
-            return Image::canvas(122, 90, $btcolor)
+
+            $btn = Image::canvas(122, 90, $btcolor)
                 ->opacity(50)
                 ->text($text, 61, 51, function ($font) use ($color) {
                     $font->file(public_path('fonts/MyriadProSemibold.ttf'));
@@ -437,6 +502,8 @@ class Leaderboard extends Model
                     $font->color($color);
                     $font->align('center');
                 });
+
+            return Image::canvas(728, 90)->insert($btn, 'right');
 
         }
 
@@ -453,7 +520,7 @@ class Leaderboard extends Model
                 $secondHalf = null;
             }
 
-            return Image::canvas(140, 90, $btcolor)
+            $btn = Image::canvas(140, 90, $btcolor)
                 ->text($firstHalf, 70, 40, function ($font) use ($color) {
                     $font->file(public_path('fonts/Roboto-BoldItalic.ttf'));
                     $font->size(22);
@@ -466,6 +533,8 @@ class Leaderboard extends Model
                     $font->color($color);
                     $font->align('center');
                 });
+
+            return Image::canvas(728, 90)->insert($btn, 'right');
 
         }
 
@@ -521,7 +590,7 @@ class Leaderboard extends Model
                 });
 
         }
-        else if ($type == 'leaderboard-iphoneblue') {
+        else if ($type == 'leaderboard-iphone-blue') {
 
             /**
              * leaderboard-iphone-blue banner type
@@ -642,6 +711,38 @@ class Leaderboard extends Model
                     $font->valign('middle');
                     $font->size(32);
                 });
+
+        }
+        else if ($type == 'leaderboard-shopping') {
+
+            /**
+             * leaderboard-shopping button type
+             */
+
+            // define polygon points
+            $points = array(
+                296, 26,    // H
+                396, 26, // G
+                398,  27, // F
+                398,  67,  //E
+                396, 68,  //D
+                296,  68, // C
+                294,  67, //B
+                294,  27   //A
+            );
+
+            return Image::canvas(728, 90)
+                ->polygon($points, function ($draw) use ($color) {
+                $draw->border(3, $color);
+                })
+                ->text($text, 349, 47, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BookAntiquaBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(16);
+                });
+
 
         }
     }

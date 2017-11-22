@@ -76,23 +76,26 @@ class ImageController extends Controller
         if ($check == 'leaderboard') {
             $x = 728;
             $y = 90;
+
             $lead = new Leaderboard();
-            $main = $lead->addText($x, $y, $banertext, $txtColor, $bannertype);
-            $folow = $lead->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+            $main = $lead->addText($banertext, $txtColor, $bannertype);
+            $folow = $lead->addFollText($banertextFollow, $ftxtColor, $bannertype);
             $bt = $lead->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
         } else if ($check == 'rectangle') {
             $x = 300;
             $y = 250;
+
             $rect = new Rectangle();
-            $main = $rect->addText($x, $y, $banertext, $txtColor, $bannertype);
-            $folow = $rect->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+            $main = $rect->addText($banertext, $txtColor, $bannertype);
+            $folow = $rect->addFollText($banertextFollow, $ftxtColor, $bannertype);
             $bt = $rect->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
         } else if ($check == 'skycraper') {
             $x = 160;
             $y = 600;
+
             $sky = new Skycraper();
-            $main = $sky->addText($x, $y, $banertext, $txtColor, $bannertype);
-            $folow = $sky->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+            $main = $sky->addText($banertext, $txtColor, $bannertype);
+            $folow = $sky->addFollText($banertextFollow, $ftxtColor, $bannertype);
             $bt = $sky->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
         }
         else if ($check == 'rectanglewide') {
@@ -100,8 +103,8 @@ class ImageController extends Controller
             $y = 400;
 
             $rctw = new Rectanglewide();
-            $main = $rctw->addText($x, $y, $banertext, $txtColor, $bannertype);
-            $folow = $rctw->addFollText($x, $y, $banertextFollow, $ftxtColor, $bannertype);
+            $main = $rctw->addText($banertext, $txtColor, $bannertype);
+            $folow = $rctw->addFollText($banertextFollow, $ftxtColor, $bannertype);
             $bt = $rctw->addButton($btntext, $btnTextColor, $btcolor, $bannertype);
         }
 
