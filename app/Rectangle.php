@@ -275,7 +275,39 @@ class Rectangle extends Model
             });
 
         }
+        else if ($pos == 'rectangle-shopping') {
 
+            /**
+             * shopping banner main text
+             */
+
+            if(str_word_count($banertext) >= 1){
+                $position = strpos($banertext, ' ');
+                $first = substr($banertext, 0, $position);
+                $second = substr($banertext, $position + 1);
+            }
+            else {
+                $first = null;
+                $second = $banertext;
+            }
+
+            return Image::canvas(300, 250)->text($first, 12, 78, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMT-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->angle(15);
+                $font->size(90);
+            })->text($second, 25, 152, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMT-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('left');
+                $font->valign('middle');
+                $font->angle(15);
+                $font->size(90);
+            });
+
+        }
 
     }
 
@@ -500,6 +532,58 @@ class Rectangle extends Model
             })->insert($line);
 
         }
+        else if ($pos == 'rectangle-shopping') {
+
+            /**
+             * rectangle  shopping follow text
+             */
+
+            if(str_word_count($banertext) >= 6 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0]. ' ' .$c[1] . ' ' .$c[2];
+                $secondHalf = $c[3]. ' ' .$c[4] . ' ' .$c[5]. ' ' .$c[6];
+                $length = strlen($firstHalf) + strlen($secondHalf)+2;
+                $third = substr($banertext, $length);
+
+            }
+            else if (str_word_count($banertext) <= 3){
+                $firstHalf = null;
+                $secondHalf = $banertext;
+                $third = null;
+            }
+            else if (str_word_count($banertext) > 3 && str_word_count($banertext) < 6){
+                $position = strpos($banertext, ' ');
+
+                $firstHalf = substr($banertext, 0, $position);
+                $secondString = substr($banertext, $position);
+
+                $secondPosition = strpos($secondString, ' ', 1);
+
+                $secondHalf = substr($secondString, 0, $secondPosition);
+                $third = substr($secondString, $secondPosition);
+            }
+
+            return Image::canvas(300, 250)->text($firstHalf, 20, 192, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(12);
+            })->text($secondHalf, 20, 206, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(12);
+            })->text($third, 25, 220, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('left');
+                $font->valign('middle');
+                $font->size(12);
+            });
+
+        }
 
 
     }
@@ -518,20 +602,28 @@ class Rectangle extends Model
        }
        else if ($type == 'rectangle-kismetrics') {
 
-            $width = 146;
-            $height = 38;
-            $btn = Image::canvas(145, 40)
-                ->circle($width, $width / 2 - 1, $height / 2, function ($draw) use ($btcolor) {
-                    $draw->background($btcolor);
-                    $draw->border($btcolor);
-                }) ->text($text, 70, 28, function ($font) use ($color) {
-                    $font->file(public_path('fonts/IstokWeb-Bold.ttf'));
-                    $font->size(14);
-                    $font->color($color);
-                    $font->align('center');
-                });
+           // define polygon points
+           $points = array(
+               15, 190,    // H
+               156, 190, // G
+               158, 193, // F
+               158, 225,  //E
+               156, 227,  //D X: D=G Y: D=C
+               15, 227, // C X: C=H Y: C=D
+               13, 225, //B X: A=B Y: B=E
+               13, 193   //A X: A=B Y: A=F
+           );
 
-            return Image::canvas(300, 250)->insert($btn, 'bottom-left', 12, 21);
+        return Image::canvas(300, 250)
+               ->polygon($points, function ($draw) use ($btcolor) {
+                   $draw->background($btcolor);
+               })->text($text, 90, 220, function ($font) use ($color) {
+                   $font->file(public_path('fonts/IstokWeb-Bold.ttf'));
+                   $font->size(14);
+                   $font->color($color);
+                   $font->align('center');
+               });
+
 
         } else if ($type == 'rectangle-airplane') {
             return Image::canvas(300, 250)
@@ -703,6 +795,37 @@ class Rectangle extends Model
                     $font->align('center');
                     $font->valign('middle');
                     $font->size(32);
+                });
+
+        }
+        else if ($type == 'rectangle-shopping') {
+
+            /**
+             * leaderboard-shopping button type
+             */
+
+            // define polygon points
+            $points = array(
+                171, 184,    // H
+                280, 184, // G
+                282, 187, // F
+                282, 229,  //E
+                280, 231,  //D X: D=G Y: D=C
+                171, 231, // C X: C=H Y: C=D
+                169, 229, //B X: A=B Y: B=E
+                169, 187   //A X: A=B Y: A=F
+            );
+
+            return Image::canvas(300, 250)
+                ->polygon($points, function ($draw) use ($color) {
+                    $draw->border(3, $color);
+                })
+                ->text($text, 229, 206, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BookAntiquaBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(17);
                 });
 
         }

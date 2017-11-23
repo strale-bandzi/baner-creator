@@ -129,25 +129,11 @@ class ImageController extends Controller
             $image = Input::file('file_image');
             $image2 = Image::make($image);
 
-//            if ($image->mime == 'image/png') {
-//
-//                $image->fit($imgX, $imgY, function ($c) {
-//                $c->upsize();
-//            });
-//
-//            } else {
-//                $image->fit($x, $y, function ($c) {
-//                $c->upsize();
-//                });
-//
-//            }
-
             $img = Image::canvas($x, $y)
                 ->insert($image2)
                 ->insert($main)
                 ->insert($bt)
                 ->insert($folow);
-
 
         } else if (!$imgExist) {
 
@@ -156,7 +142,6 @@ class ImageController extends Controller
                 ->insert($bt)
                 ->insert($folow);
         }
-
 
         /**
          *save and proceed

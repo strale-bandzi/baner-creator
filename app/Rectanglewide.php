@@ -275,6 +275,40 @@ class Rectanglewide extends Model
             });
 
         }
+        else if ($pos == 'rectanglewide-shopping') {
+
+            /**
+             * shopping banner main text
+             */
+
+            if(str_word_count($banertext) >= 1){
+                $position = strpos($banertext, ' ');
+                $first = substr($banertext, 0, $position);
+                $second = substr($banertext, $position + 1);
+            }
+            else {
+                $first = null;
+                $second = $banertext;
+            }
+
+            return Image::canvas(240, 400)->text($first, 142, 270, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMT-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->angle(15);
+                $font->size(90);
+            })->text($second, 145, 342, function ($font) use ($txtColor) {
+                $font->file(public_path('fonts/BodoniMT-Bold.ttf'));
+                $font->color($txtColor);
+                $font->align('center');
+                $font->valign('middle');
+                $font->angle(15);
+                $font->size(90);
+            });
+
+        }
+
 
 
     }
@@ -468,9 +502,62 @@ class Rectanglewide extends Model
             })->insert($line);
 
         }
+        else if ($pos == 'rectanglewide-shopping') {
+
+            /**
+             * rectanglewide  shopping follow text
+             */
+
+            if(str_word_count($banertext) >= 6 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0]. ' ' .$c[1] . ' ' .$c[2];
+                $secondHalf = $c[3]. ' ' .$c[4] . ' ' .$c[5]. ' ' .$c[6];
+                $length = strlen($firstHalf) + strlen($secondHalf)+2;
+                $third = substr($banertext, $length);
+
+            }
+            else if (str_word_count($banertext) <= 3){
+                $firstHalf = null;
+                $secondHalf = $banertext;
+                $third = null;
+            }
+            else if (str_word_count($banertext) > 3 && str_word_count($banertext) < 6){
+                $position = strpos($banertext, ' ');
+
+                $firstHalf = substr($banertext, 0, $position);
+                $secondString = substr($banertext, $position);
+
+                $secondPosition = strpos($secondString, ' ', 1);
+
+                $secondHalf = substr($secondString, 0, $secondPosition);
+                $third = substr($secondString, $secondPosition);
+            }
+
+            return Image::canvas(240, 400)->text($firstHalf, 120, 55, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(16);
+            })->text($secondHalf, 120, 75, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(16);
+            })->text($third, 112, 96, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(16);
+            });
+
+        }
 
 
-    }
+
+}
 
     public function addButton($text, $color, $btcolor, $type){
 
@@ -689,6 +776,53 @@ class Rectanglewide extends Model
                 });
 
             return Image::canvas(240, 400)->insert($widebro, 'bottom', 50, 18);
+
+        }
+        else if ($type == 'rectanglewide-shopping') {
+
+            /**
+             * leaderboard-shopping button type
+             */
+
+          if(str_word_count($text) >= 2)
+          {
+              $position = strpos($text, ' ');
+              $firstHalf = substr($text, 0, $position);
+              $secondHalf = substr($text, $position + 1);
+          }else {
+              $firstHalf = null;
+              $secondHalf = $text;
+          }
+
+            // define polygon points
+            $points = array(
+                155, 135,    // H
+                214, 135, // G
+                216, 138, // F
+                216, 211,  //E
+                214, 213,  //D X: D=G Y: D=C
+                155, 213, // C X: C=H Y: C=D
+                153, 211, //B X: A=B Y: B=E
+                153, 138   //A X: A=B Y: A=F
+            );
+
+            return Image::canvas(240, 400)
+                ->polygon($points, function ($draw) use ($color) {
+                    $draw->border(3, $color);
+                })->text($firstHalf, 188, 165, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BookAntiquaBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(17);
+                })
+                ->text($secondHalf, 187, 183, function ($font) use ($color) {
+                    $font->file(public_path('fonts/BookAntiquaBoldItalic.ttf'));
+                    $font->color($color);
+                    $font->align('center');
+                    $font->valign('middle');
+                    $font->size(17);
+                });
 
         }
 

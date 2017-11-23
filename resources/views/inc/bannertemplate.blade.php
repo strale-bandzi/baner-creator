@@ -135,6 +135,11 @@
             {!! Form::radio('bannertemplate', 'rectangle-seminar') !!}<br>
             <img src="/template/rectangle-seminar.jpg" alt="Rectangle seminar"/>
         </p>
+        <p style="display: inline-block;">
+            {!! Form::label('bannertemplate', 'Dims: 300x250') !!}
+            {!! Form::radio('bannertemplate', 'rectangle-shopping') !!}<br>
+            <img src="/template/rectangle-shopping.jpg" alt="Rectangle Shopping"/>
+        </p>
 
     </div>
 
@@ -188,6 +193,11 @@
             {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
             {!! Form::radio('bannertemplate', 'skycraper-i7') !!}
             <img src="/template/sky-iphone77.jpg" alt="skycraper iphone77.jpg"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 160x600') !!}
+            {!! Form::radio('bannertemplate', 'skycraper-shopping') !!}
+            <img src="/template/sky-shopping.jpg" alt="skycraper shopping.jpg"/>
         </p>
     </div>
     <div id="rectwide" class="presented"><br>
@@ -245,6 +255,11 @@
             {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
             {!! Form::radio('bannertemplate', 'rectanglewide-seminar') !!}
             <img src="/template/rectanglewide-seminar.jpg" alt="seminar"/>
+        </p>
+        <p>
+            {!! Form::label('bannertemplate', 'Dims: 240x400') !!}
+            {!! Form::radio('bannertemplate', 'rectanglewide-shopping') !!}
+            <img src="/template/rctw-shopping.jpg" alt="shopping"/>
         </p>
 
     </div>

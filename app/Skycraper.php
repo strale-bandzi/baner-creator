@@ -279,6 +279,39 @@ class Skycraper extends Model
              });
 
          }
+         else if ($pos == 'skycraper-shopping') {
+
+             /**
+              * shopping banner main text
+              */
+
+             if(str_word_count($banertext) >= 1){
+                 $position = strpos($banertext, ' ');
+                 $first = substr($banertext, 0, $position);
+                 $second = substr($banertext, $position + 1);
+             }
+             else {
+                 $first = null;
+                 $second = $banertext;
+             }
+
+             return Image::canvas(160, 600)->text($first, 5, 118, function ($font) use ($txtColor) {
+                 $font->file(public_path('fonts/BodoniMT-Bold.ttf'));
+                 $font->color($txtColor);
+                 $font->align('left');
+                 $font->valign('middle');
+                 $font->angle(15);
+                 $font->size(80);
+             })->text($second, 25, 181, function ($font) use ($txtColor) {
+                 $font->file(public_path('fonts/BodoniMT-Bold.ttf'));
+                 $font->color($txtColor);
+                 $font->align('left');
+                 $font->valign('middle');
+                 $font->angle(15);
+                 $font->size(75);
+             });
+
+         }
 
 
     }
@@ -422,6 +455,58 @@ class Skycraper extends Model
                 $font->align('center');
                 $font->valign('middle');
                 $font->size(32);
+            });
+
+        }
+        else if ($pos == 'skycraper-shopping') {
+
+            /**
+             * skycraper  shopping follow text
+             */
+
+            if(str_word_count($banertext) >= 6 ){
+                $c = str_word_count($banertext, 1);
+                $firstHalf = $c[0]. ' ' .$c[1] . ' ' .$c[2];
+                $secondHalf = $c[3]. ' ' .$c[4] . ' ' .$c[5]. ' ' .$c[6];
+                $length = strlen($firstHalf) + strlen($secondHalf)+2;
+                $third = substr($banertext, $length);
+
+            }
+            else if (str_word_count($banertext) <= 3){
+                $firstHalf = null;
+                $secondHalf = $banertext;
+                $third = null;
+            }
+            else if (str_word_count($banertext) > 3 && str_word_count($banertext) < 6){
+                $position = strpos($banertext, ' ');
+
+                $firstHalf = substr($banertext, 0, $position);
+                $secondString = substr($banertext, $position);
+
+                $secondPosition = strpos($secondString, ' ', 1);
+
+                $secondHalf = substr($secondString, 0, $secondPosition);
+                $third = substr($secondString, $secondPosition);
+            }
+
+            return Image::canvas(160, 600)->text($firstHalf, 80, 218, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12);
+            })->text($secondHalf, 80, 232, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12);
+            })->text($third, 80, 246, function ($font) use ($color) {
+                $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
+                $font->color($color);
+                $font->align('center');
+                $font->valign('middle');
+                $font->size(12);
             });
 
         }
@@ -660,6 +745,38 @@ class Skycraper extends Model
                     $font->valign('middle');
                     $font->size(25);
                 });
+
+            }
+            else if ($type == 'skycraper-shopping') {
+
+                /**
+                 * skycraper-shopping button type
+                 */
+
+                // define polygon points
+                $points = array(
+                    27, 315,    // H
+                    136, 315, // G
+                    138,  318, // F
+                    138,  360,  //E
+                    136, 362,  //D
+                    27,  362, // C
+                    25,  360, //B
+                    25,  318   //A
+                );
+
+                return Image::canvas(160, 600)
+                    ->polygon($points, function ($draw) use ($color) {
+                        $draw->border(3, $color);
+                    })
+                    ->text($text, 82, 338, function ($font) use ($color) {
+                        $font->file(public_path('fonts/BookAntiquaBoldItalic.ttf'));
+                        $font->color($color);
+                        $font->align('center');
+                        $font->valign('middle');
+                        $font->size(17);
+                    });
+
 
             }
     }

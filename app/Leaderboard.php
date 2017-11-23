@@ -416,35 +416,35 @@ class Leaderboard extends Model
         else if ($pos == 'leaderboard-shopping') {
 
             /**
-             * leaderboard  jewels follow text
+             * leaderboard  shopping follow text
              */
 
-            if(str_word_count($banertext) >= 5 ){
+            if(str_word_count($banertext) >= 6 ){
                 $c = str_word_count($banertext, 1);
                 $firstHalf = $c[0]. ' ' .$c[1] . ' ' .$c[2];
                 $secondHalf = $c[3]. ' ' .$c[4] . ' ' .$c[5]. ' ' .$c[6];
-                $length = strlen($firstHalf) + strlen($secondHalf)+1;
+                $length = strlen($firstHalf) + strlen($secondHalf)+2;
                 $third = substr($banertext, $length);
 
             }
-//            else if (str_word_count($banertext) <= 2){
-//                $firstHalf = null;
-//                $secondHalf = $banertext;
-//                $third = null;
-//            }
-//            else if (str_word_count($banertext) > 2 && str_word_count($banertext) < 5){
-//                $position = strpos($banertext, ' ');
-//
-//                $firstHalf = substr($banertext, 0, $position);
-//                $secondString = substr($banertext, $position);
-//
-//                $secondPosition = strpos($secondString, ' ', 1);
-//
-//                $secondHalf = substr($secondString, 0, $secondPosition);
-//                $third = substr($secondString, $secondPosition);
-//            }
+            else if (str_word_count($banertext) <= 3){
+                $firstHalf = null;
+                $secondHalf = $banertext;
+                $third = null;
+            }
+            else if (str_word_count($banertext) > 3 && str_word_count($banertext) < 6){
+                $position = strpos($banertext, ' ');
 
-            return Image::canvas(728, 90)->text($firstHalf, 505, 31, function ($font) use ($color) {
+                $firstHalf = substr($banertext, 0, $position);
+                $secondString = substr($banertext, $position);
+
+                $secondPosition = strpos($secondString, ' ', 1);
+
+                $secondHalf = substr($secondString, 0, $secondPosition);
+                $third = substr($secondString, $secondPosition);
+            }
+
+            return Image::canvas(728, 90)->text($firstHalf, 505, 32, function ($font) use ($color) {
                 $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
                 $font->color($color);
                 $font->align('center');
@@ -456,7 +456,7 @@ class Leaderboard extends Model
                 $font->align('center');
                 $font->valign('middle');
                 $font->size(12);
-            })->text($third, 505, 61, function ($font) use ($color) {
+            })->text($third, 500, 60, function ($font) use ($color) {
                 $font->file(public_path('fonts/ACaslonPro-Italic.otf'));
                 $font->color($color);
                 $font->align('center');
